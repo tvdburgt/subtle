@@ -1,0 +1,27 @@
+﻿<#@ template debug="true" hostSpecific="true"  #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)bin\Debug\Subtle.Model.dll" #>
+<#@ import namespace="Subtle.Model" #>
+<#@ import namespace="System.Linq" #>
+<#
+	var client = new OSDbClient();
+	var langs = client.GetLanguages().OrderBy(s => s.Name);
+#>
+using Subtle.Model.Responses;
+
+namespace Subtle.Model
+{
+	/// <summary>
+	/// Generated from <#= OSDbClient.ApiUrl #> at <#= DateTime.Now #>.
+	/// </summary>
+	public static class OSDbConfig
+	{
+		public static Language[] Languages => new[]
+		{
+<# foreach (var lang in langs)  { #>
+			new Language { Id = "<#= lang.Id #>", Iso639Code = "<#= lang.Iso639Code #>", Name = "<#= lang.Name #>" },
+<# } #>
+		};
+	}
+}
