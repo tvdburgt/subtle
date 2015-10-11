@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMapper;
+using Subtle.UI.Mapping;
 
 namespace Subtle.UI
 {
@@ -14,9 +13,10 @@ namespace Subtle.UI
         [STAThread]
         static void Main()
         {
+            Mapper.Initialize(cfg => cfg.AddProfile<OSDbProfile>());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }

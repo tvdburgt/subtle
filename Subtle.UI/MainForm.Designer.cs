@@ -1,0 +1,338 @@
+﻿namespace Subtle.UI
+{
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fileTable = new System.Windows.Forms.TableLayoutPanel();
+            this.hashTextBox = new System.Windows.Forms.TextBox();
+            this.fileTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.subtitleGrid = new System.Windows.Forms.DataGridView();
+            this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1.SuspendLayout();
+            this.fileTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
+            this.statusStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.languagesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenMenuItemClick);
+            // 
+            // languagesToolStripMenuItem
+            // 
+            this.languagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.languagesToolStripMenuItem.Name = "languagesToolStripMenuItem";
+            this.languagesToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.languagesToolStripMenuItem.Text = "Languages";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Checked = true;
+            this.toolStripMenuItem1.CheckOnClick = true;
+            this.toolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(70, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.TabIndex = 1;
+            // 
+            // fileTable
+            // 
+            this.fileTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileTable.ColumnCount = 2;
+            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.726872F));
+            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.27312F));
+            this.fileTable.Controls.Add(this.hashTextBox, 1, 1);
+            this.fileTable.Controls.Add(this.fileTextBox, 1, 0);
+            this.fileTable.Controls.Add(this.label3, 0, 0);
+            this.fileTable.Controls.Add(this.label4, 0, 1);
+            this.fileTable.Location = new System.Drawing.Point(12, 31);
+            this.fileTable.Name = "fileTable";
+            this.fileTable.RowCount = 2;
+            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.fileTable.Size = new System.Drawing.Size(960, 60);
+            this.fileTable.TabIndex = 3;
+            // 
+            // hashTextBox
+            // 
+            this.hashTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hashTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.hashTextBox.Location = new System.Drawing.Point(57, 33);
+            this.hashTextBox.Name = "hashTextBox";
+            this.hashTextBox.ReadOnly = true;
+            this.hashTextBox.Size = new System.Drawing.Size(129, 23);
+            this.hashTextBox.TabIndex = 7;
+            // 
+            // fileTextBox
+            // 
+            this.fileTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.fileTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.fileTextBox.Location = new System.Drawing.Point(57, 3);
+            this.fileTextBox.Name = "fileTextBox";
+            this.fileTextBox.ReadOnly = true;
+            this.fileTextBox.Size = new System.Drawing.Size(773, 23);
+            this.fileTextBox.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "File:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Hash:";
+            // 
+            // subtitleGrid
+            // 
+            this.subtitleGrid.AllowUserToAddRows = false;
+            this.subtitleGrid.AllowUserToDeleteRows = false;
+            this.subtitleGrid.AllowUserToResizeColumns = false;
+            this.subtitleGrid.AllowUserToResizeRows = false;
+            this.subtitleGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.subtitleGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.subtitleGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.subtitleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.subtitleGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FeaturedColumn,
+            this.nameColumn,
+            this.languageColumn,
+            this.Column1,
+            this.Column3,
+            this.Column2});
+            this.subtitleGrid.Location = new System.Drawing.Point(12, 97);
+            this.subtitleGrid.MultiSelect = false;
+            this.subtitleGrid.Name = "subtitleGrid";
+            this.subtitleGrid.ReadOnly = true;
+            this.subtitleGrid.RowHeadersVisible = false;
+            this.subtitleGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.subtitleGrid.Size = new System.Drawing.Size(960, 403);
+            this.subtitleGrid.TabIndex = 4;
+            this.subtitleGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.SubtitleGridCellFormatting);
+            this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
+            this.subtitleGrid.SelectionChanged += new System.EventHandler(this.SubtitleGridSelectionChanged);
+            // 
+            // FeaturedColumn
+            // 
+            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = null;
+            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.FeaturedColumn.FillWeight = 26.55415F;
+            this.FeaturedColumn.HeaderText = "";
+            this.FeaturedColumn.MinimumWidth = 20;
+            this.FeaturedColumn.Name = "FeaturedColumn";
+            this.FeaturedColumn.ReadOnly = true;
+            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FeaturedColumn.ToolTipText = "Featured subtitle";
+            this.FeaturedColumn.Width = 25;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "FileName";
+            this.nameColumn.FillWeight = 111.3178F;
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // languageColumn
+            // 
+            this.languageColumn.DataPropertyName = "Language";
+            this.languageColumn.FillWeight = 37.10593F;
+            this.languageColumn.HeaderText = "Language";
+            this.languageColumn.Name = "languageColumn";
+            this.languageColumn.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "UploadDate";
+            this.Column1.FillWeight = 49.47458F;
+            this.Column1.HeaderText = "Uploaded";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "DownloadCount";
+            this.Column3.FillWeight = 24.73729F;
+            this.Column3.HeaderText = "Downloads";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Rating";
+            this.Column2.FillWeight = 12.36864F;
+            this.Column2.HeaderText = "Rating";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadButton.Enabled = false;
+            this.downloadButton.Location = new System.Drawing.Point(876, 506);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(96, 30);
+            this.downloadButton.TabIndex = 5;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.DownloadButtonClick);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(984, 22);
+            this.statusStrip1.TabIndex = 6;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(0, 17);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.downloadButton);
+            this.Controls.Add(this.subtitleGrid);
+            this.Controls.Add(this.fileTable);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
+            this.Name = "MainForm";
+            this.Text = "Subtle";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.fileTable.ResumeLayout(false);
+            this.fileTable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel fileTable;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.DataGridView subtitleGrid;
+        private System.Windows.Forms.TextBox fileTextBox;
+        private System.Windows.Forms.ToolStripMenuItem languagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusStrip;
+        private System.Windows.Forms.TextBox hashTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+    }
+}
+

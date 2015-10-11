@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Model", "Subtle.Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.UI", "Subtle.UI\Subtle.UI.csproj", "{2D632EA1-56C1-4910-9CCD-D6216FD65273}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Registry", "Subtle.Registry\Subtle.Registry.csproj", "{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D632EA1-56C1-4910-9CCD-D6216FD65273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D632EA1-56C1-4910-9CCD-D6216FD65273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D632EA1-56C1-4910-9CCD-D6216FD65273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
