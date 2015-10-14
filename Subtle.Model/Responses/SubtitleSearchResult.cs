@@ -40,7 +40,9 @@ namespace Subtle.Model.Responses
         public static class MatchMethods
         {
             public const string Hash = "moviehash";
-            public const string Imdb = "???";
+            public const string Imdb = "imdbid";
+            public const string FullText = "fulltext";
+            public const string Tag = "tag";
         }
     }
 }

@@ -6,15 +6,11 @@ using CookComputing.XmlRpc;
 namespace Subtle.Model.Responses
 {
     [XmlRpcMissingMapping(MappingAction.Ignore)]
-    public class ImdbSearchResultCollection : IEnumerable<ImdbSearchResult>
+    public class ImdbSearchResultCollection : OSDbResponse, IEnumerable<ImdbSearchResult>
     {
         [XmlRpcMember("data")]
         [XmlRpcMissingMapping(MappingAction.Error)]
         public ImdbSearchResult[] Results { get; set; }
-
-        [XmlRpcMember("status")]
-        [XmlRpcMissingMapping(MappingAction.Error)]
-        public string Status { get; set; }
 
         public IEnumerator<ImdbSearchResult> GetEnumerator()
         {

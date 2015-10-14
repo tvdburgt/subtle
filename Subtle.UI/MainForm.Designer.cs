@@ -41,6 +41,8 @@
             this.fileTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.queryTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +53,7 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.searchButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
@@ -115,25 +118,28 @@
             this.fileTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fileTable.ColumnCount = 2;
-            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.726872F));
-            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.27312F));
+            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.27523F));
+            this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.72477F));
             this.fileTable.Controls.Add(this.hashTextBox, 1, 1);
             this.fileTable.Controls.Add(this.fileTextBox, 1, 0);
             this.fileTable.Controls.Add(this.label3, 0, 0);
             this.fileTable.Controls.Add(this.label4, 0, 1);
+            this.fileTable.Controls.Add(this.queryTextBox, 1, 2);
+            this.fileTable.Controls.Add(this.label2, 0, 2);
             this.fileTable.Location = new System.Drawing.Point(12, 31);
             this.fileTable.Name = "fileTable";
-            this.fileTable.RowCount = 2;
-            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.fileTable.Size = new System.Drawing.Size(960, 60);
+            this.fileTable.RowCount = 3;
+            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33444F));
+            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33444F));
+            this.fileTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33112F));
+            this.fileTable.Size = new System.Drawing.Size(960, 90);
             this.fileTable.TabIndex = 3;
             // 
             // hashTextBox
             // 
             this.hashTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hashTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.hashTextBox.Location = new System.Drawing.Point(57, 33);
+            this.hashTextBox.Location = new System.Drawing.Point(101, 33);
             this.hashTextBox.Name = "hashTextBox";
             this.hashTextBox.ReadOnly = true;
             this.hashTextBox.Size = new System.Drawing.Size(129, 23);
@@ -143,10 +149,10 @@
             // 
             this.fileTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.fileTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.fileTextBox.Location = new System.Drawing.Point(57, 3);
+            this.fileTextBox.Location = new System.Drawing.Point(101, 3);
             this.fileTextBox.Name = "fileTextBox";
             this.fileTextBox.ReadOnly = true;
-            this.fileTextBox.Size = new System.Drawing.Size(773, 23);
+            this.fileTextBox.Size = new System.Drawing.Size(690, 23);
             this.fileTextBox.TabIndex = 6;
             // 
             // label3
@@ -169,6 +175,25 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Hash:";
             // 
+            // queryTextBox
+            // 
+            this.queryTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.queryTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.queryTextBox.Location = new System.Drawing.Point(101, 63);
+            this.queryTextBox.Name = "queryTextBox";
+            this.queryTextBox.Size = new System.Drawing.Size(690, 23);
+            this.queryTextBox.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Query:";
+            // 
             // subtitleGrid
             // 
             this.subtitleGrid.AllowUserToAddRows = false;
@@ -188,13 +213,13 @@
             this.Column1,
             this.Column3,
             this.Column2});
-            this.subtitleGrid.Location = new System.Drawing.Point(12, 97);
+            this.subtitleGrid.Location = new System.Drawing.Point(12, 127);
             this.subtitleGrid.MultiSelect = false;
             this.subtitleGrid.Name = "subtitleGrid";
             this.subtitleGrid.ReadOnly = true;
             this.subtitleGrid.RowHeadersVisible = false;
             this.subtitleGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.subtitleGrid.Size = new System.Drawing.Size(960, 403);
+            this.subtitleGrid.Size = new System.Drawing.Size(960, 373);
             this.subtitleGrid.TabIndex = 4;
             this.subtitleGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.SubtitleGridCellFormatting);
             this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
@@ -282,6 +307,16 @@
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(0, 17);
             // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(789, 506);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(81, 30);
+            this.searchButton.TabIndex = 9;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,6 +327,7 @@
             this.Controls.Add(this.subtitleGrid);
             this.Controls.Add(this.fileTable);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -333,6 +369,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.TextBox queryTextBox;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Label label2;
     }
 }
 

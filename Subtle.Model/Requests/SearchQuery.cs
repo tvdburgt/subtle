@@ -3,7 +3,7 @@
 namespace Subtle.Model.Requests
 {
     [XmlRpcMissingMapping(MappingAction.Ignore)]
-    public class VideoInformation
+    public abstract class SearchQuery
     {
         /// <summary>
         /// Comma-separated list of ISO639-3 language codes
@@ -11,13 +11,10 @@ namespace Subtle.Model.Requests
         [XmlRpcMember("sublanguageid")]
         public string LanguageIds { get; set; }
 
-        [XmlRpcMember("moviehash")]
-        public string FileHash { get; set; }
+        [XmlRpcMember("season")]
+        public string Season { get; set; }
 
-        [XmlRpcMember("moviebytesize")]
-        public double FileSize { get; set; }
-
-        [XmlRpcMember("imdbid")]
-        public string ImdbId { get; set; }
+        [XmlRpcMember("episode")]
+        public string Episode { get; set; }
     }
 }

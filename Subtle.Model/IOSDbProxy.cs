@@ -13,10 +13,10 @@ namespace Subtle.Model
         LanguageCollection GetLanguages(string language = "en");
 
         [XmlRpcMethod]
-        SubtitleSearchResultCollection SearchSubtitles(string token, VideoInformation[] videos);
+        SubtitleSearchResultCollection SearchSubtitles(string token, SearchQuery[] query, SearchSettings settings);
 
         [XmlRpcMethod("SearchMoviesOnIMDB")]
-        ImdbSearchResultCollection SearchMoviesOnImdb(string token, string query);
+        ImdbSearchResultCollection SearchVideos(string token, string query);
 
         [XmlRpcMethod]
         Session LogIn(string username, string password, string language, string useragent);

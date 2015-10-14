@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AutoMapper;
 using Subtle.Model;
 using Subtle.Model.Helpers;
+using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using Subtle.UI.Properties;
 using Subtle.UI.ViewModels;
@@ -37,6 +38,7 @@ namespace Subtle.UI
 
         private async void SearchSubtitles(string filename)
         {
+            // TODO: Check exception here
             var fileInfo = new FileInfo(filename);
 
             if (!fileInfo.Exists)
@@ -45,19 +47,34 @@ namespace Subtle.UI
             }
 
             var hash = Crypto.HashFile(filename);
+            var hashString = Crypto.BinaryToHex(hash);
 
             fileTextBox.Text = filename;
-            hashTextBox.Text = Crypto.BinaryToHex(hash);
+            hashTextBox.Text = hashString;
+
             StatusText = "Searching...";
 
-            var subs = await client.SearchSubtitlesAsync(
-                hash, fileInfo.Length, Settings.Default.Languages.Cast<string>());
+            var hashQuery = new HashSearchQuery
+            {
+                LanguageIds = string.Join(",", Settings.Default.Languages.Cast<string>()),
+                FileHash = hashString,
+                FileSize = fileInfo.Length
+            };
+
+            var textQuery = new FullTextSearchQuery
+            {
+                LanguageIds = string.Join(",", Settings.Default.Languages.Cast<string>()),
+                Query = queryTextBox.Text
+            };
+
+            var subs = await client.SearchSubtitlesAsync(hashQuery, textQuery);
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
                 .OrderBy(s => s.Language)
                 .ThenByDescending(s => s.IsFeatured)
                 .ThenByDescending(s => s.Rating)
-                .ThenByDescending(s => s.DownloadCount);
+                .ThenByDescending(s => s.DownloadCount)
+                .ToList();
 
             subtitleBindingSource.ResetBindings(false);
             StatusText = $"Search returned {subs.Count()} subtitles.";
@@ -68,7 +85,7 @@ namespace Subtle.UI
         protected async override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            await client.Login();
+            await client.InitSessionAsync();
 
             var args = Environment.GetCommandLineArgs();
 
@@ -125,8 +142,7 @@ namespace Subtle.UI
         private void LanguagesDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
             // Prevent dropdown from closing after checking a language item
-            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked ||
-                e.CloseReason == ToolStripDropDownCloseReason.AppFocusChange)
+            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
             {
                 e.Cancel = true;
             }
@@ -153,6 +169,7 @@ namespace Subtle.UI
         {
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                queryTextBox.Text = Path.GetFileNameWithoutExtension(fileDialog.FileName);
                 SearchSubtitles(fileDialog.FileName);
             }
         }
@@ -222,5 +239,10 @@ namespace Subtle.UI
         }
 
         #endregion
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            SearchSubtitles(fileDialog.FileName);
+        }
     }
 }
