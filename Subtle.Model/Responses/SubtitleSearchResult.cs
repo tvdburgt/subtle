@@ -29,7 +29,7 @@ namespace Subtle.Model.Responses
         public string DownloadCount { get; set; }
 
         [XmlRpcMember("MatchedBy")]
-        public string MatchedBy { get; set; }
+        public string MatchMethod { get; set; }
 
         [XmlRpcMember("SubFeatured")]
         public string IsFeatured { get; set; }

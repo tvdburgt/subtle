@@ -13,5 +13,6 @@ namespace Subtle.UI.ViewModels
         public int DownloadCount { get; set; }
         public bool IsFeatured { get; set; }
         public string Url { get; set; }
+        public string MatchMethod { get; set; }
     }
 }

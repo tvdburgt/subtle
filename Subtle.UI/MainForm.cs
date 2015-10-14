@@ -71,6 +71,7 @@ namespace Subtle.UI
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
                 .OrderBy(s => s.Language)
+                .ThenBy(GetMatchMethodSortOrder)
                 .ThenByDescending(s => s.IsFeatured)
                 .ThenByDescending(s => s.Rating)
                 .ThenByDescending(s => s.DownloadCount)
@@ -215,26 +216,57 @@ namespace Subtle.UI
 
         private void SubtitleGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (subtitleGrid.Columns[e.ColumnIndex].Name != "FeaturedColumn")
-            {
-                return;
-            }
-
             var sub = subtitleGrid.Rows[e.RowIndex].DataBoundItem as SubtitleViewModel;
-
             if (sub == null)
             {
                 return;
             }
 
-            if (sub.IsFeatured)
+            if (subtitleGrid.Columns[e.ColumnIndex].Name == "FeaturedColumn")
             {
-                e.Value = Resources.Featured;
-                subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Featured";
+                if (sub.IsFeatured)
+                {
+                    e.Value = Resources.Featured;
+                    subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Featured";
+                }
+                else
+                {
+                    e.Value = null;
+                }
             }
-            else
+
+            if (subtitleGrid.Columns[e.ColumnIndex].Name == "MatchMethodColumn")
             {
-                e.Value = null;
+                switch (sub.MatchMethod)
+                {
+                    case SubtitleSearchResult.MatchMethods.Hash:
+                        e.Value = "H";
+                        break;
+                    case SubtitleSearchResult.MatchMethods.FullText:
+                        e.Value = "T";
+                        break;
+                    case SubtitleSearchResult.MatchMethods.Imdb:
+                        e.Value = "I";
+                        break;
+                    default:
+                        e.Value = "?";
+                        break;
+                }
+            }
+        }
+
+        private static int GetMatchMethodSortOrder(SubtitleViewModel sub)
+        {
+            switch (sub.MatchMethod)
+            {
+                case SubtitleSearchResult.MatchMethods.Hash:
+                    return 0;
+                case SubtitleSearchResult.MatchMethods.Imdb:
+                    return 1;
+                case SubtitleSearchResult.MatchMethods.FullText:
+                    return 2;
+                default:
+                    return int.MaxValue;
             }
         }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,16 +45,17 @@
             this.queryTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.searchButton = new System.Windows.Forms.Button();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.MatchMethodColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.searchButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
@@ -208,6 +210,7 @@
             this.subtitleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.subtitleGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FeaturedColumn,
+            this.MatchMethodColumn,
             this.nameColumn,
             this.languageColumn,
             this.Column1,
@@ -224,61 +227,6 @@
             this.subtitleGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.SubtitleGridCellFormatting);
             this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
             this.subtitleGrid.SelectionChanged += new System.EventHandler(this.SubtitleGridSelectionChanged);
-            // 
-            // FeaturedColumn
-            // 
-            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = null;
-            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.FeaturedColumn.FillWeight = 26.55415F;
-            this.FeaturedColumn.HeaderText = "";
-            this.FeaturedColumn.MinimumWidth = 20;
-            this.FeaturedColumn.Name = "FeaturedColumn";
-            this.FeaturedColumn.ReadOnly = true;
-            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FeaturedColumn.ToolTipText = "Featured subtitle";
-            this.FeaturedColumn.Width = 25;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "FileName";
-            this.nameColumn.FillWeight = 111.3178F;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // languageColumn
-            // 
-            this.languageColumn.DataPropertyName = "Language";
-            this.languageColumn.FillWeight = 37.10593F;
-            this.languageColumn.HeaderText = "Language";
-            this.languageColumn.Name = "languageColumn";
-            this.languageColumn.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "UploadDate";
-            this.Column1.FillWeight = 49.47458F;
-            this.Column1.HeaderText = "Uploaded";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "DownloadCount";
-            this.Column3.FillWeight = 24.73729F;
-            this.Column3.HeaderText = "Downloads";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Rating";
-            this.Column2.FillWeight = 12.36864F;
-            this.Column2.HeaderText = "Rating";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
             // 
             // downloadButton
             // 
@@ -316,6 +264,76 @@
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // FeaturedColumn
+            // 
+            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = null;
+            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.FeaturedColumn.FillWeight = 26.55415F;
+            this.FeaturedColumn.HeaderText = "";
+            this.FeaturedColumn.MinimumWidth = 25;
+            this.FeaturedColumn.Name = "FeaturedColumn";
+            this.FeaturedColumn.ReadOnly = true;
+            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FeaturedColumn.ToolTipText = "Featured subtitle";
+            this.FeaturedColumn.Width = 25;
+            // 
+            // MatchMethodColumn
+            // 
+            this.MatchMethodColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MatchMethodColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.MatchMethodColumn.FillWeight = 5F;
+            this.MatchMethodColumn.HeaderText = "";
+            this.MatchMethodColumn.MinimumWidth = 25;
+            this.MatchMethodColumn.Name = "MatchMethodColumn";
+            this.MatchMethodColumn.ReadOnly = true;
+            this.MatchMethodColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.MatchMethodColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MatchMethodColumn.Width = 25;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "FileName";
+            this.nameColumn.FillWeight = 117.9331F;
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // languageColumn
+            // 
+            this.languageColumn.DataPropertyName = "Language";
+            this.languageColumn.FillWeight = 39.31104F;
+            this.languageColumn.HeaderText = "Language";
+            this.languageColumn.Name = "languageColumn";
+            this.languageColumn.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "UploadDate";
+            this.Column1.FillWeight = 52.41473F;
+            this.Column1.HeaderText = "Uploaded";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "DownloadCount";
+            this.Column3.FillWeight = 26.20736F;
+            this.Column3.HeaderText = "Downloads";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Rating";
+            this.Column2.FillWeight = 13.10368F;
+            this.Column2.HeaderText = "Rating";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -363,15 +381,16 @@
         private System.Windows.Forms.ToolStripStatusLabel statusStrip;
         private System.Windows.Forms.TextBox hashTextBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox queryTextBox;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchMethodColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.TextBox queryTextBox;
-        private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.Label label2;
     }
 }
 
