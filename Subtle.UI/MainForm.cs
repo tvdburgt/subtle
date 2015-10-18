@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using AutoMapper;
 using Subtle.Model;
@@ -54,28 +56,53 @@ namespace Subtle.UI
 
             StatusText = "Searching...";
 
-            var hashQuery = new HashSearchQuery
+            var langIds = string.Join(",", Settings.Default.Languages.Cast<string>());
+            var queries = new List<SearchQuery>();
+
+            queries.Add(new HashSearchQuery
             {
-                LanguageIds = string.Join(",", Settings.Default.Languages.Cast<string>()),
+                LanguageIds = langIds,
                 FileHash = hashString,
                 FileSize = fileInfo.Length
-            };
+            });
 
-            var textQuery = new FullTextSearchQuery
+
+            if (!string.IsNullOrWhiteSpace(queryTextBox.Text))
             {
-                LanguageIds = string.Join(",", Settings.Default.Languages.Cast<string>()),
-                Query = queryTextBox.Text
-            };
+                queries.Add(new FullTextSearchQuery
+                {
+                    LanguageIds = langIds,
+                    Query = queryTextBox.Text
+                });
+            }
 
-            var subs = await client.SearchSubtitlesAsync(hashQuery, textQuery);
+            if (!string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
+            {
+                queries.Add(new ImdbSearchQuery
+                {
+                    LanguageIds = langIds,
+                    ImdbId = imdbIdTextBox.Text
+                });
+            }
+
+            var subs = new SubtitleSearchResultCollection();
+
+            try
+            {
+                subs = await client.SearchSubtitlesAsync(queries.ToArray());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
-                .OrderBy(s => s.Language)
-                .ThenBy(GetMatchMethodSortOrder)
-                .ThenByDescending(s => s.IsFeatured)
-                .ThenByDescending(s => s.Rating)
-                .ThenByDescending(s => s.DownloadCount)
-                .ToList();
+                        .OrderBy(s => s.Language)
+                        .ThenBy(GetMatchMethodSortOrder)
+                        .ThenByDescending(s => s.IsFeatured)
+                        .ThenByDescending(s => s.Rating)
+                        .ThenByDescending(s => s.DownloadCount)
+                        .ToList();
 
             subtitleBindingSource.ResetBindings(false);
             StatusText = $"Search returned {subs.Count()} subtitles.";
@@ -170,6 +197,7 @@ namespace Subtle.UI
         {
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                imdbIdTextBox.Text = ImdbHelper.GetImdbId(fileDialog.FileName);
                 queryTextBox.Text = Path.GetFileNameWithoutExtension(fileDialog.FileName);
                 SearchSubtitles(fileDialog.FileName);
             }
@@ -240,12 +268,15 @@ namespace Subtle.UI
                 switch (sub.MatchMethod)
                 {
                     case SubtitleSearchResult.MatchMethods.Hash:
+                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by file hash";
                         e.Value = "H";
                         break;
                     case SubtitleSearchResult.MatchMethods.FullText:
+                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by full-text search";
                         e.Value = "T";
                         break;
                     case SubtitleSearchResult.MatchMethods.Imdb:
+                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched IMDb ID";
                         e.Value = "I";
                         break;
                     default:

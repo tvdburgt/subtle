@@ -2,7 +2,7 @@
 
 namespace Subtle.Model.Requests
 {
-    public class SearchSettings
+    public class SearchOptions
     {
         [XmlRpcMember("limit")]
         public int Limit { get; set; }

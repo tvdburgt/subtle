@@ -71,31 +71,11 @@ namespace Subtle.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ic_textsms_black_36dp_1x {
-            get {
-                object obj = ResourceManager.GetObject("ic_textsms_black_36dp_1x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Icon {
             get {
                 object obj = ResourceManager.GetObject("Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Untitled_3 {
-            get {
-                object obj = ResourceManager.GetObject("Untitled_3", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

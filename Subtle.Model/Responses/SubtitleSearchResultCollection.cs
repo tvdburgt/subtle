@@ -14,12 +14,17 @@ namespace Subtle.Model.Responses
 
         public IEnumerator<SubtitleSearchResult> GetEnumerator()
         {
+            if (Results == null)
+            {
+                return Enumerable.Empty<SubtitleSearchResult>().GetEnumerator();
+            }
+
             return Results.Cast<SubtitleSearchResult>().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Results.GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

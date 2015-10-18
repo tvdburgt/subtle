@@ -10,7 +10,7 @@ namespace Subtle.Model
 {
     public class OSDbClient
     {
-        public const string UserAgent = "OSTestUserAgent"; // Subtle/0.1 (TODO: make configurable for test)
+        public const string DefaultUserAgent = "OSTestUserAgent"; // Subtle/0.1
         public const string ApiUrl = "http://api.opensubtitles.org:80/xml-rpc";
 
         /// <summary>
@@ -21,21 +21,25 @@ namespace Subtle.Model
         private readonly IOSDbProxy proxy;
         private Session session;
 
-        public OSDbClient()
+        public OSDbClient() : this(DefaultUserAgent)
+        {
+        }
+
+        public OSDbClient(string userAgent)
         {
             proxy = XmlRpcProxyGen.Create<IOSDbProxy>();
             proxy.Url = ApiUrl;
-            proxy.UserAgent = UserAgent;
+            proxy.UserAgent = userAgent;
         }
 
         public async Task InitSessionAsync()
         {
             session = await Task.Run(() => proxy.LogIn(
-                string.Empty, string.Empty, string.Empty, UserAgent));
+                string.Empty, string.Empty, string.Empty, DefaultUserAgent));
 
-            if (session.StatusCode != HttpStatusCode.OK)
+            if (!session.IsSuccess)
             {
-                throw new ApplicationException(
+                throw new OSDbException(
                     $"Failed to initialize session: {session.Status}");
             }
         }
@@ -60,12 +64,21 @@ namespace Subtle.Model
             return proxy.GetLanguages();
         }
 
-        public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
+        public async Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
         {
             CheckSession();
-            var settings = new SearchSettings { Limit = SearchLimit };
-            return Task.Run(() => proxy.SearchSubtitles(
-                session.Token, query, settings));
+
+            var options = new SearchOptions { Limit = SearchLimit };
+            var result = await Task.Run(() => proxy.SearchSubtitles(
+                session.Token, query, options));
+
+            if (!result.IsSuccess)
+            {
+                throw new OSDbException(
+                    $"Failed to search for subtitles: {result.Status}");
+            }
+
+            return result;
         }
 
         private void CheckSession()

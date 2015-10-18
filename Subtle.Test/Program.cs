@@ -12,7 +12,7 @@ namespace Subtle.Test
         {
             Task.Run(async () =>
             {
-                var client = new OSDbClient();
+                var client = new OSDbClient("OSTestUserAgent");
                 await client.InitSessionAsync();
 
                 var query = new FullTextSearchQuery
