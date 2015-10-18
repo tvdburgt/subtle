@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using AutoMapper;
 using Subtle.Model;
@@ -65,7 +64,6 @@ namespace Subtle.UI
                 FileHash = hashString,
                 FileSize = fileInfo.Length
             });
-
 
             if (!string.IsNullOrWhiteSpace(queryTextBox.Text))
             {
@@ -254,7 +252,7 @@ namespace Subtle.UI
             {
                 if (sub.IsFeatured)
                 {
-                    e.Value = Resources.Featured;
+                    e.Value = Resources.FeaturedIcon;
                     subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Featured";
                 }
                 else
@@ -263,24 +261,21 @@ namespace Subtle.UI
                 }
             }
 
-            if (subtitleGrid.Columns[e.ColumnIndex].Name == "MatchMethodColumn")
+            if (subtitleGrid.Columns[e.ColumnIndex].Name == "SearchMethodColumn")
             {
                 switch (sub.MatchMethod)
                 {
                     case SubtitleSearchResult.MatchMethods.Hash:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by file hash";
-                        e.Value = "H";
+                        e.Value = Resources.HashIcon;
                         break;
                     case SubtitleSearchResult.MatchMethods.FullText:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by full-text search";
-                        e.Value = "T";
+                        e.Value = Resources.TextSearchIcon;
                         break;
                     case SubtitleSearchResult.MatchMethods.Imdb:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched IMDb ID";
-                        e.Value = "I";
-                        break;
-                    default:
-                        e.Value = "?";
+                        e.Value = Resources.ImdbIcon;
                         break;
                 }
             }

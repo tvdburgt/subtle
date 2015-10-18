@@ -15,12 +15,10 @@ namespace Subtle.Test
                 var client = new OSDbClient("OSTestUserAgent");
                 await client.InitSessionAsync();
 
-                var query = new FullTextSearchQuery
+                var query = new ImdbSearchQuery
                 {
                     LanguageIds = "eng",
-                    Query = "Limitless (2015) S01E03 1080p WEB-DL x264 nl subs",
-                    Season = "1",
-                    Episode = "2"
+                    ImdbId = "1559549",
                 };
 
                 var subs = await client.SearchSubtitlesAsync(query);

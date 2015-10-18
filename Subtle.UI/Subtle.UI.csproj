@@ -60,11 +60,6 @@
     <Compile Include="Mapping\OSDbProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\SearchMethod.cs" />
     <Compile Include="ViewModels\SubtitleViewModel.cs" />
     <EmbeddedResource Include="MainForm.resx">
@@ -78,11 +73,8 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -107,7 +99,10 @@
     <None Include="Resources\Subtle.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Featured.png" />
+    <Content Include="Resources\FeaturedIcon.png" />
+    <Content Include="Resources\HashIcon.png" />
+    <Content Include="Resources\ImdbIcon.png" />
+    <Content Include="Resources\TextSearchIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
