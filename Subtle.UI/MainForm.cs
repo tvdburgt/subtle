@@ -150,7 +150,7 @@ namespace Subtle.UI
                     Text = lang.Name,
                     CheckState = CheckState.Checked,
                     CheckOnClick = true,
-                    Checked = Settings.Default.Languages.Contains(lang.Id),
+                    Checked = Settings.Default.Languages.Contains(lang.Iso6392),
                     Tag = lang
                 };
 
@@ -231,11 +231,11 @@ namespace Subtle.UI
 
             if (item.Checked)
             {
-                Settings.Default.Languages.Add(lang.Id);
+                Settings.Default.Languages.Add(lang.Iso6392);
             }
             else
             {
-                Settings.Default.Languages.Remove(lang.Id);
+                Settings.Default.Languages.Remove(lang.Iso6392);
             }
 
             Settings.Default.Save();
