@@ -23,6 +23,7 @@ namespace Subtle.UI
         {
             InitializeComponent();
             InitLanguages();
+            InitSearchMethods();
             InitFileDialog();
             InitSubtitleGrid();
 
@@ -39,14 +40,12 @@ namespace Subtle.UI
 
         private async void SearchSubtitles(string filename)
         {
-            // TODO: Check exception here
-            var fileInfo = new FileInfo(filename);
-
-            if (!fileInfo.Exists)
+            if (!File.Exists(filename))
             {
                 return;
             }
 
+            var fileInfo = new FileInfo(filename);
             var hash = Crypto.HashFile(filename);
             var hashString = Crypto.BinaryToHex(hash);
 
@@ -65,7 +64,7 @@ namespace Subtle.UI
                 FileSize = fileInfo.Length
             });
 
-            if (!string.IsNullOrWhiteSpace(queryTextBox.Text))
+            if (queryTextBox.Enabled && !string.IsNullOrWhiteSpace(queryTextBox.Text))
             {
                 queries.Add(new FullTextSearchQuery
                 {
@@ -74,7 +73,7 @@ namespace Subtle.UI
                 });
             }
 
-            if (!string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
+            if (imdbIdTextBox.Enabled && !string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
             {
                 queries.Add(new ImdbSearchQuery
                 {
@@ -91,6 +90,7 @@ namespace Subtle.UI
             }
             catch (Exception e)
             {
+                // TODO: concrete exception
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -158,20 +158,70 @@ namespace Subtle.UI
                 item.CheckedChanged += LanguageCheckChanged;
             }
 
-            languagesToolStripMenuItem.DropDown.Closing += LanguagesDropDownClosing;
+            languagesToolStripMenuItem.DropDown.Closing += ToolStripDropDownClosing;
+        }
+
+        private void InitSearchMethods()
+        {
+            searchMethodsToolStripMenuItem.DropDownItems.Clear();
+
+            AppendSearchMethod(SearchMethod.Hash, "File Hash");
+            AppendSearchMethod(SearchMethod.Imdb, "IMDb ID");
+            AppendSearchMethod(SearchMethod.FullText, "Full-Text Search");
+
+            searchMethodsToolStripMenuItem.DropDown.Closing += ToolStripDropDownClosing;
+        }
+
+        private void AppendSearchMethod(SearchMethod value, string text)
+        {
+            var isChecked = Settings.Default.SearchMethods.HasFlag(value);
+            var item = new ToolStripMenuItem
+            {
+                CheckState = isChecked ? CheckState.Checked : CheckState.Unchecked,
+                Text = text,
+                Tag = value,
+                CheckOnClick = true
+            };
+
+            searchMethodsToolStripMenuItem.DropDownItems.Add(item);
+            item.CheckedChanged += SearchMethodCheckChanged;
         }
 
         #endregion
 
+        private void UpdateSearchMethodInputs()
+        {
+            queryTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
+            imdbIdTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
+        }
+
         #region Event handlers
 
-        private void LanguagesDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
+        private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
             // Prevent dropdown from closing after checking a language item
             if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
             {
                 e.Cancel = true;
             }
+        }
+
+        private void SearchMethodCheckChanged(object sender, EventArgs eventArgs)
+        {
+            var item = (ToolStripMenuItem)sender;
+            var method = (SearchMethod)item.Tag;
+
+            if (item.Checked)
+            {
+                Settings.Default.SearchMethods = Settings.Default.SearchMethods | method;
+            }
+            else
+            {
+                Settings.Default.SearchMethods = Settings.Default.SearchMethods & ~method;
+            }
+
+            Settings.Default.Save();
+            UpdateSearchMethodInputs();
         }
 
         private void LanguageCheckChanged(object sender, EventArgs eventArgs)
@@ -197,6 +247,8 @@ namespace Subtle.UI
             {
                 imdbIdTextBox.Text = ImdbHelper.GetImdbId(fileDialog.FileName);
                 queryTextBox.Text = Path.GetFileNameWithoutExtension(fileDialog.FileName);
+                UpdateSearchMethodInputs();
+                searchButton.Enabled = true;
                 SearchSubtitles(fileDialog.FileName);
             }
         }
@@ -217,7 +269,7 @@ namespace Subtle.UI
             var subFilePath = Path.ChangeExtension(fileDialog.FileName, sub.FileFormat);
             File.WriteAllBytes(subFilePath, Gzip.Decompress(data));
 
-            StatusText = $"Saved subtitle to {subFilePath}.";
+            StatusText = $@"Saved subtitle to ""{subFilePath}"".";
         }
 
         private void SubtitleGridSelectionChanged(object sender, EventArgs e)
@@ -301,6 +353,11 @@ namespace Subtle.UI
         private void searchButton_Click(object sender, EventArgs e)
         {
             SearchSubtitles(fileDialog.FileName);
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

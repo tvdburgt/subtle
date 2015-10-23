@@ -8,5 +8,8 @@
   &lt;string&gt;eng&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="SearchMethods" Type="Subtle.UI.ViewModels.SearchMethod" Scope="User">
+      <Value Profile="(Default)">Hash, FullText, Imdb</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

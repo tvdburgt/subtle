@@ -36,5 +36,17 @@ namespace Subtle.UI.Properties {
                 this["Languages"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hash, FullText, Imdb")]
+        public global::Subtle.UI.ViewModels.SearchMethod SearchMethods {
+            get {
+                return ((global::Subtle.UI.ViewModels.SearchMethod)(this["SearchMethods"]));
+            }
+            set {
+                this["SearchMethods"] = value;
+            }
+        }
     }
 }

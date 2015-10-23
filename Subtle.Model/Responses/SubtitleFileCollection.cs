@@ -8,17 +8,17 @@ namespace Subtle.Model.Responses
     [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class SubtitleFileCollection : OSDbResponse, IEnumerable<SubtitleFile>
     {
+        public SubtitleFileCollection()
+        {
+            Files = new SubtitleFile[0];
+        }
+
         [XmlRpcMember("data")]
         [XmlRpcMissingMapping(MappingAction.Error)]
         public SubtitleFile[] Files { get; set; }
 
         public IEnumerator<SubtitleFile> GetEnumerator()
         {
-            if (Files == null)
-            {
-                return Enumerable.Empty<SubtitleFile>().GetEnumerator();
-            }
-
             return Files.Cast<SubtitleFile>().GetEnumerator();
         }
 
