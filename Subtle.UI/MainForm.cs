@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using AutoMapper;
 using Subtle.Model;
@@ -111,7 +112,17 @@ namespace Subtle.UI
         protected async override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            await client.InitSessionAsync();
+
+            try
+            {
+                await client.InitSessionAsync();
+            }
+            catch (WebException we)
+            {
+                var text = $"Failed to initialize session: {we.Message}";
+                var result = MessageBox.Show(
+                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+            }
 
             var args = Environment.GetCommandLineArgs();
 
@@ -255,7 +266,7 @@ namespace Subtle.UI
 
         private async void DownloadButtonClick(object sender, EventArgs e)
         {
-            var sub = subtitleGrid.SelectedRows[0].DataBoundItem as SubtitleViewModel;
+            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as SubtitleViewModel;
 
             if (sub == null)
             {
@@ -284,8 +295,7 @@ namespace Subtle.UI
                 return;
             }
 
-            var sub = subtitleGrid.SelectedRows[0].DataBoundItem as SubtitleViewModel;
-
+            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as SubtitleViewModel;
             if (sub != null)
             {
                 System.Diagnostics.Process.Start(sub.Url);
@@ -317,15 +327,15 @@ namespace Subtle.UI
             {
                 switch (sub.MatchMethod)
                 {
-                    case SubtitleSearchResult.MatchMethods.Hash:
+                    case SubtitleSearchResult.SearchMethods.Hash:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by file hash";
                         e.Value = Resources.HashIcon;
                         break;
-                    case SubtitleSearchResult.MatchMethods.FullText:
+                    case SubtitleSearchResult.SearchMethods.FullText:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by full-text search";
                         e.Value = Resources.TextSearchIcon;
                         break;
-                    case SubtitleSearchResult.MatchMethods.Imdb:
+                    case SubtitleSearchResult.SearchMethods.Imdb:
                         subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched IMDb ID";
                         e.Value = Resources.ImdbIcon;
                         break;
@@ -337,11 +347,11 @@ namespace Subtle.UI
         {
             switch (sub.MatchMethod)
             {
-                case SubtitleSearchResult.MatchMethods.Hash:
+                case SubtitleSearchResult.SearchMethods.Hash:
                     return 0;
-                case SubtitleSearchResult.MatchMethods.Imdb:
+                case SubtitleSearchResult.SearchMethods.Imdb:
                     return 1;
-                case SubtitleSearchResult.MatchMethods.FullText:
+                case SubtitleSearchResult.SearchMethods.FullText:
                     return 2;
                 default:
                     return int.MaxValue;

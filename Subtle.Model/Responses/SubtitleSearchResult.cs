@@ -37,7 +37,7 @@ namespace Subtle.Model.Responses
         [XmlRpcMember("SubtitlesLink")]
         public string Url { get; set; }
 
-        public static class MatchMethods
+        public static class SearchMethods
         {
             public const string Hash = "moviehash";
             public const string Imdb = "imdbid";
