@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
 using Subtle.Model;
@@ -109,10 +110,22 @@ namespace Subtle.UI
 
         #region Initialization
 
-        protected async override void OnLoad(EventArgs e)
+        protected override async void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
+            await InitSession();
+
+            var args = Environment.GetCommandLineArgs();
+
+            if (args.Length > 1 && !string.IsNullOrEmpty(args[1]))
+            {
+                SearchSubtitles(args[1]);
+            }
+        }
+
+        private async Task InitSession()
+        {
             try
             {
                 await client.InitSessionAsync();
@@ -122,13 +135,15 @@ namespace Subtle.UI
                 var text = $"Failed to initialize session: {we.Message}";
                 var result = MessageBox.Show(
                     text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-            }
 
-            var args = Environment.GetCommandLineArgs();
-
-            if (args.Length > 1 && !string.IsNullOrEmpty(args[1]))
-            {
-                SearchSubtitles(args[1]);
+                if (result == DialogResult.Retry)
+                {
+                    await InitSession();
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
         }
 
