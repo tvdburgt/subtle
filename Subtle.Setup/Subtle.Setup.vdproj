@@ -34,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_6DC97999855A09FC3FA04D6E6DFBC3BF"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DC97999855A09FC3FA04D6E6DFBC3BF"
         "OwnerKey" = "8:_B6DC9ABC5B53C96DB8CF8625593AA937"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -45,8 +51,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B6DC9ABC5B53C96DB8CF8625593AA937"
         "OwnerKey" = "8:_5240B892A90F43B09E638986F63E97E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B6DC9ABC5B53C96DB8CF8625593AA937"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -59,6 +83,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -93,7 +123,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Subtle.Setup.msi"
+        "OutputFilename" = "8:Debug\\Subtle.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -103,13 +133,29 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
+                    }
+                }
+            }
         }
         "Release"
         {
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Subtle.Setup.msi"
+        "OutputFilename" = "8:Release\\Subtle.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -125,6 +171,62 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3DF84BC517EE4E4396FCA8C69612B315"
+            {
+            "Name" = "8:Primary output from Subtle.Registry (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_3775E386_00CF_4C21_B6F5_335772AEC34A"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_5F49B245B3CF4ECA93D8D28A112C6E87"
+            {
+            "Name" = "8:Primary output from Subtle.Registry (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_3C9ABDA1_B365_4E7C_A880_9C7CD765B0D7"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_76D2C3D187A64BC9B9809F4C3F0B7C4B"
+            {
+            "Name" = "8:Primary output from Subtle.Registry (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_61AD92DE_DF60_4D70_8F8A_341BBCDCF272"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_F4F9A5D308E543B8875E563CA7B90B52"
+            {
+            "Name" = "8:Primary output from Subtle.Registry (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_606DB223_1D60_4114_BF70_9197E88CCF33"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -140,7 +242,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -349,7 +451,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Subtle"
         "ProductCode" = "8:{11975A97-028A-4F7A-8A01-537E73415EE3}"
-        "PackageCode" = "8:{9002C587-FFD7-4893-A937-A11F71E54CCC}"
+        "PackageCode" = "8:{69124C05-9036-4AD5-A46B-6360B67D08FF}"
         "UpgradeCode" = "8:{A0039DE2-30FC-463D-B98D-F4D359C58416}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -357,7 +459,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:0.1"
-        "Manufacturer" = "8:Acme Corporation"
+        "Manufacturer" = "8: "
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Subtle"
@@ -884,7 +986,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5240B892A90F43B09E638986F63E97E0"
             {
-            "SourcePath" = "8:..\\Subtle.UI\\obj\\Debug\\Subtle.UI.exe"
+            "SourcePath" = "8:..\\Subtle.UI\\obj\\Debug\\Subtle.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -905,6 +1007,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{2D632EA1-56C1-4910-9CCD-D6216FD65273}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+            {
+            "SourcePath" = "8:..\\Subtle.Registry\\obj\\Debug\\Subtle.Registry.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

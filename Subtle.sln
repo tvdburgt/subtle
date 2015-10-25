@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Registry", "Subtle.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Test", "Subtle.Test\Subtle.Test.csproj", "{CBB3A7E5-7963-4483-837C-BC81771A4CD1}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Subtle.Setup", "Subtle.Setup\Subtle.Setup.vdproj", "{C81CE0E9-BDE0-448A-892D-0D5F4E44403B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{CBB3A7E5-7963-4483-837C-BC81771A4CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB3A7E5-7963-4483-837C-BC81771A4CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB3A7E5-7963-4483-837C-BC81771A4CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81CE0E9-BDE0-448A-892D-0D5F4E44403B}.Debug|Any CPU.ActiveCfg = Debug
+		{C81CE0E9-BDE0-448A-892D-0D5F4E44403B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

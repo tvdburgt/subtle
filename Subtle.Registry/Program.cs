@@ -2,8 +2,6 @@
 
 namespace Subtle.Registry
 {
-    using Microsoft.Win32;
-
     class Program
     {
         static void Main(string[] args)
@@ -15,28 +13,10 @@ namespace Subtle.Registry
             //    Console.WriteLine($"{key} => {val}");
             //}
 
-
-            foreach (var ext in FileTypes.VideoTypes)
-            {
-                var progId = Registry.GetValue($@"HKEY_CLASSES_ROOT\.{ext}", null, null);
-
-                if (progId == null)
-                {
-                    continue;
-                }
-
-                Registry.SetValue(
-                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\dlsub",
-                    null,
-                    "Download subtitle");
-
-                Registry.SetValue(
-                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\dlsub\command",
-                    null,
-                    @"""D:\src\Subtle\Subtle.UI\bin\Debug\Subtle.UI.exe"" ""%1""");
-            }
-
-            //Console.ReadLine();
+            RegistryHelper.SetShellCommands(
+                FileTypes.VideoTypes,
+                @"C:\Program Files (x86)\Subtle\Subtle.exe",
+                @"C:\Program Files (x86)\Subtle\Subtle.ico");
         }
     }
 }

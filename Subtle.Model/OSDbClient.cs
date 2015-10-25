@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using CookComputing.XmlRpc;
 using Subtle.Model.Requests;
