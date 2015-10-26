@@ -6,10 +6,11 @@ using System.IO;
 
 namespace Subtle.Registry
 {
-
     [RunInstaller(true)]
     public partial class Installer : System.Configuration.Install.Installer
     {
+        private const string TargetDirKey = "targetdir";
+
         public Installer()
         {
             InitializeComponent();
@@ -19,12 +20,12 @@ namespace Subtle.Registry
         {
             base.Commit(savedState);
 
-            if (!Context.Parameters.ContainsKey("targetdir"))
+            if (!Context.Parameters.ContainsKey(TargetDirKey))
             {
-                throw new InstallException("Missing 'targetdir' parameter");
+                throw new InstallException($"Missing '{TargetDirKey}' parameter");
             }
 
-            var targetDir = Context.Parameters["targetdir"].TrimEnd(Path.DirectorySeparatorChar);
+            var targetDir = Context.Parameters[TargetDirKey].TrimEnd(Path.DirectorySeparatorChar);
             RegistryHelper.SetShellCommands(
                 FileTypes.VideoTypes,
                 Path.Combine(targetDir, "Subtle.exe"),
@@ -36,7 +37,5 @@ namespace Subtle.Registry
             base.Rollback(savedState);
             //RegistryHelper.DeleteShellCommands(FileTypes.VideoTypes);
         }
-
-
     }
 }
