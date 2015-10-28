@@ -40,6 +40,54 @@ namespace Subtle.UI
             }
         }
 
+        private async Task<SubtitleSearchResultCollection> SearchSubtitles(ICollection<SearchQuery> query)
+        {
+            var subs = new SubtitleSearchResultCollection();
+
+            try
+            {
+                subs = await client.SearchSubtitlesAsync(query.ToArray());
+            }
+            catch (OSDbException e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (WebException e)
+            {
+                var text = $"Subtitle search failed: {e.Message}";
+                var result = MessageBox.Show(
+                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+
+                if (result == DialogResult.Retry)
+                {
+                    subs = await SearchSubtitles(query);
+                }
+            }
+
+            return subs;
+        }
+
+        private async Task<SubtitleFile> DownloadSubtitle(string subId)
+        {
+            try
+            {
+                return await client.DownloadSubtitleAsync(subId);
+            }
+            catch (WebException e)
+            {
+                var text = $"Failed to download subtitle: {e.Message}";
+                var result = MessageBox.Show(
+                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+
+                if (result == DialogResult.Retry)
+                {
+                    return await DownloadSubtitle(subId);
+                }
+
+                return null;
+            }
+        }
+
         private async void SearchSubtitles(string filename)
         {
             if (!File.Exists(filename))
@@ -57,9 +105,9 @@ namespace Subtle.UI
             StatusText = "Searching...";
 
             var langIds = string.Join(",", Settings.Default.Languages.Cast<string>());
-            var queries = new List<SearchQuery>();
+            var query = new List<SearchQuery>();
 
-            queries.Add(new HashSearchQuery
+            query.Add(new HashSearchQuery
             {
                 LanguageIds = langIds,
                 FileHash = hashString,
@@ -68,7 +116,7 @@ namespace Subtle.UI
 
             if (queryTextBox.Enabled && !string.IsNullOrWhiteSpace(queryTextBox.Text))
             {
-                queries.Add(new FullTextSearchQuery
+                query.Add(new FullTextSearchQuery
                 {
                     LanguageIds = langIds,
                     Query = queryTextBox.Text
@@ -77,24 +125,14 @@ namespace Subtle.UI
 
             if (imdbIdTextBox.Enabled && !string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
             {
-                queries.Add(new ImdbSearchQuery
+                query.Add(new ImdbSearchQuery
                 {
                     LanguageIds = langIds,
                     ImdbId = imdbIdTextBox.Text
                 });
             }
 
-            var subs = new SubtitleSearchResultCollection();
-
-            try
-            {
-                subs = await client.SearchSubtitlesAsync(queries.ToArray());
-            }
-            catch (Exception e)
-            {
-                // TODO: concrete exception
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var subs = await SearchSubtitles(query);
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
                         .OrderBy(s => s.Language)
@@ -114,7 +152,9 @@ namespace Subtle.UI
         {
             base.OnLoad(e);
 
+            StatusText = "Inititializing session...";
             await InitSession();
+            StatusText = "Session initialized.";
 
             var args = Environment.GetCommandLineArgs();
 
@@ -289,9 +329,15 @@ namespace Subtle.UI
             }
 
             StatusText = "Downloading...";
-            var file = await client.DownloadSubtitleAsync(sub.Id);
-            var data = Convert.FromBase64String(file.Base64Data);
+            var file = await DownloadSubtitle(sub.Id);
 
+            if (file == null)
+            {
+                StatusText = string.Empty;
+                return;
+            }
+
+            var data = Convert.FromBase64String(file.Base64Data);
             var subFilePath = Path.ChangeExtension(fileDialog.FileName, sub.FileFormat);
             File.WriteAllBytes(subFilePath, Gzip.Decompress(data));
 

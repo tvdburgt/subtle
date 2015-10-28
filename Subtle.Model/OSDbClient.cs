@@ -31,10 +31,10 @@ namespace Subtle.Model
             proxy.UserAgent = userAgent;
         }
 
-        public async Task InitSessionAsync()
+        public void InitSession()
         {
-            session = await Task.Run(() => proxy.LogIn(
-                string.Empty, string.Empty, string.Empty, DefaultUserAgent));
+            session = proxy.LogIn(
+                string.Empty, string.Empty, string.Empty, DefaultUserAgent);
 
             if (!session.IsSuccess)
             {
@@ -63,13 +63,13 @@ namespace Subtle.Model
             return proxy.GetLanguages();
         }
 
-        public async Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
+        public SubtitleSearchResultCollection SearchSubtitles(params SearchQuery[] query)
         {
             CheckSession();
 
             var options = new SearchOptions { Limit = SearchLimit };
-            var result = await Task.Run(() => proxy.SearchSubtitles(
-                session.Token, query, options));
+            var result =  proxy.SearchSubtitles(
+                session.Token, query, options);
 
             if (!result.IsSuccess)
             {
@@ -78,6 +78,16 @@ namespace Subtle.Model
             }
 
             return result;
+        }
+
+        public Task InitSessionAsync()
+        {
+            return Task.Run(() => InitSession());
+        }
+
+        public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
+        {
+            return Task.Run(() => SearchSubtitles(query));
         }
 
         private void CheckSession()
