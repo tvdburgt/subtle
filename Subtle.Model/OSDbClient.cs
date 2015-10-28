@@ -9,7 +9,9 @@ namespace Subtle.Model
 {
     public class OSDbClient
     {
-        public const string DefaultUserAgent = "OSTestUserAgent"; // Subtle/0.1
+        public const string DefaultUserAgent = "tvdburgt";
+        public const string TestUserAgent = "OSTestUserAgent";
+
         public const string ApiUrl = "http://api.opensubtitles.org:80/xml-rpc";
 
         /// <summary>

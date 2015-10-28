@@ -29,7 +29,11 @@ namespace Subtle.UI
             InitFileDialog();
             InitSubtitleGrid();
 
+#if DEBUG
+            client = new OSDbClient(OSDbClient.TestUserAgent);
+#else
             client = new OSDbClient();
+#endif
         }
 
         private string StatusText
@@ -146,7 +150,7 @@ namespace Subtle.UI
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }
 
-        #region Initialization
+#region Initialization
 
         protected override async void OnLoad(EventArgs e)
         {
@@ -253,7 +257,7 @@ namespace Subtle.UI
             item.CheckedChanged += SearchMethodCheckChanged;
         }
 
-        #endregion
+#endregion
 
         private void UpdateSearchMethodInputs()
         {
@@ -261,7 +265,7 @@ namespace Subtle.UI
             imdbIdTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
         }
 
-        #region Event handlers
+#region Event handlers
 
         private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
@@ -419,7 +423,7 @@ namespace Subtle.UI
             }
         }
 
-        #endregion
+#endregion
 
         private void searchButton_Click(object sender, EventArgs e)
         {

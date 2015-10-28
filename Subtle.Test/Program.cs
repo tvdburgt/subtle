@@ -12,7 +12,7 @@ namespace Subtle.Test
         {
             Task.Run(async () =>
             {
-                var client = new OSDbClient("OSTestUserAgent");
+                var client = new OSDbClient(OSDbClient.TestUserAgent);
                 await client.InitSessionAsync();
 
                 var query = new ImdbSearchQuery
