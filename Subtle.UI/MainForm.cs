@@ -75,7 +75,8 @@ namespace Subtle.UI
         {
             try
             {
-                return await client.DownloadSubtitleAsync(subId);
+                var subs = await client.DownloadSubtitlesAsync(subId);
+                return subs.First();
             }
             catch (WebException e)
             {

@@ -45,12 +45,10 @@ namespace Subtle.Model
             }
         }
 
-        public Task<SubtitleFile> DownloadSubtitleAsync(string fileId)
+        public SubtitleFileCollection DownloadSubtitles(params string[] fileIds)
         {
             CheckSession();
-            return Task.Run(() => proxy.DownloadSubtitles(
-                session.Token,
-                new[] { fileId }).First());
+            return proxy.DownloadSubtitles(session.Token, fileIds);
         }
 
         public Task<ImdbSearchResultCollection> SearchVideos(string query)
@@ -90,6 +88,11 @@ namespace Subtle.Model
         public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
         {
             return Task.Run(() => SearchSubtitles(query));
+        }
+
+        public Task<SubtitleFileCollection> DownloadSubtitlesAsync(params string[] fileIds)
+        {
+            return Task.Run(() => DownloadSubtitles(fileIds));
         }
 
         private void CheckSession()
