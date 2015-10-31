@@ -33,7 +33,7 @@ namespace Subtle.Registry
                 FileTypes.VideoTypes,
                 VerbKey,
                 VerbValue,
-                Path.Combine(targetDir, "Subtle.exe"),
+                Path.Combine(targetDir, "subtle.exe"),
                 Path.Combine(targetDir, "Subtle.ico"));
     }
 
