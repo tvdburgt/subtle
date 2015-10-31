@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Subtle.Registry
@@ -7,41 +8,46 @@ namespace Subtle.Registry
 
     public static class RegistryHelper
     {
-        private const string VerbKey = "dlsub";
-        private const string VerbName = "Download subtitle";
-
-        public static void SetShellCommands(IEnumerable<string> fileTypes, string command, string icon = null)
+        public static void SetShellCommands(IEnumerable<string> fileTypes, string verbKey, string verbValue, string command, string icon = null)
         {
+            File.Delete(Path.Combine(Path.GetTempPath(), "subtle.log"));
+
             foreach (var progId in GetProgIds(fileTypes))
             {
                 Registry.SetValue(
-                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{VerbKey}",
+                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{verbKey}",
                     null,
-                    VerbName);
+                    verbValue);
 
                 Registry.SetValue(
-                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{VerbKey}\command",
+                    $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{verbKey}\command",
                     null,
                     $@"""{command}"" ""%1""");
 
                 if (!string.IsNullOrEmpty(icon))
                 {
                     Registry.SetValue(
-                        $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{VerbKey}",
+                        $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{verbKey}",
                         "Icon",
                         $@"""{icon}""");
                 }
+
+                File.AppendAllLines(
+                    Path.Combine(Path.GetTempPath(), "subtle.log"),
+                    new[] { $@"HKEY_CURRENT_USER\SOFTWARE\Classes\{progId}\shell\{verbKey}" });
             }
         }
 
-        public static void DeleteShellCommands(IEnumerable<string> fileTypes)
+        public static void DeleteShellCommands(IEnumerable<string> fileTypes, string verbKey)
         {
-            foreach (var progId in GetProgIds(fileTypes))
+            foreach (var subKey in GetProgIds(fileTypes).Select(id => $@"SOFTWARE\Classes\{id}\shell"))
             {
-                var subKey = $@"SOFTWARE\Classes\{progId}\dlsub";
-                using (var key = Registry.CurrentUser.OpenSubKey(subKey))
+                using (var key = Registry.CurrentUser.OpenSubKey(subKey, true))
                 {
-                    key?.DeleteSubKey("dlsub");
+                    if (key?.OpenSubKey(verbKey) != null)
+                    {
+                        key.DeleteSubKeyTree(verbKey);
+                    }
                 }
             }
         }
@@ -49,7 +55,7 @@ namespace Subtle.Registry
         private static IEnumerable<string> GetProgIds(IEnumerable<string> types)
         {
             return types
-                .Select(ext => (string)Registry.GetValue($@"HKEY_CLASSES_ROOT\.{ext}", null, null))
+                .Select(ext => (string)Registry.GetValue($@"HKEY_CURRENT_USER\SOFTWARE\Classes\.{ext}", null, null))
                 .Where(progId => progId != null);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Configuration.Install;
+using System.Diagnostics;
 using System.IO;
 
 namespace Subtle.Registry
@@ -9,6 +10,8 @@ namespace Subtle.Registry
     [RunInstaller(true)]
     public partial class Installer : System.Configuration.Install.Installer
     {
+        public const string VerbKey = "dlsub";
+        public const string VerbValue = "Download subtitle";
         private const string TargetDirKey = "targetdir";
 
         public Installer()
@@ -16,26 +19,28 @@ namespace Subtle.Registry
             InitializeComponent();
         }
 
-        public override void Commit(IDictionary savedState)
+        public override void Install(IDictionary savedState)
         {
-            base.Commit(savedState);
+            base.Install(savedState);
 
             if (!Context.Parameters.ContainsKey(TargetDirKey))
             {
-                throw new InstallException($"Missing '{TargetDirKey}' parameter");
+                throw new InstallException($"Missing '{TargetDirKey}' parameter.");
             }
 
             var targetDir = Context.Parameters[TargetDirKey].TrimEnd(Path.DirectorySeparatorChar);
             RegistryHelper.SetShellCommands(
                 FileTypes.VideoTypes,
+                VerbKey,
+                VerbValue,
                 Path.Combine(targetDir, "Subtle.exe"),
                 Path.Combine(targetDir, "Subtle.ico"));
-        }
+    }
 
-        public override void Rollback(IDictionary savedState)
+        public override void Uninstall(IDictionary savedState)
         {
-            base.Rollback(savedState);
-            //RegistryHelper.DeleteShellCommands(FileTypes.VideoTypes);
+            base.Uninstall(savedState);
+            RegistryHelper.DeleteShellCommands(FileTypes.VideoTypes, VerbKey);
         }
     }
 }

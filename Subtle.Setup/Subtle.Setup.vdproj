@@ -82,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
+        "OwnerKey" = "8:_5240B892A90F43B09E638986F63E97E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,12 +100,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5240B892A90F43B09E638986F63E97E0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6DC97999855A09FC3FA04D6E6DFBC3BF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -113,6 +107,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_CC6C2BDBCC4AD5EE25EF09E7B6FAF309"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -165,6 +165,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -197,7 +205,7 @@
             "Sequence" = "3:1"
             "Identifier" = "8:_3C9ABDA1_B365_4E7C_A880_9C7CD765B0D7"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
+            "CustomActionData" = "8:"
             }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_76D2C3D187A64BC9B9809F4C3F0B7C4B"
             {
@@ -225,7 +233,7 @@
             "Sequence" = "3:1"
             "Identifier" = "8:_606DB223_1D60_4114_BF70_9197E88CCF33"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
             }
         }
         "DefaultFeature"
@@ -451,7 +459,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Subtle"
         "ProductCode" = "8:{11975A97-028A-4F7A-8A01-537E73415EE3}"
-        "PackageCode" = "8:{69124C05-9036-4AD5-A46B-6360B67D08FF}"
+        "PackageCode" = "8:{A2DA50EC-C0F7-4E54-8CBC-C4E8921E121C}"
         "UpgradeCode" = "8:{A0039DE2-30FC-463D-B98D-F4D359C58416}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

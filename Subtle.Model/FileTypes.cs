@@ -1,5 +1,8 @@
-﻿namespace Subtle.Model
+﻿using System.Diagnostics;
+
+namespace Subtle.Model
 {
+    [DebuggerStepThrough]
     public static class FileTypes
     {
         public static string[] VideoTypes => new[]

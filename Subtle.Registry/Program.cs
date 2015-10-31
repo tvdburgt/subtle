@@ -6,17 +6,14 @@ namespace Subtle.Registry
     {
         static void Main(string[] args)
         {
-            //foreach (var type in FileTypes.VideoTypes)
-            //{
-            //    var key = $@"HKEY_CLASSES_ROOT\.{type}";
-            //    var val = Microsoft.Win32.Registry.GetValue(key, null, "(not found)");
-            //    Console.WriteLine($"{key} => {val}");
-            //}
-
             RegistryHelper.SetShellCommands(
                 FileTypes.VideoTypes,
+                Installer.VerbKey,
+                Installer.VerbValue,
                 @"C:\Program Files (x86)\Subtle\Subtle.exe",
                 @"C:\Program Files (x86)\Subtle\Subtle.ico");
+
+           // RegistryHelper.DeleteShellCommands(FileTypes.VideoTypes, Installer.VerbKey);
         }
     }
 }
