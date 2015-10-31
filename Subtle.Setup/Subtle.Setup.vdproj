@@ -34,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_6DC97999855A09FC3FA04D6E6DFBC3BF"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DC97999855A09FC3FA04D6E6DFBC3BF"
         "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -52,7 +58,19 @@
         "Entry"
         {
         "MsmKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
         "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -65,6 +83,12 @@
         {
         "MsmKey" = "8:_B6DC9ABC5B53C96DB8CF8625593AA937"
         "OwnerKey" = "8:_5240B892A90F43B09E638986F63E97E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B6DC9ABC5B53C96DB8CF8625593AA937"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -83,6 +107,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5240B892A90F43B09E638986F63E97E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -459,7 +489,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Subtle"
         "ProductCode" = "8:{11975A97-028A-4F7A-8A01-537E73415EE3}"
-        "PackageCode" = "8:{A2DA50EC-C0F7-4E54-8CBC-C4E8921E121C}"
+        "PackageCode" = "8:{CE3C9E1F-3491-45E5-9EE0-90304001A394}"
         "UpgradeCode" = "8:{A0039DE2-30FC-463D-B98D-F4D359C58416}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1015,6 +1045,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{2D632EA1-56C1-4910-9CCD-D6216FD65273}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_75EFEB75577F424DBBE15D523FCEAEC6"
+            {
+            "SourcePath" = "8:..\\Subtle.Cli\\obj\\Debug\\Subtle.Cli.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{200DE0C5-DD57-4ADD-9E20-78156D04F1CA}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
