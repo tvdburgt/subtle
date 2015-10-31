@@ -44,13 +44,30 @@ namespace Subtle.UI
             }
         }
 
-        private async Task<SubtitleSearchResultCollection> SearchSubtitles(ICollection<SearchQuery> query)
+        private void LoadFile(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return;
+            }
+
+            var hash = Crypto.HashFile(filename);
+            fileNameTextBox.Text = filename;
+            hashTextBox.Text = Crypto.BinaryToHex(hash);
+            imdbIdTextBox.Text = ImdbHelper.GetImdbId(filename);
+            textSearchTextBox.Text = Path.GetFileNameWithoutExtension(filename);
+            searchButton.Enabled = true;
+
+            SetSearchMethodStates();
+        }
+
+        private async Task<SubtitleSearchResultCollection> SearchSubtitles(SearchQuery[] query)
         {
             var subs = new SubtitleSearchResultCollection();
 
             try
             {
-                subs = await client.SearchSubtitlesAsync(query.ToArray());
+                subs = await client.SearchSubtitlesAsync(query);
             }
             catch (OSDbException e)
             {
@@ -100,44 +117,9 @@ namespace Subtle.UI
                 return;
             }
 
-            var fileInfo = new FileInfo(filename);
-            var hash = Crypto.HashFile(filename);
-            var hashString = Crypto.BinaryToHex(hash);
-
-            fileTextBox.Text = filename;
-            hashTextBox.Text = hashString;
-
             StatusText = "Searching...";
-
-            var langIds = string.Join(",", Settings.Default.Languages.Cast<string>());
-            var query = new List<SearchQuery>();
-
-            query.Add(new HashSearchQuery
-            {
-                LanguageIds = langIds,
-                FileHash = hashString,
-                FileSize = fileInfo.Length
-            });
-
-            if (queryTextBox.Enabled && !string.IsNullOrWhiteSpace(queryTextBox.Text))
-            {
-                query.Add(new FullTextSearchQuery
-                {
-                    LanguageIds = langIds,
-                    Query = queryTextBox.Text
-                });
-            }
-
-            if (imdbIdTextBox.Enabled && !string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
-            {
-                query.Add(new ImdbSearchQuery
-                {
-                    LanguageIds = langIds,
-                    ImdbId = imdbIdTextBox.Text
-                });
-            }
-
-            var subs = await SearchSubtitles(query);
+            var query = CreateSearchQuery(filename);
+            var subs = await SearchSubtitles(query.ToArray());
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
                         .OrderBy(s => s.Language)
@@ -151,7 +133,44 @@ namespace Subtle.UI
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }
 
-#region Initialization
+        private IEnumerable<SearchQuery> CreateSearchQuery(string filename)
+        {
+            var fileInfo = new FileInfo(filename);
+            var langIds = string.Join(",", Settings.Default.Languages.Cast<string>());
+
+            if (Settings.Default.SearchMethods.HasFlag(SearchMethod.Hash) &&
+                !string.IsNullOrWhiteSpace(hashTextBox.Text))
+            {
+                yield return new HashSearchQuery
+                {
+                    LanguageIds = langIds,
+                    FileHash = hashTextBox.Text,
+                    FileSize = fileInfo.Length
+                };
+            }
+
+            if (Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText) &&
+                !string.IsNullOrWhiteSpace(textSearchTextBox.Text))
+            {
+                yield return new FullTextSearchQuery
+                {
+                    LanguageIds = langIds,
+                    Query = textSearchTextBox.Text
+                };
+            }
+
+            if (Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb) &&
+                !string.IsNullOrWhiteSpace(imdbIdTextBox.Text))
+            {
+                yield return new ImdbSearchQuery
+                {
+                    LanguageIds = langIds,
+                    ImdbId = imdbIdTextBox.Text
+                };
+            }
+        }
+
+        #region Initialization
 
         protected override async void OnLoad(EventArgs e)
         {
@@ -165,6 +184,7 @@ namespace Subtle.UI
 
             if (args.Length > 1 && !string.IsNullOrEmpty(args[1]))
             {
+                LoadFile(args[1]);
                 SearchSubtitles(args[1]);
             }
         }
@@ -258,15 +278,16 @@ namespace Subtle.UI
             item.CheckedChanged += SearchMethodCheckChanged;
         }
 
-#endregion
+        #endregion
 
-        private void UpdateSearchMethodInputs()
+        private void SetSearchMethodStates()
         {
-            queryTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
+            hashTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Hash);
+            textSearchTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
             imdbIdTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
         }
 
-#region Event handlers
+        #region Event handlers
 
         private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
@@ -292,7 +313,7 @@ namespace Subtle.UI
             }
 
             Settings.Default.Save();
-            UpdateSearchMethodInputs();
+            SetSearchMethodStates();
         }
 
         private void LanguageCheckChanged(object sender, EventArgs eventArgs)
@@ -316,10 +337,7 @@ namespace Subtle.UI
         {
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                imdbIdTextBox.Text = ImdbHelper.GetImdbId(fileDialog.FileName);
-                queryTextBox.Text = Path.GetFileNameWithoutExtension(fileDialog.FileName);
-                UpdateSearchMethodInputs();
-                searchButton.Enabled = true;
+                LoadFile(fileDialog.FileName);
                 SearchSubtitles(fileDialog.FileName);
             }
         }
@@ -343,7 +361,7 @@ namespace Subtle.UI
             }
 
             var data = Convert.FromBase64String(file.Base64Data);
-            var subFilePath = Path.ChangeExtension(fileDialog.FileName, sub.FileFormat);
+            var subFilePath = Path.ChangeExtension(fileNameTextBox.Text, sub.FileFormat);
             File.WriteAllBytes(subFilePath, Gzip.Decompress(data));
 
             StatusText = $@"Saved subtitle to ""{subFilePath}"".";
@@ -424,11 +442,11 @@ namespace Subtle.UI
             }
         }
 
-#endregion
+        #endregion
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            SearchSubtitles(fileDialog.FileName);
+            SearchSubtitles(fileNameTextBox.Text);
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)

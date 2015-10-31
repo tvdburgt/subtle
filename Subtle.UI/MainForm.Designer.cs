@@ -45,11 +45,12 @@
             this.fileTable = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.hashTextBox = new System.Windows.Forms.TextBox();
-            this.fileTextBox = new System.Windows.Forms.TextBox();
+            this.fileNameTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.queryTextBox = new System.Windows.Forms.TextBox();
+            this.textSearchTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.imdbIdTextBox = new Subtle.UI.Controls.ImdbTextBox();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
@@ -62,7 +63,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.searchButton = new System.Windows.Forms.Button();
-            this.imdbIdTextBox = new Subtle.UI.Controls.ImdbTextBox();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
@@ -167,10 +167,10 @@
             this.fileTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.72477F));
             this.fileTable.Controls.Add(this.label5, 0, 3);
             this.fileTable.Controls.Add(this.hashTextBox, 1, 1);
-            this.fileTable.Controls.Add(this.fileTextBox, 1, 0);
+            this.fileTable.Controls.Add(this.fileNameTextBox, 1, 0);
             this.fileTable.Controls.Add(this.label3, 0, 0);
             this.fileTable.Controls.Add(this.label4, 0, 1);
-            this.fileTable.Controls.Add(this.queryTextBox, 1, 2);
+            this.fileTable.Controls.Add(this.textSearchTextBox, 1, 2);
             this.fileTable.Controls.Add(this.label2, 0, 2);
             this.fileTable.Controls.Add(this.imdbIdTextBox, 1, 3);
             this.fileTable.Location = new System.Drawing.Point(12, 31);
@@ -203,15 +203,15 @@
             this.hashTextBox.Size = new System.Drawing.Size(129, 23);
             this.hashTextBox.TabIndex = 7;
             // 
-            // fileTextBox
+            // fileNameTextBox
             // 
-            this.fileTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.fileTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.fileTextBox.Location = new System.Drawing.Point(101, 3);
-            this.fileTextBox.Name = "fileTextBox";
-            this.fileTextBox.ReadOnly = true;
-            this.fileTextBox.Size = new System.Drawing.Size(690, 23);
-            this.fileTextBox.TabIndex = 6;
+            this.fileNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.fileNameTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.fileNameTextBox.Location = new System.Drawing.Point(101, 3);
+            this.fileNameTextBox.Name = "fileNameTextBox";
+            this.fileNameTextBox.ReadOnly = true;
+            this.fileNameTextBox.Size = new System.Drawing.Size(690, 23);
+            this.fileNameTextBox.TabIndex = 6;
             // 
             // label3
             // 
@@ -233,15 +233,15 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Hash:";
             // 
-            // queryTextBox
+            // textSearchTextBox
             // 
-            this.queryTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.queryTextBox.Enabled = false;
-            this.queryTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.queryTextBox.Location = new System.Drawing.Point(101, 63);
-            this.queryTextBox.Name = "queryTextBox";
-            this.queryTextBox.Size = new System.Drawing.Size(690, 23);
-            this.queryTextBox.TabIndex = 8;
+            this.textSearchTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textSearchTextBox.Enabled = false;
+            this.textSearchTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.textSearchTextBox.Location = new System.Drawing.Point(101, 63);
+            this.textSearchTextBox.Name = "textSearchTextBox";
+            this.textSearchTextBox.Size = new System.Drawing.Size(690, 23);
+            this.textSearchTextBox.TabIndex = 8;
             // 
             // label2
             // 
@@ -249,9 +249,20 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Query:";
+            this.label2.Text = "Text search:";
+            // 
+            // imdbIdTextBox
+            // 
+            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.imdbIdTextBox.Enabled = false;
+            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
+            this.imdbIdTextBox.MaxLength = 7;
+            this.imdbIdTextBox.Name = "imdbIdTextBox";
+            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
+            this.imdbIdTextBox.TabIndex = 10;
             // 
             // subtitleGrid
             // 
@@ -408,16 +419,6 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // imdbIdTextBox
-            // 
-            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
-            this.imdbIdTextBox.MaxLength = 7;
-            this.imdbIdTextBox.Name = "imdbIdTextBox";
-            this.imdbIdTextBox.Size = new System.Drawing.Size(129, 23);
-            this.imdbIdTextBox.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,13 +458,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.DataGridView subtitleGrid;
-        private System.Windows.Forms.TextBox fileTextBox;
+        private System.Windows.Forms.TextBox fileNameTextBox;
         private System.Windows.Forms.ToolStripMenuItem languagesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusStrip;
         private System.Windows.Forms.TextBox hashTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox queryTextBox;
+        private System.Windows.Forms.TextBox textSearchTextBox;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;

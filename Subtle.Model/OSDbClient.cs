@@ -74,7 +74,7 @@ namespace Subtle.Model
             if (!result.IsSuccess)
             {
                 throw new OSDbException(
-                    $"Failed to search for subtitles: {result.Status}");
+                    $"Subtitle search failed: {result.Status}");
             }
 
             return result;
