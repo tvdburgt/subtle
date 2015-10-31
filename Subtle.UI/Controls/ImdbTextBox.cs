@@ -27,6 +27,10 @@ namespace Subtle.UI.Controls
             {
                 Text = match.Groups[1].Value;
             }
+            else
+            {
+                base.WndProc(ref m);
+            }
         }
     }
 }
