@@ -35,7 +35,7 @@ namespace Subtle.Registry
                 VerbValue,
                 Path.Combine(targetDir, "subtle.exe"),
                 Path.Combine(targetDir, "Subtle.ico"));
-    }
+        }
 
         public override void Uninstall(IDictionary savedState)
         {
