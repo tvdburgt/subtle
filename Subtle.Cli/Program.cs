@@ -12,41 +12,56 @@ namespace Subtle.Cli
 {
     class Program
     {
-        private const string LanguageId = "eng";
-
         private static readonly string[] SubtitleTypes = { "srt", "sub", "smi", /*"txt",*/ "ssa", "ass", "mpl" };
         private static readonly Regex IgnorePattern = new Regex(@"sample$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static OSDbClient client;
+        private static SubtleOptions options;
+        private static Language language;
 
         static void Main(string[] args)
         {
-            if (args.Length == 0)
+            client = new OSDbClient(OSDbClient.DefaultUserAgent);
+            options = new SubtleOptions();
+            CommandLine.Parser.Default.ParseArgumentsStrict(args, options);
+
+            if (string.IsNullOrEmpty(options.Path))
             {
-                Console.WriteLine("Nowhere to look...");
-                return;
+                Console.WriteLine("Missing path.");
+                Console.WriteLine(options.GetUsage());
+                Environment.Exit(1);
             }
 
-            client = new OSDbClient(OSDbClient.DefaultUserAgent);
+            language = OSDbConfig.Languages.SingleOrDefault(l =>
+                options.Language.Equals(l.Iso6391, StringComparison.OrdinalIgnoreCase) ||
+                options.Language.Equals(l.Iso6392, StringComparison.OrdinalIgnoreCase));
 
-            client.InitSession();
-
-            var path = args[0];
-
-            if (Directory.Exists(path))
+            if (language == null)
             {
-                var results = ScanDirectory(path)
+                Console.WriteLine("Unrecognized language code.");
+                Console.WriteLine(options.GetUsage());
+                Environment.Exit(1);
+            }
+
+            if (Directory.Exists(options.Path))
+            {
+                client.InitSession();
+                var results = ScanDirectory(options.Path)
                     .Select(SearchSubtitle)
                     .Where(s => s.Selection != null)
                     .ToList();
 
-                Console.WriteLine();
-                DownloadSubtitles(results);
+                if (!options.DryRun)
+                {
+                    Console.WriteLine();
+                    DownloadSubtitles(results);
+                }
             }
-            else if (File.Exists(path))
+            else if (File.Exists(options.Path))
             {
-                var sub = SearchSubtitle(path);
-                if (sub.Selection != null)
+                client.InitSession();
+                var sub = SearchSubtitle(options.Path);
+                if (sub.Selection != null && !options.DryRun)
                 {
                     DownloadSubtitle(sub);
                 }
@@ -54,6 +69,8 @@ namespace Subtle.Cli
             else
             {
                 Console.WriteLine("Path must be an existing file or directory.");
+                Console.WriteLine(options.GetUsage());
+                Environment.Exit(1);
             }
         }
 
@@ -65,7 +82,7 @@ namespace Subtle.Cli
             var subs = client.SearchSubtitles(
                 new HashSearchQuery
                 {
-                    LanguageIds = LanguageId,
+                    LanguageIds = language.Iso6392,
                     FileHash = Crypto.BinaryToHex(hash),
                     FileSize = fileInfo.Length,
                 });
@@ -111,7 +128,14 @@ namespace Subtle.Cli
 
         private static IEnumerable<string> ScanDirectory(string path)
         {
-            var files = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
+            var searchOption = SearchOption.AllDirectories;
+
+            if (options.Shallow)
+            {
+                searchOption = SearchOption.TopDirectoryOnly;
+            }
+
+            var files = Directory.EnumerateFiles(path, "*", searchOption);
 
             foreach (var file in files)
             {
@@ -128,7 +152,7 @@ namespace Subtle.Cli
                     continue;
                 }
 
-                if (HasSubtitle(file))
+                if (!options.Replace && HasSubtitle(file))
                 {
                     Console.WriteLine($@"Skipping ""{file}"": already has matching subtitle");
                     continue;
