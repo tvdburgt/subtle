@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Subtle.UI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Subtle")]
+[assembly: AssemblyDescription("Subtitle downloader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Subtle.UI")]
+[assembly: AssemblyProduct("Subtle")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
