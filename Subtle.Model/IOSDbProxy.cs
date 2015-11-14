@@ -19,7 +19,7 @@ namespace Subtle.Model
         ImdbSearchResultCollection SearchVideos(string token, string query);
 
         [XmlRpcMethod]
-        Session LogIn(string username, string password, string language, string useragent);
+        Session LogIn(string username, string password, string language, string userAgent);
 
         [XmlRpcMethod]
         SubtitleFileCollection DownloadSubtitles(string token, string[] fileIds);

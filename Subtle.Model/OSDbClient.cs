@@ -30,6 +30,7 @@ namespace Subtle.Model
             proxy = XmlRpcProxyGen.Create<IOSDbProxy>();
             proxy.Url = ApiUrl;
             proxy.UserAgent = userAgent;
+            proxy.EnableCompression = true;
         }
 
         public void InitSession()
@@ -38,7 +39,7 @@ namespace Subtle.Model
                 username: string.Empty,
                 password: string.Empty,
                 language: string.Empty,
-                useragent: DefaultUserAgent);
+                userAgent: DefaultUserAgent);
 
             if (!session.IsSuccess)
             {
