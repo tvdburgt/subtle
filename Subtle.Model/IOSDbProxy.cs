@@ -6,8 +6,8 @@ namespace Subtle.Model
 {
     public interface IOSDbProxy : IXmlRpcProxy
     {
-        [XmlRpcMethod]
-        ServerInfo ServerInfo();
+        [XmlRpcMethod("ServerInfo")]
+        ServerInfo GetServerInfo();
 
         [XmlRpcMethod("GetSubLanguages")]
         LanguageCollection GetLanguages(string language = "en");

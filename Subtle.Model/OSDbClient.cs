@@ -9,10 +9,9 @@ namespace Subtle.Model
 {
     public class OSDbClient
     {
+        public const string ApiUrl = "http://api.opensubtitles.org:80/xml-rpc";
         public const string DefaultUserAgent = "tvdburgt";
         public const string TestUserAgent = "OSTestUserAgent";
-
-        public const string ApiUrl = "http://api.opensubtitles.org:80/xml-rpc";
 
         /// <summary>
         /// Default limit for SearchSubtitles. Maximum is 500.
@@ -36,13 +35,21 @@ namespace Subtle.Model
         public void InitSession()
         {
             session = proxy.LogIn(
-                string.Empty, string.Empty, string.Empty, DefaultUserAgent);
+                username: string.Empty,
+                password: string.Empty,
+                language: string.Empty,
+                useragent: DefaultUserAgent);
 
             if (!session.IsSuccess)
             {
                 throw new OSDbException(
                     $"Failed to initialize session: {session.Status}");
             }
+        }
+
+        public ServerInfo GetServerInfo()
+        {
+            return proxy.GetServerInfo();
         }
 
         public SubtitleFileCollection DownloadSubtitles(params string[] fileIds)
