@@ -27,7 +27,7 @@ namespace Subtle.Registry
                     using (var cmd = verb.CreateSubKey("command"))
                     {
                         verb.SetValue(null, verbValue);
-                        cmd.SetValue(null, $@"""{command} ""%1""");
+                        cmd.SetValue(null, $@"""{command}"" ""%1""");
 
                         if (!string.IsNullOrEmpty(icon))
                         {
