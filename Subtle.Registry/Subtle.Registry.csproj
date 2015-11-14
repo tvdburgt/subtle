@@ -54,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryHelper.cs" />
+    <Compile Include="ShellCommandHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

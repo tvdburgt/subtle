@@ -29,7 +29,7 @@ namespace Subtle.Registry
             }
 
             var targetDir = Context.Parameters[TargetDirKey].TrimEnd(Path.DirectorySeparatorChar);
-            RegistryHelper.SetShellCommands(
+            ShellCommandHelper.SetShellCommands(
                 FileTypes.VideoTypes,
                 VerbKey,
                 VerbValue,
@@ -40,7 +40,7 @@ namespace Subtle.Registry
         public override void Uninstall(IDictionary savedState)
         {
             base.Uninstall(savedState);
-            RegistryHelper.DeleteShellCommands(FileTypes.VideoTypes, VerbKey);
+            ShellCommandHelper.DeleteShellCommands(FileTypes.VideoTypes, VerbKey);
         }
     }
 }
