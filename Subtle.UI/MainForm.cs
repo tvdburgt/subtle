@@ -29,8 +29,11 @@ namespace Subtle.UI
             InitFileDialog();
             InitSubtitleGrid();
 
+            WindowTitle = $"{Application.ProductName} {Application.ProductVersion}";
+
 #if DEBUG
             client = new OSDbClient(OSDbClient.TestUserAgent);
+            WindowTitle += " (debug)";
 #else
             client = new OSDbClient();
 #endif
@@ -38,10 +41,13 @@ namespace Subtle.UI
 
         private string StatusText
         {
-            set
-            {
-                statusStrip.Text = value;
-            }
+            set { statusStrip.Text = value; }
+        }
+
+        private string WindowTitle
+        {
+            get { return Text; }
+            set { Text = value; }
         }
 
         private void LoadFile(string filename)
