@@ -10,22 +10,18 @@ namespace Subtle.Test
     {
         static void Main(string[] args)
         {
-            Task.Run(async () =>
+            var client = new OSDbClient(OSDbClient.TestUserAgent);
+            client.InitSession();
+
+            var query = new ImdbSearchQuery
             {
-                var client = new OSDbClient(OSDbClient.TestUserAgent);
-                await client.InitSessionAsync();
+                LanguageIds = "eng",
+                ImdbId = "0111161",
+            };
 
-                var query = new ImdbSearchQuery
-                {
-                    LanguageIds = "eng",
-                    ImdbId = "1559549",
-                };
+            var subs = client.SearchSubtitles(query);
 
-                var subs = await client.SearchSubtitlesAsync(query);
-
-                File.WriteAllText("SearchSubtitles.json", JsonConvert.SerializeObject(subs, Formatting.Indented));
-
-            }).Wait();
+            File.WriteAllText("SearchSubtitles.json", JsonConvert.SerializeObject(subs, Formatting.Indented));
         }
     }
 }
