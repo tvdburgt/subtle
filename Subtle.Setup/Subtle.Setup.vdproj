@@ -216,10 +216,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
                     }
                 }
             }
@@ -1075,7 +1075,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5240B892A90F43B09E638986F63E97E0"
             {
-            "SourcePath" = "8:..\\Subtle.Gui\\obj\\Debug\\subtle.exe"
+            "SourcePath" = "8:..\\Subtle.Gui\\obj\\Release\\subtle.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -1103,7 +1103,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_75EFEB75577F424DBBE15D523FCEAEC6"
             {
-            "SourcePath" = "8:..\\Subtle.Cli\\obj\\Debug\\subtle-cli.exe"
+            "SourcePath" = "8:..\\Subtle.Cli\\obj\\Release\\subtle-cli.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -1131,7 +1131,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
             {
-            "SourcePath" = "8:..\\Subtle.Registry\\obj\\Debug\\Subtle.Registry.exe"
+            "SourcePath" = "8:..\\Subtle.Registry\\obj\\Release\\Subtle.Registry.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
