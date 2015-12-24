@@ -6,7 +6,7 @@ namespace Subtle.Registry
 {
     using Microsoft.Win32;
 
-    [Obsolete]
+    [Obsolete("Remove this once legacy registry keys from v0.1 are cleaned up")]
     public static class RegistryHelper
     {
         public static void DeleteShellCommands(IEnumerable<string> fileTypes, string verbKey)
