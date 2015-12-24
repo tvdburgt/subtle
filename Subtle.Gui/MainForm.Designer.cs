@@ -67,7 +67,8 @@ namespace Subtle.Gui
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UploaderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UploadedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
@@ -280,7 +281,8 @@ namespace Subtle.Gui
             this.SearchMethodColumn,
             this.nameColumn,
             this.languageColumn,
-            this.Column1,
+            this.UploaderColumn,
+            this.UploadedColumn,
             this.Column3,
             this.Column2});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -416,16 +418,24 @@ namespace Subtle.Gui
             this.languageColumn.Name = "languageColumn";
             this.languageColumn.ReadOnly = true;
             // 
-            // Column1
+            // UploaderColumn
             // 
-            this.Column1.DataPropertyName = "UploadDate";
+            this.UploaderColumn.DataPropertyName = "UploaderName";
+            this.UploaderColumn.FillWeight = 30F;
+            this.UploaderColumn.HeaderText = "Uploader";
+            this.UploaderColumn.Name = "UploaderColumn";
+            this.UploaderColumn.ReadOnly = true;
+            // 
+            // UploadedColumn
+            // 
+            this.UploadedColumn.DataPropertyName = "UploadDate";
             dataGridViewCellStyle4.Format = "d";
             dataGridViewCellStyle4.NullValue = null;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column1.FillWeight = 23F;
-            this.Column1.HeaderText = "Uploaded";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
+            this.UploadedColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.UploadedColumn.FillWeight = 23F;
+            this.UploadedColumn.HeaderText = "Uploaded";
+            this.UploadedColumn.Name = "UploadedColumn";
+            this.UploadedColumn.ReadOnly = true;
             // 
             // Column3
             // 
@@ -509,7 +519,8 @@ namespace Subtle.Gui
         private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UploaderColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UploadedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }

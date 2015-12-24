@@ -8,6 +8,7 @@ namespace Subtle.Gui.ViewModels
         public string FileName { get; set; }
         public string Language { get; set; }
         public string FileFormat { get; set; }
+        public string UploaderName { get; set; }
         public DateTime UploadDate { get; set; }
         public decimal? Rating { get; set; }
         public int DownloadCount { get; set; }
