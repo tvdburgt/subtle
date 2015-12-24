@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Globalization;
+using AutoMapper;
 
 namespace Subtle.Gui.Mapping
 {
@@ -7,7 +8,7 @@ namespace Subtle.Gui.Mapping
         protected override decimal? ConvertCore(string source)
         {
             decimal result;
-            decimal.TryParse(source, out result);
+            decimal.TryParse(source, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
 
             // Discard zero values
             if (result == 0)
