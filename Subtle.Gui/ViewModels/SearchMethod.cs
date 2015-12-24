@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Subtle.UI.ViewModels
+namespace Subtle.Gui.ViewModels
 {
     [Flags]
     public enum SearchMethod

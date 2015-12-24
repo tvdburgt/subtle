@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
+using Subtle.Gui.ViewModels;
 using Subtle.Model.Responses;
-using Subtle.UI.ViewModels;
 
-namespace Subtle.UI.Mapping
+namespace Subtle.Gui.Mapping
 {
     class OSDbProfile : Profile
     {

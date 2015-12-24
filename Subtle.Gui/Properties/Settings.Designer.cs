@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Subtle.UI.Properties {
+namespace Subtle.Gui.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -40,9 +40,9 @@ namespace Subtle.UI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hash, FullText, Imdb")]
-        public global::Subtle.UI.ViewModels.SearchMethod SearchMethods {
+        public global::Subtle.Gui.ViewModels.SearchMethod SearchMethods {
             get {
-                return ((global::Subtle.UI.ViewModels.SearchMethod)(this["SearchMethods"]));
+                return ((global::Subtle.Gui.ViewModels.SearchMethod)(this["SearchMethods"]));
             }
             set {
                 this["SearchMethods"] = value;

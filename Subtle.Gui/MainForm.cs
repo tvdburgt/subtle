@@ -6,14 +6,13 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
+using Subtle.Gui.ViewModels;
 using Subtle.Model;
 using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
-using Subtle.UI.Properties;
-using Subtle.UI.ViewModels;
 
-namespace Subtle.UI
+namespace Subtle.Gui
 {
     public partial class MainForm : Form
     {

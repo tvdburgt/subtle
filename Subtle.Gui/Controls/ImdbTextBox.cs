@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Subtle.UI.Controls
+namespace Subtle.Gui.Controls
 {
     public class ImdbTextBox : TextBox
     {

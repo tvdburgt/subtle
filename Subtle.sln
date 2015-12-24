@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Model", "Subtle.Model\Subtle.Model.csproj", "{F78C0D7A-0248-416B-A5EB-6B20E7F57CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.UI", "Subtle.UI\Subtle.UI.csproj", "{2D632EA1-56C1-4910-9CCD-D6216FD65273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Gui", "Subtle.Gui\Subtle.Gui.csproj", "{2D632EA1-56C1-4910-9CCD-D6216FD65273}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subtle.Registry", "Subtle.Registry\Subtle.Registry.csproj", "{C499E32A-DAF7-4850-895C-7D0CD8CF2D6D}"
 EndProject

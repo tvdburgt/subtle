@@ -1,4 +1,6 @@
-﻿namespace Subtle.UI
+﻿using Subtle.Gui.Controls;
+
+namespace Subtle.Gui
 {
     partial class MainForm
     {
@@ -50,7 +52,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textSearchTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.imdbIdTextBox = new Subtle.UI.Controls.ImdbTextBox();
+            this.imdbIdTextBox = new ImdbTextBox();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();

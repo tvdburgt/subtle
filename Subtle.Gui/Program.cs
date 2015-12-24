@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using AutoMapper;
-using Subtle.UI.Mapping;
+using Subtle.Gui.Mapping;
 
-namespace Subtle.UI
+namespace Subtle.Gui
 {
     static class Program
     {

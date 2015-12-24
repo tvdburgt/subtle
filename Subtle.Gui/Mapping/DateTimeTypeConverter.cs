@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 
-namespace Subtle.UI.Mapping
+namespace Subtle.Gui.Mapping
 {
     public class DateTimeTypeConverter : ITypeConverter<string, DateTime>
     {
