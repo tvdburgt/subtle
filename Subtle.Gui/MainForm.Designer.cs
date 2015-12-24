@@ -433,7 +433,7 @@ namespace Subtle.Gui
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = global::Subtle.UI.Properties.Resources.Subtle;
+            this.Icon = global::Subtle.Gui.Properties.Resources.Subtle;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "MainForm";
