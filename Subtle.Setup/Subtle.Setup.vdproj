@@ -310,7 +310,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15D0D11C5C914270AD62ED28B64F5026"
             {
-            "SourcePath" = "8:..\\Subtle.UI\\Resources\\Subtle.ico"
+            "SourcePath" = "8:..\\Subtle.Gui\\Resources\\Subtle.ico"
             "TargetName" = "8:subtle.ico"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -1075,7 +1075,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5240B892A90F43B09E638986F63E97E0"
             {
-            "SourcePath" = "8:..\\Subtle.UI\\obj\\Debug\\subtle.exe"
+            "SourcePath" = "8:..\\Subtle.Gui\\obj\\Debug\\subtle.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
