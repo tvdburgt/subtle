@@ -3,18 +3,13 @@ using AutoMapper;
 
 namespace Subtle.Gui.Mapping
 {
-    public class DateTimeTypeConverter : ITypeConverter<string, DateTime>
+    public class DateTimeTypeConverter : TypeConverter<string, DateTime>
     {
-        public DateTime Convert(ResolutionContext context)
+        protected override DateTime ConvertCore(string source)
         {
-            if (context.SourceValue == null)
-            {
-                return DateTime.MinValue;
-            }
-
             try
             {
-                return System.Convert.ToDateTime(context.SourceValue);
+                return System.Convert.ToDateTime(source);
             }
             catch (FormatException)
             {

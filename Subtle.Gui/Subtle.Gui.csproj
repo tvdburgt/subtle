@@ -62,6 +62,8 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\BooleanValueResolver.cs" />
+    <Compile Include="Mapping\DecimalTypeConverter.cs" />
     <Compile Include="Mapping\DateTimeTypeConverter.cs" />
     <Compile Include="Mapping\OSDbProfile.cs" />
     <Compile Include="Program.cs" />

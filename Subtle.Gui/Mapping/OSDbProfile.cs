@@ -5,14 +5,18 @@ using Subtle.Model.Responses;
 
 namespace Subtle.Gui.Mapping
 {
-    class OSDbProfile : Profile
+    public class OSDbProfile : Profile
     {
         protected override void Configure()
         {
             Mapper.CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
+            Mapper.CreateMap<string, decimal?>().ConvertUsing(new DecimalTypeConverter());
 
             Mapper.CreateMap<SubtitleSearchResult, SubtitleViewModel>()
-                .ForMember(dest => dest.IsFeatured, opt => opt.MapFrom(src => src.IsFeatured == "1"));
+                .ForMember(dest => dest.IsFeatured, opt => opt.ResolveUsing<BooleanValueResolver>().FromMember(src => src.IsFeatured))
+                .ForMember(dest => dest.IsHearingImpaired, opt => opt.ResolveUsing<BooleanValueResolver>().FromMember(src => src.IsHearingImpaired));
+
+            Mapper.AssertConfigurationIsValid();
         }
 
         public override string ProfileName => GetType().Name;

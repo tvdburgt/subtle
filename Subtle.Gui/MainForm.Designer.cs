@@ -30,9 +30,12 @@ namespace Subtle.Gui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +55,12 @@ namespace Subtle.Gui
             this.label4 = new System.Windows.Forms.Label();
             this.textSearchTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.imdbIdTextBox = new ImdbTextBox();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,10 +68,6 @@ namespace Subtle.Gui
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.searchButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
@@ -255,17 +258,6 @@ namespace Subtle.Gui
             this.label2.TabIndex = 9;
             this.label2.Text = "Text search:";
             // 
-            // imdbIdTextBox
-            // 
-            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.imdbIdTextBox.Enabled = false;
-            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
-            this.imdbIdTextBox.MaxLength = 7;
-            this.imdbIdTextBox.Name = "imdbIdTextBox";
-            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
-            this.imdbIdTextBox.TabIndex = 10;
-            // 
             // subtitleGrid
             // 
             this.subtitleGrid.AllowUserToAddRows = false;
@@ -288,15 +280,15 @@ namespace Subtle.Gui
             this.Column1,
             this.Column3,
             this.Column2});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.subtitleGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.subtitleGrid.DefaultCellStyle = dataGridViewCellStyle6;
             this.subtitleGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.subtitleGrid.Location = new System.Drawing.Point(12, 160);
             this.subtitleGrid.MultiSelect = false;
@@ -310,76 +302,6 @@ namespace Subtle.Gui
             this.subtitleGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.SubtitleGridCellFormatting);
             this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
             this.subtitleGrid.SelectionChanged += new System.EventHandler(this.SubtitleGridSelectionChanged);
-            // 
-            // FeaturedColumn
-            // 
-            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = null;
-            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.FeaturedColumn.FillWeight = 26.55415F;
-            this.FeaturedColumn.HeaderText = "";
-            this.FeaturedColumn.MinimumWidth = 25;
-            this.FeaturedColumn.Name = "FeaturedColumn";
-            this.FeaturedColumn.ReadOnly = true;
-            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FeaturedColumn.ToolTipText = "Featured subtitle";
-            this.FeaturedColumn.Width = 25;
-            // 
-            // SearchMethodColumn
-            // 
-            this.SearchMethodColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.NullValue = null;
-            this.SearchMethodColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SearchMethodColumn.FillWeight = 5F;
-            this.SearchMethodColumn.HeaderText = "";
-            this.SearchMethodColumn.MinimumWidth = 25;
-            this.SearchMethodColumn.Name = "SearchMethodColumn";
-            this.SearchMethodColumn.ReadOnly = true;
-            this.SearchMethodColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.SearchMethodColumn.Width = 25;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "FileName";
-            this.nameColumn.FillWeight = 117.9331F;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // languageColumn
-            // 
-            this.languageColumn.DataPropertyName = "Language";
-            this.languageColumn.FillWeight = 39.31104F;
-            this.languageColumn.HeaderText = "Language";
-            this.languageColumn.Name = "languageColumn";
-            this.languageColumn.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "UploadDate";
-            this.Column1.FillWeight = 52.41473F;
-            this.Column1.HeaderText = "Uploaded";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "DownloadCount";
-            this.Column3.FillWeight = 26.20736F;
-            this.Column3.HeaderText = "Downloads";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Rating";
-            this.Column2.FillWeight = 13.10368F;
-            this.Column2.HeaderText = "Rating";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
             // 
             // downloadButton
             // 
@@ -420,6 +342,95 @@ namespace Subtle.Gui
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // imdbIdTextBox
+            // 
+            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.imdbIdTextBox.Enabled = false;
+            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
+            this.imdbIdTextBox.MaxLength = 7;
+            this.imdbIdTextBox.Name = "imdbIdTextBox";
+            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
+            this.imdbIdTextBox.TabIndex = 10;
+            // 
+            // FeaturedColumn
+            // 
+            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = null;
+            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.FeaturedColumn.FillWeight = 5F;
+            this.FeaturedColumn.HeaderText = "";
+            this.FeaturedColumn.MinimumWidth = 25;
+            this.FeaturedColumn.Name = "FeaturedColumn";
+            this.FeaturedColumn.ReadOnly = true;
+            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FeaturedColumn.ToolTipText = "Featured subtitle";
+            this.FeaturedColumn.Width = 25;
+            // 
+            // SearchMethodColumn
+            // 
+            this.SearchMethodColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.NullValue = null;
+            this.SearchMethodColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SearchMethodColumn.FillWeight = 5F;
+            this.SearchMethodColumn.HeaderText = "";
+            this.SearchMethodColumn.MinimumWidth = 25;
+            this.SearchMethodColumn.Name = "SearchMethodColumn";
+            this.SearchMethodColumn.ReadOnly = true;
+            this.SearchMethodColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.SearchMethodColumn.Width = 25;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "FileName";
+            this.nameColumn.FillWeight = 117.9331F;
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // languageColumn
+            // 
+            this.languageColumn.DataPropertyName = "Language";
+            this.languageColumn.FillWeight = 30F;
+            this.languageColumn.HeaderText = "Language";
+            this.languageColumn.Name = "languageColumn";
+            this.languageColumn.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "UploadDate";
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column1.FillWeight = 30F;
+            this.Column1.HeaderText = "Uploaded";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "DownloadCount";
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column3.FillWeight = 26.20736F;
+            this.Column3.HeaderText = "Downloads";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Rating";
+            dataGridViewCellStyle5.NullValue = "-";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column2.FillWeight = 13.10368F;
+            this.Column2.HeaderText = "Rating";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -470,13 +481,6 @@ namespace Subtle.Gui
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
-        private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.ToolStripMenuItem searchMethodsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileHashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iMDbIDToolStripMenuItem;
@@ -484,6 +488,13 @@ namespace Subtle.Gui
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.ImdbTextBox imdbIdTextBox;
+        private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
+        private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }
 
