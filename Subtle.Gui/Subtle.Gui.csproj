@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="Resources\FeaturedIcon.png" />
     <Content Include="Resources\HashIcon.png" />
+    <Content Include="Resources\HearingImpaired.png" />
     <Content Include="Resources\ImdbIcon.png" />
     <Content Include="Resources\TextSearchIcon.png" />
   </ItemGroup>

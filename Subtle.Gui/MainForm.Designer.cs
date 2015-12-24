@@ -30,12 +30,13 @@ namespace Subtle.Gui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +63,7 @@ namespace Subtle.Gui
             this.searchButton = new System.Windows.Forms.Button();
             this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.HearingImpairedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -274,21 +276,22 @@ namespace Subtle.Gui
             this.subtitleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.subtitleGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FeaturedColumn,
+            this.HearingImpairedColumn,
             this.SearchMethodColumn,
             this.nameColumn,
             this.languageColumn,
             this.Column1,
             this.Column3,
             this.Column2});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.subtitleGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.subtitleGrid.DefaultCellStyle = dataGridViewCellStyle7;
             this.subtitleGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.subtitleGrid.Location = new System.Drawing.Point(12, 160);
             this.subtitleGrid.MultiSelect = false;
@@ -366,16 +369,29 @@ namespace Subtle.Gui
             this.FeaturedColumn.Name = "FeaturedColumn";
             this.FeaturedColumn.ReadOnly = true;
             this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FeaturedColumn.ToolTipText = "Featured subtitle";
             this.FeaturedColumn.Width = 25;
+            // 
+            // HearingImpairedColumn
+            // 
+            this.HearingImpairedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = null;
+            this.HearingImpairedColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.HearingImpairedColumn.FillWeight = 5F;
+            this.HearingImpairedColumn.HeaderText = "";
+            this.HearingImpairedColumn.MinimumWidth = 25;
+            this.HearingImpairedColumn.Name = "HearingImpairedColumn";
+            this.HearingImpairedColumn.ReadOnly = true;
+            this.HearingImpairedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.HearingImpairedColumn.Width = 25;
             // 
             // SearchMethodColumn
             // 
             this.SearchMethodColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.NullValue = null;
-            this.SearchMethodColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.NullValue = null;
+            this.SearchMethodColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.SearchMethodColumn.FillWeight = 5F;
             this.SearchMethodColumn.HeaderText = "";
             this.SearchMethodColumn.MinimumWidth = 25;
@@ -387,7 +403,7 @@ namespace Subtle.Gui
             // nameColumn
             // 
             this.nameColumn.DataPropertyName = "FileName";
-            this.nameColumn.FillWeight = 117.9331F;
+            this.nameColumn.FillWeight = 100.1292F;
             this.nameColumn.HeaderText = "Name";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
@@ -395,7 +411,7 @@ namespace Subtle.Gui
             // languageColumn
             // 
             this.languageColumn.DataPropertyName = "Language";
-            this.languageColumn.FillWeight = 30F;
+            this.languageColumn.FillWeight = 23F;
             this.languageColumn.HeaderText = "Language";
             this.languageColumn.Name = "languageColumn";
             this.languageColumn.ReadOnly = true;
@@ -403,10 +419,10 @@ namespace Subtle.Gui
             // Column1
             // 
             this.Column1.DataPropertyName = "UploadDate";
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column1.FillWeight = 30F;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column1.FillWeight = 23F;
             this.Column1.HeaderText = "Uploaded";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -414,10 +430,10 @@ namespace Subtle.Gui
             // Column3
             // 
             this.Column3.DataPropertyName = "DownloadCount";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column3.FillWeight = 26.20736F;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column3.FillWeight = 20F;
             this.Column3.HeaderText = "Downloads";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -425,9 +441,9 @@ namespace Subtle.Gui
             // Column2
             // 
             this.Column2.DataPropertyName = "Rating";
-            dataGridViewCellStyle5.NullValue = "-";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column2.FillWeight = 13.10368F;
+            dataGridViewCellStyle6.NullValue = "-";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column2.FillWeight = 11.12546F;
             this.Column2.HeaderText = "Rating";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -489,6 +505,7 @@ namespace Subtle.Gui
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.ImdbTextBox imdbIdTextBox;
         private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
+        private System.Windows.Forms.DataGridViewImageColumn HearingImpairedColumn;
         private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;

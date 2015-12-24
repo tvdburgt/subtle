@@ -395,41 +395,53 @@ namespace Subtle.Gui
         private void SubtitleGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             var sub = subtitleGrid.Rows[e.RowIndex].DataBoundItem as SubtitleViewModel;
+            var column = subtitleGrid.Columns[e.ColumnIndex];
+            var cell = subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
             if (sub == null)
             {
                 return;
             }
 
-            if (subtitleGrid.Columns[e.ColumnIndex].Name == "FeaturedColumn")
+            switch (column.Name)
             {
-                if (sub.IsFeatured)
-                {
-                    e.Value = Resources.FeaturedIcon;
-                    subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Featured";
-                }
-                else
-                {
-                    e.Value = null;
-                }
-            }
+                case "FeaturedColumn":
+                    if (sub.IsFeatured)
+                    {
+                        e.Value = Resources.FeaturedIcon;
+                        cell.ToolTipText = "Featured";
+                    }
+                    break;
+                case "HearingImpairedColumn":
+                    if (sub.IsHearingImpaired)
+                    {
+                        e.Value = Resources.HearingImpaired;
+                        cell.ToolTipText = "Hearing impaired";
+                    }
+                    break;
+                case "SearchMethodColumn":
+                    FormatSearchMethodColumn(sub, cell, e);
+                    break;
 
-            if (subtitleGrid.Columns[e.ColumnIndex].Name == "SearchMethodColumn")
+            }
+        }
+
+        private static void FormatSearchMethodColumn(SubtitleViewModel sub, DataGridViewCell cell, DataGridViewCellFormattingEventArgs e)
+        {
+            switch (sub.MatchMethod)
             {
-                switch (sub.MatchMethod)
-                {
-                    case SubtitleSearchResult.SearchMethods.Hash:
-                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by file hash";
-                        e.Value = Resources.HashIcon;
-                        break;
-                    case SubtitleSearchResult.SearchMethods.FullText:
-                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched by full-text search";
-                        e.Value = Resources.TextSearchIcon;
-                        break;
-                    case SubtitleSearchResult.SearchMethods.Imdb:
-                        subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = "Matched IMDb ID";
-                        e.Value = Resources.ImdbIcon;
-                        break;
-                }
+                case SubtitleSearchResult.SearchMethods.Hash:
+                    e.Value = Resources.HashIcon;
+                    cell.ToolTipText = "Matched by file hash";
+                    break;
+                case SubtitleSearchResult.SearchMethods.FullText:
+                    e.Value = Resources.TextSearchIcon;
+                    cell.ToolTipText = "Matched by full-text search";
+                    break;
+                case SubtitleSearchResult.SearchMethods.Imdb:
+                    e.Value = Resources.ImdbIcon;
+                    cell.ToolTipText = "Matched IMDb ID";
+                    break;
             }
         }
 
