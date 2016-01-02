@@ -274,9 +274,9 @@ namespace Subtle.Gui
 
         private void SetSearchMethodStates()
         {
-            hashTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Hash);
-            textSearchTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
-            imdbIdTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
+            hashTextBox.Enabled = fileNameTextBox.Enabled && Settings.Default.SearchMethods.HasFlag(SearchMethod.Hash);
+            textSearchTextBox.Enabled = fileNameTextBox.Enabled && Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
+            imdbIdTextBox.Enabled = fileNameTextBox.Enabled && Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
         }
 
         private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
