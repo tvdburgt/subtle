@@ -79,13 +79,19 @@ namespace Subtle.Gui
             }
             catch (OSDbException e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    e.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
             catch (WebException e)
             {
-                var text = $"Subtitle search failed: {e.Message}";
                 var result = MessageBox.Show(
-                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    $"Subtitle search failed: {e.Message}",
+                    "Error",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Error);
 
                 if (result == DialogResult.Retry)
                 {
@@ -105,9 +111,11 @@ namespace Subtle.Gui
             }
             catch (WebException e)
             {
-                var text = $"Failed to download subtitle: {e.Message}";
                 var result = MessageBox.Show(
-                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    $"Failed to download subtitle: {e.Message}",
+                    "Error",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Error);
 
                 if (result == DialogResult.Retry)
                 {
@@ -130,12 +138,12 @@ namespace Subtle.Gui
             var subs = await SearchSubtitles(query.ToArray());
 
             subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
-                        .OrderBy(s => s.Language)
-                        .ThenBy(GetMatchMethodSortOrder)
-                        .ThenByDescending(s => s.IsFeatured)
-                        .ThenByDescending(s => s.Rating)
-                        .ThenByDescending(s => s.DownloadCount)
-                        .ToList();
+                .OrderBy(s => s.Language)
+                .ThenBy(GetMatchMethodSortOrder)
+                .ThenByDescending(s => s.IsFeatured)
+                .ThenByDescending(s => s.Rating)
+                .ThenByDescending(s => s.DownloadCount)
+                .ToList();
 
             subtitleBindingSource.ResetBindings(false);
             StatusText = $"Search returned {subs.Count()} subtitles.";
@@ -178,8 +186,6 @@ namespace Subtle.Gui
             }
         }
 
-        #region Initialization
-
         protected override async void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -205,9 +211,11 @@ namespace Subtle.Gui
             }
             catch (WebException we)
             {
-                var text = $"Failed to initialize session: {we.Message}";
                 var result = MessageBox.Show(
-                    text, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    $"Failed to initialize session: {we.Message}",
+                    "Error",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Error);
 
                 if (result == DialogResult.Retry)
                 {
@@ -264,16 +272,12 @@ namespace Subtle.Gui
             item.CheckedChanged += SearchMethodCheckChanged;
         }
 
-        #endregion
-
         private void SetSearchMethodStates()
         {
             hashTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Hash);
             textSearchTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.FullText);
             imdbIdTextBox.Enabled = Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb);
         }
-
-        #region Event handlers
 
         private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
@@ -422,8 +426,6 @@ namespace Subtle.Gui
                     return int.MaxValue;
             }
         }
-
-        #endregion
 
         private void searchButton_Click(object sender, EventArgs e)
         {
