@@ -248,16 +248,14 @@ namespace Subtle.Gui
 
         private void InitSearchMethods()
         {
-            searchMethodsToolStripMenuItem.DropDownItems.Clear();
-
-            AppendSearchMethod(SearchMethod.Hash, "File Hash");
-            AppendSearchMethod(SearchMethod.Imdb, "IMDb ID");
-            AppendSearchMethod(SearchMethod.FullText, "Full-Text Search");
-
-            searchMethodsToolStripMenuItem.DropDown.Closing += ToolStripDropDownClosing;
+            searchMethodsMenuItem.DropDownItems.Clear();
+            AppendSearchMethod(searchMethodsMenuItem, SearchMethod.Hash, "File hash");
+            AppendSearchMethod(searchMethodsMenuItem, SearchMethod.Imdb, "IMDb ID");
+            AppendSearchMethod(searchMethodsMenuItem, SearchMethod.FullText, "Full-text search");
+            searchMethodsMenuItem.DropDown.Closing += ToolStripDropDownClosing;
         }
 
-        private void AppendSearchMethod(SearchMethod value, string text)
+        private void AppendSearchMethod(ToolStripDropDownItem menuItem, SearchMethod value, string text)
         {
             var isChecked = Settings.Default.SearchMethods.HasFlag(value);
             var item = new ToolStripMenuItem
@@ -268,7 +266,7 @@ namespace Subtle.Gui
                 CheckOnClick = true
             };
 
-            searchMethodsToolStripMenuItem.DropDownItems.Add(item);
+            menuItem.DropDownItems.Add(item);
             item.CheckedChanged += SearchMethodCheckChanged;
         }
 
@@ -281,7 +279,7 @@ namespace Subtle.Gui
 
         private void ToolStripDropDownClosing(object sender, ToolStripDropDownClosingEventArgs e)
         {
-            // Prevent dropdown from closing after checking a language item
+            // Prevent dropdown from closing after checking a dropdown menu item
             if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
             {
                 e.Cancel = true;

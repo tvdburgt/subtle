@@ -42,15 +42,8 @@ namespace Subtle.Gui
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchMethodsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileHashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iMDbIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fulltextSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prefsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.searchMethodsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileHashToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.iMDbIDToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fulltextSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.langMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.fileTable = new System.Windows.Forms.TableLayoutPanel();
@@ -86,7 +79,6 @@ namespace Subtle.Gui
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.searchMethodsToolStripMenuItem,
             this.prefsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -125,37 +117,6 @@ namespace Subtle.Gui
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
-            // searchMethodsToolStripMenuItem
-            // 
-            this.searchMethodsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileHashToolStripMenuItem,
-            this.iMDbIDToolStripMenuItem,
-            this.fulltextSearchToolStripMenuItem});
-            this.searchMethodsToolStripMenuItem.Name = "searchMethodsToolStripMenuItem";
-            this.searchMethodsToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
-            this.searchMethodsToolStripMenuItem.Text = "Search Methods";
-            // 
-            // fileHashToolStripMenuItem
-            // 
-            this.fileHashToolStripMenuItem.CheckOnClick = true;
-            this.fileHashToolStripMenuItem.Name = "fileHashToolStripMenuItem";
-            this.fileHashToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.fileHashToolStripMenuItem.Text = "File hash";
-            // 
-            // iMDbIDToolStripMenuItem
-            // 
-            this.iMDbIDToolStripMenuItem.CheckOnClick = true;
-            this.iMDbIDToolStripMenuItem.Name = "iMDbIDToolStripMenuItem";
-            this.iMDbIDToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.iMDbIDToolStripMenuItem.Text = "IMDb ID";
-            // 
-            // fulltextSearchToolStripMenuItem
-            // 
-            this.fulltextSearchToolStripMenuItem.CheckOnClick = true;
-            this.fulltextSearchToolStripMenuItem.Name = "fulltextSearchToolStripMenuItem";
-            this.fulltextSearchToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.fulltextSearchToolStripMenuItem.Text = "Full-text search";
-            // 
             // prefsMenu
             // 
             this.prefsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -167,31 +128,9 @@ namespace Subtle.Gui
             // 
             // searchMethodsMenuItem
             // 
-            this.searchMethodsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileHashToolStripMenuItem1,
-            this.iMDbIDToolStripMenuItem1,
-            this.fulltextSearchToolStripMenuItem1});
             this.searchMethodsMenuItem.Name = "searchMethodsMenuItem";
             this.searchMethodsMenuItem.Size = new System.Drawing.Size(159, 22);
             this.searchMethodsMenuItem.Text = "Search methods";
-            // 
-            // fileHashToolStripMenuItem1
-            // 
-            this.fileHashToolStripMenuItem1.Name = "fileHashToolStripMenuItem1";
-            this.fileHashToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.fileHashToolStripMenuItem1.Text = "File hash";
-            // 
-            // iMDbIDToolStripMenuItem1
-            // 
-            this.iMDbIDToolStripMenuItem1.Name = "iMDbIDToolStripMenuItem1";
-            this.iMDbIDToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.iMDbIDToolStripMenuItem1.Text = "IMDb ID";
-            // 
-            // fulltextSearchToolStripMenuItem1
-            // 
-            this.fulltextSearchToolStripMenuItem1.Name = "fulltextSearchToolStripMenuItem1";
-            this.fulltextSearchToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.fulltextSearchToolStripMenuItem1.Text = "Full-text search";
             // 
             // langMenuItem
             // 
@@ -552,10 +491,6 @@ namespace Subtle.Gui
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ToolStripMenuItem searchMethodsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileHashToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iMDbIDToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fulltextSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.ImdbTextBox imdbIdTextBox;
@@ -571,9 +506,6 @@ namespace Subtle.Gui
         private System.Windows.Forms.ToolStripMenuItem prefsMenu;
         private System.Windows.Forms.ToolStripMenuItem langMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchMethodsMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileHashToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem iMDbIDToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem fulltextSearchToolStripMenuItem1;
     }
 }
 
