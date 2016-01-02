@@ -24,7 +24,6 @@ namespace Subtle.Gui
         public MainForm()
         {
             InitializeComponent();
-            InitLanguages();
             InitSearchMethods();
             InitFileDialog();
             InitSubtitleGrid();
@@ -234,28 +233,6 @@ namespace Subtle.Gui
                 string.Join(";", types));
 
             fileDialog = new OpenFileDialog { Filter = filter };
-        }
-
-        private void InitLanguages()
-        {
-            languagesToolStripMenuItem.DropDownItems.Clear();
-
-            foreach (var lang in OSDbConfig.Languages)
-            {
-                var item = new ToolStripMenuItem
-                {
-                    Text = lang.Name,
-                    CheckState = CheckState.Checked,
-                    CheckOnClick = true,
-                    Checked = Settings.Default.Languages.Contains(lang.Iso6392),
-                    Tag = lang
-                };
-
-                languagesToolStripMenuItem.DropDownItems.Add(item);
-                item.CheckedChanged += LanguageCheckChanged;
-            }
-
-            languagesToolStripMenuItem.DropDown.Closing += ToolStripDropDownClosing;
         }
 
         private void InitSearchMethods()
@@ -470,6 +447,12 @@ namespace Subtle.Gui
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void langsMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new LanguagesForm();
+            form.ShowDialog(this);
         }
     }
 }

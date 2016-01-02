@@ -42,11 +42,16 @@ namespace Subtle.Gui
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.languagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchMethodsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileHashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMDbIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fulltextSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prefsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchMethodsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileHashToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMDbIDToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fulltextSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.langMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.fileTable = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,11 +62,6 @@ namespace Subtle.Gui
             this.textSearchTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.subtitleGrid = new System.Windows.Forms.DataGridView();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
             this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.HearingImpairedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
@@ -71,6 +71,11 @@ namespace Subtle.Gui
             this.UploadedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
@@ -81,8 +86,8 @@ namespace Subtle.Gui
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.languagesToolStripMenuItem,
-            this.searchMethodsToolStripMenuItem});
+            this.searchMethodsToolStripMenuItem,
+            this.prefsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
@@ -120,12 +125,6 @@ namespace Subtle.Gui
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
-            // languagesToolStripMenuItem
-            // 
-            this.languagesToolStripMenuItem.Name = "languagesToolStripMenuItem";
-            this.languagesToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.languagesToolStripMenuItem.Text = "Languages";
-            // 
             // searchMethodsToolStripMenuItem
             // 
             this.searchMethodsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -156,6 +155,50 @@ namespace Subtle.Gui
             this.fulltextSearchToolStripMenuItem.Name = "fulltextSearchToolStripMenuItem";
             this.fulltextSearchToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.fulltextSearchToolStripMenuItem.Text = "Full-text search";
+            // 
+            // prefsMenu
+            // 
+            this.prefsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchMethodsMenuItem,
+            this.langMenuItem});
+            this.prefsMenu.Name = "prefsMenu";
+            this.prefsMenu.Size = new System.Drawing.Size(80, 20);
+            this.prefsMenu.Text = "Preferences";
+            // 
+            // searchMethodsMenuItem
+            // 
+            this.searchMethodsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileHashToolStripMenuItem1,
+            this.iMDbIDToolStripMenuItem1,
+            this.fulltextSearchToolStripMenuItem1});
+            this.searchMethodsMenuItem.Name = "searchMethodsMenuItem";
+            this.searchMethodsMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.searchMethodsMenuItem.Text = "Search methods";
+            // 
+            // fileHashToolStripMenuItem1
+            // 
+            this.fileHashToolStripMenuItem1.Name = "fileHashToolStripMenuItem1";
+            this.fileHashToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.fileHashToolStripMenuItem1.Text = "File hash";
+            // 
+            // iMDbIDToolStripMenuItem1
+            // 
+            this.iMDbIDToolStripMenuItem1.Name = "iMDbIDToolStripMenuItem1";
+            this.iMDbIDToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.iMDbIDToolStripMenuItem1.Text = "IMDb ID";
+            // 
+            // fulltextSearchToolStripMenuItem1
+            // 
+            this.fulltextSearchToolStripMenuItem1.Name = "fulltextSearchToolStripMenuItem1";
+            this.fulltextSearchToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.fulltextSearchToolStripMenuItem1.Text = "Full-text search";
+            // 
+            // langMenuItem
+            // 
+            this.langMenuItem.Name = "langMenuItem";
+            this.langMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.langMenuItem.Text = "Languages...";
+            this.langMenuItem.Click += new System.EventHandler(this.langsMenuItem_Click);
             // 
             // label1
             // 
@@ -308,57 +351,6 @@ namespace Subtle.Gui
             this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
             this.subtitleGrid.SelectionChanged += new System.EventHandler(this.SubtitleGridSelectionChanged);
             // 
-            // downloadButton
-            // 
-            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.downloadButton.Enabled = false;
-            this.downloadButton.Location = new System.Drawing.Point(876, 506);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(96, 30);
-            this.downloadButton.TabIndex = 5;
-            this.downloadButton.Text = "Download";
-            this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.DownloadButtonClick);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusStrip});
-            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 556);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(984, 5);
-            this.statusStrip1.TabIndex = 6;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(0, 0);
-            // 
-            // searchButton
-            // 
-            this.searchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchButton.Enabled = false;
-            this.searchButton.Location = new System.Drawing.Point(789, 506);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(81, 30);
-            this.searchButton.TabIndex = 9;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // imdbIdTextBox
-            // 
-            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.imdbIdTextBox.Enabled = false;
-            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
-            this.imdbIdTextBox.MaxLength = 7;
-            this.imdbIdTextBox.Name = "imdbIdTextBox";
-            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
-            this.imdbIdTextBox.TabIndex = 10;
-            // 
             // FeaturedColumn
             // 
             this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -458,6 +450,57 @@ namespace Subtle.Gui
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
+            // downloadButton
+            // 
+            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadButton.Enabled = false;
+            this.downloadButton.Location = new System.Drawing.Point(876, 506);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(96, 30);
+            this.downloadButton.TabIndex = 5;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.DownloadButtonClick);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip});
+            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 556);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(984, 5);
+            this.statusStrip1.TabIndex = 6;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(0, 0);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchButton.Enabled = false;
+            this.searchButton.Location = new System.Drawing.Point(789, 506);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(81, 30);
+            this.searchButton.TabIndex = 9;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // imdbIdTextBox
+            // 
+            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.imdbIdTextBox.Enabled = false;
+            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
+            this.imdbIdTextBox.MaxLength = 7;
+            this.imdbIdTextBox.Name = "imdbIdTextBox";
+            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
+            this.imdbIdTextBox.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,6 +513,7 @@ namespace Subtle.Gui
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = global::Subtle.Gui.Properties.Resources.Subtle;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
@@ -498,7 +542,6 @@ namespace Subtle.Gui
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.DataGridView subtitleGrid;
         private System.Windows.Forms.TextBox fileNameTextBox;
-        private System.Windows.Forms.ToolStripMenuItem languagesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusStrip;
         private System.Windows.Forms.TextBox hashTextBox;
@@ -523,6 +566,12 @@ namespace Subtle.Gui
         private System.Windows.Forms.DataGridViewTextBoxColumn UploadedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.ToolStripMenuItem prefsMenu;
+        private System.Windows.Forms.ToolStripMenuItem langMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchMethodsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileHashToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem iMDbIDToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fulltextSearchToolStripMenuItem1;
     }
 }
 
