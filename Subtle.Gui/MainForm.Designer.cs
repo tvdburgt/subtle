@@ -247,6 +247,7 @@ namespace Subtle.Gui
             // hashTextBox
             // 
             this.hashTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hashTextBox.Enabled = false;
             this.hashTextBox.Font = new System.Drawing.Font("Consolas", 10F);
             this.hashTextBox.Location = new System.Drawing.Point(101, 33);
             this.hashTextBox.Name = "hashTextBox";
@@ -257,6 +258,7 @@ namespace Subtle.Gui
             // fileNameTextBox
             // 
             this.fileNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.fileNameTextBox.Enabled = false;
             this.fileNameTextBox.Font = new System.Drawing.Font("Consolas", 10F);
             this.fileNameTextBox.Location = new System.Drawing.Point(101, 3);
             this.fileNameTextBox.Name = "fileNameTextBox";

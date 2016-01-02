@@ -61,6 +61,9 @@ namespace Subtle.Gui
             hashTextBox.Text = Crypto.BinaryToHex(hash);
             imdbIdTextBox.Text = ImdbHelper.GetImdbId(filename);
             textSearchTextBox.Text = Path.GetFileNameWithoutExtension(filename);
+
+            fileNameTextBox.Enabled = true;
+            hashTextBox.Enabled = true;
             searchButton.Enabled = true;
 
             SetSearchMethodStates();
@@ -297,23 +300,6 @@ namespace Subtle.Gui
 
             Settings.Default.Save();
             SetSearchMethodStates();
-        }
-
-        private void LanguageCheckChanged(object sender, EventArgs eventArgs)
-        {
-            var item = (ToolStripMenuItem)sender;
-            var lang = (Language)item.Tag;
-
-            if (item.Checked)
-            {
-                Settings.Default.Languages.Add(lang.Iso6392);
-            }
-            else
-            {
-                Settings.Default.Languages.Remove(lang.Iso6392);
-            }
-
-            Settings.Default.Save();
         }
 
         private void OpenMenuItemClick(object sender, EventArgs e)
