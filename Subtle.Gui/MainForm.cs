@@ -14,6 +14,7 @@ using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using Application = System.Windows.Forms.Application;
+using System.Reflection;
 
 namespace Subtle.Gui
 {
@@ -237,6 +238,11 @@ namespace Subtle.Gui
             subtitleBindingSource = new BindingSource();
             subtitleGrid.AutoGenerateColumns = false;
             subtitleGrid.DataSource = subtitleBindingSource;
+
+            // Enable double buffering
+            PropertyInfo pi = subtitleGrid.GetType().GetProperty("DoubleBuffered",
+                  BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(subtitleGrid, true, null);
         }
 
         private void InitFileDialog()

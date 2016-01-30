@@ -273,7 +273,6 @@ namespace Subtle.Gui
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.subtitleGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.subtitleGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.subtitleGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.subtitleGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.subtitleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -472,7 +471,6 @@ namespace Subtle.Gui
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.menuStrip1);
-            this.DoubleBuffered = true;
             this.Icon = global::Subtle.Gui.Properties.Resources.Subtle;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
