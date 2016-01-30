@@ -40,6 +40,7 @@ namespace Subtle.Registry
         public override void Uninstall(IDictionary savedState)
         {
             base.Uninstall(savedState);
+
             ShellCommandHelper.DeleteShellCommands(FileTypes.VideoTypes, VerbKey);
         }
     }

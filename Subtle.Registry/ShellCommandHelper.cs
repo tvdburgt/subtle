@@ -9,9 +9,6 @@ namespace Subtle.Registry
     {
         public static void SetShellCommands(IEnumerable<string> fileTypes, string verbKey, string verbValue, string command, string icon = null)
         {
-            // Clean up legacy registry keys
-            RegistryHelper.DeleteShellCommands(fileTypes, verbKey);
-
             foreach (var type in fileTypes)
             {
                 using (var key = Registry.ClassesRoot.OpenSubKey($@"SystemFileAssociations\.{type}", true))
@@ -42,9 +39,6 @@ namespace Subtle.Registry
 
         public static void DeleteShellCommands(IEnumerable<string> fileTypes, string verbKey)
         {
-            // Clean up legacy registry keys
-            RegistryHelper.DeleteShellCommands(fileTypes, verbKey);
-
             foreach (var type in fileTypes)
             {
                 using (var key = Registry.ClassesRoot.OpenSubKey($@"SystemFileAssociations\.{type}", true))
