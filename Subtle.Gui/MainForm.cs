@@ -384,7 +384,7 @@ namespace Subtle.Gui
                 case "HearingImpairedColumn":
                     if (sub.IsHearingImpaired)
                     {
-                        e.Value = Resources.HearingImpaired;
+                        e.Value = Resources.HearingImpairedIcon;
                         cell.ToolTipText = "Hearing impaired";
                     }
                     break;

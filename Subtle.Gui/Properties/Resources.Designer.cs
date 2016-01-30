@@ -83,9 +83,9 @@ namespace Subtle.Gui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HearingImpaired {
+        internal static System.Drawing.Bitmap HearingImpairedIcon {
             get {
-                object obj = ResourceManager.GetObject("HearingImpaired", resourceCulture);
+                object obj = ResourceManager.GetObject("HearingImpairedIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
