@@ -39,7 +39,7 @@ namespace Subtle.Gui
 
         private async void LoadServerInfo()
         {
-            var info = osdbClient.GetServerInfo();
+            var info = await osdbClient.GetServerInfoAsync();
 
             apiLabel.Text = $"{info.ApiUrl} ({info.ApiVersion})";
             subtitleCountLabel.Text = $"{int.Parse(info.SubtitleCount):n0}";
