@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
 using AutoMapper;
+using Octokit;
 using Subtle.Gui.Mapping;
+using Subtle.Model;
+using Application = System.Windows.Forms.Application;
 
 namespace Subtle.Gui
 {
@@ -13,10 +15,17 @@ namespace Subtle.Gui
         [STAThread]
         static void Main()
         {
+#if DEBUG
+            var osdbClient = new OSDbClient(OSDbClient.TestUserAgent);
+#else
+            var osdbClient = new OSDbClient();
+#endif
+            var githubClient = new GitHubClient(new ProductHeaderValue(Application.ProductName, Application.ProductVersion));
+
             Mapper.Initialize(cfg => cfg.AddProfile<OSDbProfile>());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(osdbClient, githubClient));
         }
     }
 }

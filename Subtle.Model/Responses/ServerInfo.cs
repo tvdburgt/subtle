@@ -1,4 +1,5 @@
 ﻿using CookComputing.XmlRpc;
+using System;
 
 namespace Subtle.Model.Responses
 {
@@ -9,6 +10,9 @@ namespace Subtle.Model.Responses
 
         [XmlRpcMember("xmlrpc_url")]
         public string ApiUrl { get; set; }
+
+        [XmlRpcMember("website_url")]
+        public string WebsiteUrl { get; set; }
 
         [XmlRpcMember("application")]
         public string Application { get; set; }
@@ -24,6 +28,12 @@ namespace Subtle.Model.Responses
 
         [XmlRpcMember("download_limits")]
         public DownloadQuota DownloadQuota { get; set; }
+
+        [XmlRpcMember("seconds")]
+        public double ServerTime { get; set; }
+
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public TimeSpan ResponseTime { get; set; }
     }
 
     public class DownloadQuota

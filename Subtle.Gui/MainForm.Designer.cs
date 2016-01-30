@@ -41,10 +41,12 @@ namespace Subtle.Gui
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prefsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.searchMethodsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.langMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.fileTable = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -79,7 +81,8 @@ namespace Subtle.Gui
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.prefsMenu});
+            this.prefsMenu,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
@@ -91,7 +94,7 @@ namespace Subtle.Gui
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.toolStripSeparator1,
-            this.quitToolStripMenuItem});
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -109,13 +112,13 @@ namespace Subtle.Gui
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
-            // quitToolStripMenuItem
+            // exitToolStripMenuItem
             // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.quitToolStripMenuItem.Text = "Quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // prefsMenu
             // 
@@ -138,6 +141,21 @@ namespace Subtle.Gui
             this.langMenuItem.Size = new System.Drawing.Size(159, 22);
             this.langMenuItem.Text = "Languages...";
             this.langMenuItem.Click += new System.EventHandler(this.langsMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutMenuItem.Text = "About";
+            this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
             // label1
             // 
@@ -191,7 +209,7 @@ namespace Subtle.Gui
             this.hashTextBox.Location = new System.Drawing.Point(101, 33);
             this.hashTextBox.Name = "hashTextBox";
             this.hashTextBox.ReadOnly = true;
-            this.hashTextBox.Size = new System.Drawing.Size(129, 23);
+            this.hashTextBox.Size = new System.Drawing.Size(119, 23);
             this.hashTextBox.TabIndex = 7;
             // 
             // fileNameTextBox
@@ -439,7 +457,7 @@ namespace Subtle.Gui
             this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
             this.imdbIdTextBox.MaxLength = 7;
             this.imdbIdTextBox.Name = "imdbIdTextBox";
-            this.imdbIdTextBox.Size = new System.Drawing.Size(57, 23);
+            this.imdbIdTextBox.Size = new System.Drawing.Size(55, 23);
             this.imdbIdTextBox.TabIndex = 10;
             // 
             // MainForm
@@ -491,7 +509,7 @@ namespace Subtle.Gui
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.ImdbTextBox imdbIdTextBox;
         private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
@@ -506,6 +524,8 @@ namespace Subtle.Gui
         private System.Windows.Forms.ToolStripMenuItem prefsMenu;
         private System.Windows.Forms.ToolStripMenuItem langMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchMethodsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
     }
 }
 

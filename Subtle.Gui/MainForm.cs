@@ -6,35 +6,39 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
+using Octokit;
 using Subtle.Gui.Properties;
 using Subtle.Gui.ViewModels;
 using Subtle.Model;
 using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
+using Application = System.Windows.Forms.Application;
 
 namespace Subtle.Gui
 {
     public partial class MainForm : Form
     {
-        private readonly OSDbClient client;
+        private readonly OSDbClient osdbClient;
+        private readonly IGitHubClient githubClient;
         private OpenFileDialog fileDialog;
+
         private BindingSource subtitleBindingSource;
 
-        public MainForm()
+        public MainForm(OSDbClient osdbClient, IGitHubClient githubClient)
         {
             InitializeComponent();
             InitSearchMethods();
             InitFileDialog();
             InitSubtitleGrid();
 
-            WindowTitle = $"{Application.ProductName} {Application.ProductVersion}";
+            this.osdbClient = osdbClient;
+            this.githubClient = githubClient;
+
+            WindowTitle = Application.ProductName;
 
 #if DEBUG
-            client = new OSDbClient(OSDbClient.TestUserAgent);
             WindowTitle += " (debug)";
-#else
-            client = new OSDbClient();
 #endif
         }
 
@@ -75,7 +79,7 @@ namespace Subtle.Gui
 
             try
             {
-                subs = await client.SearchSubtitlesAsync(query);
+                subs = await osdbClient.SearchSubtitlesAsync(query);
             }
             catch (OSDbException e)
             {
@@ -106,7 +110,7 @@ namespace Subtle.Gui
         {
             try
             {
-                var subs = await client.DownloadSubtitlesAsync(subId);
+                var subs = await osdbClient.DownloadSubtitlesAsync(subId);
                 return subs.First();
             }
             catch (WebException e)
@@ -207,7 +211,7 @@ namespace Subtle.Gui
         {
             try
             {
-                await client.InitSessionAsync();
+                await osdbClient.InitSessionAsync();
             }
             catch (WebException we)
             {
@@ -387,7 +391,6 @@ namespace Subtle.Gui
                 case "SearchMethodColumn":
                     FormatSearchMethodColumn(sub, cell, e);
                     break;
-
             }
         }
 
@@ -430,7 +433,7 @@ namespace Subtle.Gui
             SearchSubtitles(fileNameTextBox.Text);
         }
 
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -438,6 +441,12 @@ namespace Subtle.Gui
         private void langsMenuItem_Click(object sender, EventArgs e)
         {
             var form = new LanguagesForm();
+            form.ShowDialog(this);
+        }
+
+        private void aboutMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new AboutForm(osdbClient, githubClient);
             form.ShowDialog(this);
         }
     }
