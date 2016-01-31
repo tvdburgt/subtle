@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using System.Globalization;
 
 namespace Subtle.Gui.Mapping
 {
@@ -7,14 +8,9 @@ namespace Subtle.Gui.Mapping
     {
         protected override DateTime ConvertCore(string source)
         {
-            try
-            {
-                return System.Convert.ToDateTime(source);
-            }
-            catch (FormatException)
-            {
-                return DateTime.MinValue;
-            }
+            DateTime result;
+            DateTime.TryParse(source, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out result);
+            return result;
         }
     }
 }
