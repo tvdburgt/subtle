@@ -54,10 +54,5 @@ namespace Subtle.Gui
         {
             System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
         }
-
-        private void versionLabel_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }
