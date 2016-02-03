@@ -34,7 +34,7 @@
         "Entry"
         {
         "MsmKey" = "8:_517CEDA8C45095892555527FFC6CA631"
-        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "OwnerKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_517CEDA8C45095892555527FFC6CA631"
-        "OwnerKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
-        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "OwnerKey" = "8:_31769C7581E334A8EC72E6F9BEDA14ED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,7 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
-        "OwnerKey" = "8:_31769C7581E334A8EC72E6F9BEDA14ED"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,13 +112,13 @@
         "Entry"
         {
         "MsmKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
-        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
-        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,37 +130,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A90DC56D90C8B37F28451491BD90719B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_517CEDA8C45095892555527FFC6CA631"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_31769C7581E334A8EC72E6F9BEDA14ED"
+        "OwnerKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -172,7 +142,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_70E54B949999693EB2FE9D1F84BFFCA3"
+        "OwnerKey" = "8:_31769C7581E334A8EC72E6F9BEDA14ED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_517CEDA8C45095892555527FFC6CA631"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D7FEC703304DF6521A4C6EF455AC1B3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A90DC56D90C8B37F28451491BD90719B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_75EFEB75577F424DBBE15D523FCEAEC6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -353,11 +353,6 @@
             "AssemblyAsmDisplayName" = "8:Octokit, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_31769C7581E334A8EC72E6F9BEDA14ED"
-                    {
-                    "Name" = "8:Octokit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Octokit.dll"
             "TargetName" = "8:"
@@ -384,11 +379,6 @@
             "AssemblyAsmDisplayName" = "8:CookComputing.XmlRpcV2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_517CEDA8C45095892555527FFC6CA631"
-                    {
-                    "Name" = "8:CookComputing.XmlRpcV2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CookComputing.XmlRpcV2.dll"
             "TargetName" = "8:"
@@ -415,11 +405,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_70E54B949999693EB2FE9D1F84BFFCA3"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -446,11 +431,6 @@
             "AssemblyAsmDisplayName" = "8:CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A90DC56D90C8B37F28451491BD90719B"
-                    {
-                    "Name" = "8:CommandLine.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CommandLine.dll"
             "TargetName" = "8:"
@@ -477,11 +457,6 @@
             "AssemblyAsmDisplayName" = "8:AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CC6C2BDBCC4AD5EE25EF09E7B6FAF309"
-                    {
-                    "Name" = "8:AutoMapper.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:AutoMapper.dll"
             "TargetName" = "8:"
@@ -508,11 +483,6 @@
             "AssemblyAsmDisplayName" = "8:Subtle.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D7FEC703304DF6521A4C6EF455AC1B3A"
-                    {
-                    "Name" = "8:Subtle.Model.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Subtle.Model.dll"
             "TargetName" = "8:"
@@ -588,15 +558,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Subtle"
-        "ProductCode" = "8:{C79867BC-3B48-4C6C-AB25-0E4451C3C995}"
-        "PackageCode" = "8:{0E5ACA1F-9C94-45CB-8DBD-96C2F8DF3C8E}"
+        "ProductCode" = "8:{46CE18E7-D6DE-4F32-8C22-019369A28F2D}"
+        "PackageCode" = "8:{93C2AF20-BE2B-411D-B765-D4CDD87FF5EF}"
         "UpgradeCode" = "8:{A0039DE2-30FC-463D-B98D-F4D359C58416}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.2.2"
+        "ProductVersion" = "8:0.3"
         "Manufacturer" = "8: "
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1124,7 +1094,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5240B892A90F43B09E638986F63E97E0"
             {
-            "SourcePath" = "8:..\\Subtle.Gui\\obj\\Release\\subtle.exe"
+            "SourcePath" = "8:..\\Subtle.Gui\\obj\\Debug\\subtle.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -1152,7 +1122,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_75EFEB75577F424DBBE15D523FCEAEC6"
             {
-            "SourcePath" = "8:..\\Subtle.Cli\\obj\\Release\\subtle-cli.exe"
+            "SourcePath" = "8:..\\Subtle.Cli\\obj\\Debug\\subtle-cli.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
@@ -1180,7 +1150,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7D95B0DC71CD4EA0A8F113CE328EFDD4"
             {
-            "SourcePath" = "8:..\\Subtle.Registry\\obj\\Release\\Subtle.Registry.exe"
+            "SourcePath" = "8:..\\Subtle.Registry\\obj\\Debug\\Subtle.Registry.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E23A7AEED86F416BA3CDC1005B09C57D"
