@@ -1,6 +1,7 @@
 # Subtle
 
 Subtle is a simple and intuitive Windows desktop application for downloading subtitles for your favorite movies and TV shows.
+Download on <https://github.com/tvdburgt/subtle/releases/latest>
 
 ![Screenshot of Subtle](https://raw.githubusercontent.com/tvdburgt/subtle/master/screenshots/pioneer.png)
 
