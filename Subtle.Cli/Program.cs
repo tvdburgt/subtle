@@ -19,7 +19,7 @@ namespace Subtle.Cli
         private static SubtleOptions options;
         private static Language language;
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             client = new OSDbClient(OSDbClient.DefaultUserAgent);
             options = new SubtleOptions();
@@ -29,7 +29,7 @@ namespace Subtle.Cli
             {
                 Console.WriteLine("Missing path.");
                 Console.WriteLine(options.GetUsage());
-                Environment.Exit(1);
+                return 1;
             }
 
             language = OSDbConfig.Languages.SingleOrDefault(l =>
@@ -40,7 +40,7 @@ namespace Subtle.Cli
             {
                 Console.WriteLine("Unrecognized language code.");
                 Console.WriteLine(options.GetUsage());
-                Environment.Exit(1);
+                return 1;
             }
 
             if (Directory.Exists(options.Path))
@@ -54,7 +54,9 @@ namespace Subtle.Cli
                 if (!options.DryRun)
                 {
                     Console.WriteLine();
+                    Console.WriteLine("Downloading...");
                     DownloadSubtitles(results);
+                    Console.WriteLine("Done!");
                 }
             }
             else if (File.Exists(options.Path))
@@ -70,8 +72,10 @@ namespace Subtle.Cli
             {
                 Console.WriteLine("Path must be an existing file or directory.");
                 Console.WriteLine(options.GetUsage());
-                Environment.Exit(1);
+                return 1;
             }
+
+            return 0;
         }
 
         private static SubtitleSelection SearchSubtitle(string file)
@@ -91,7 +95,11 @@ namespace Subtle.Cli
 
             if (selection == null)
             {
-                Console.WriteLine($@"Skipping ""{file}"": no search results");
+                Console.WriteLine($"[notfound]\t{file}");
+            }
+            else
+            {
+                Console.WriteLine($"[{selection.MatchMethod}]\t{file}");
             }
 
             return new SubtitleSelection
@@ -113,16 +121,14 @@ namespace Subtle.Cli
                 return;
             }
 
-            var files = client.DownloadSubtitles(subs.Select(s => s.Selection.Id).ToArray());
+            var downloads = client.DownloadSubtitles(subs.Select(s => s.Selection.Id).ToArray());
 
-            foreach (var file in files)
+            foreach (var file in downloads)
             {
-                var sub = subs.Single(s => s.Selection.Id == file.Id);
+                var sub = subs.First(s => s.Selection.Id == file.Id); // Same subtitle might be used for multiple files
                 var path = Path.ChangeExtension(sub.File, sub.Selection.FileFormat);
                 var data = Convert.FromBase64String(file.Base64Data);
-
                 File.WriteAllBytes(path, Gzip.Decompress(data));
-                Console.WriteLine($@"Downloaded ""{path}""");
             }
         }
 
@@ -148,13 +154,15 @@ namespace Subtle.Cli
 
                 if (IgnorePattern.IsMatch(Path.GetFileNameWithoutExtension(file)))
                 {
-                    Console.WriteLine($@"Skipping ""{file}"": matched ignore pattern");
+                    Console.WriteLine($"[ignored]\t{file}");
+                    //Console.WriteLine($@"Skipping ""{file}"": matched ignore pattern");
                     continue;
                 }
 
                 if (!options.Replace && HasSubtitle(file))
                 {
-                    Console.WriteLine($@"Skipping ""{file}"": already has matching subtitle");
+                    Console.WriteLine($"[skipped]\t{file}");
+                    //Console.WriteLine($@"Skipping ""{file}"": already has matching subtitle");
                     continue;
                 }
 
