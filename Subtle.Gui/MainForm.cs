@@ -22,6 +22,7 @@ namespace Subtle.Gui
     {
         private readonly OSDbClient osdbClient;
         private readonly IGitHubClient githubClient;
+        private readonly OmdbClient omdbClient;
         private OpenFileDialog fileDialog;
 
         private BindingSource subtitleBindingSource;
@@ -35,6 +36,7 @@ namespace Subtle.Gui
 
             this.osdbClient = osdbClient;
             this.githubClient = githubClient;
+            this.omdbClient = new OmdbClient();
 
             WindowTitle = Application.ProductName;
 
@@ -54,7 +56,7 @@ namespace Subtle.Gui
             set { Text = value; }
         }
 
-        private void LoadFile(string filename)
+        private async void LoadFile(string filename)
         {
             if (!File.Exists(filename))
             {
@@ -64,14 +66,46 @@ namespace Subtle.Gui
             var hash = Crypto.HashFile(filename);
             fileNameTextBox.Text = filename;
             hashTextBox.Text = Crypto.BinaryToHex(hash);
-            imdbIdTextBox.Text = ImdbHelper.GetImdbId(filename);
             textSearchTextBox.Text = Path.GetFileNameWithoutExtension(filename);
 
             fileNameTextBox.Enabled = true;
-            hashTextBox.Enabled = true;
-            searchButton.Enabled = true;
 
             SetSearchMethodStates();
+
+            await Task.WhenAny(GetImdbDetails(fileDialog.FileName), Task.Delay(1000));
+            await SearchSubtitles(fileDialog.FileName);
+        }
+
+        private async Task GetImdbDetails(string filename)
+        {
+            if (!Settings.Default.SearchMethods.HasFlag(SearchMethod.Imdb))
+            {
+                return;
+            }
+
+            var vi = VideoInfo.Extract(filename);
+            if (vi.Type == VideoType.Undefined)
+            {
+                return;
+            }
+
+            StatusText = "Retrieving IMDb details...";
+            OmdbResponse response = new OmdbResponse();
+
+            switch (vi.Type)
+            {
+                case VideoType.Movie:
+                    response = await omdbClient.SearchMovieAsync(vi.Title, vi.Year);
+                    break;
+                case VideoType.Episode:
+                    response = await omdbClient.SearchEpisodeAsync(vi.Title, vi.Season, vi.Episode);
+                    break;
+            }
+
+            if (response.Success)
+            {
+                imdbIdTextBox.Text = response.ImdbIdTrimmed;
+            }
         }
 
         private async Task<SubtitleSearchResultCollection> SearchSubtitles(SearchQuery[] query)
@@ -131,14 +165,10 @@ namespace Subtle.Gui
             }
         }
 
-        private async void SearchSubtitles(string filename)
+        private async Task SearchSubtitles(string filename)
         {
-            if (!File.Exists(filename))
-            {
-                return;
-            }
-
-            StatusText = "Searching...";
+            StatusText = "Searching for subtitles...";
+            searchButton.Enabled = false;
             var query = CreateSearchQuery(filename);
             var subs = await SearchSubtitles(query.ToArray());
 
@@ -151,6 +181,7 @@ namespace Subtle.Gui
                 .ToList();
 
             subtitleBindingSource.ResetBindings(false);
+            searchButton.Enabled = true;
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }
 
@@ -195,16 +226,13 @@ namespace Subtle.Gui
         {
             base.OnLoad(e);
 
-            StatusText = "Inititializing session...";
             await InitSession();
-            StatusText = "Session initialized.";
 
             var args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1 && !string.IsNullOrEmpty(args[1]))
             {
                 LoadFile(args[1]);
-                SearchSubtitles(args[1]);
             }
         }
 
@@ -212,6 +240,7 @@ namespace Subtle.Gui
         {
             try
             {
+                StatusText = "Inititializing session...";
                 await osdbClient.InitSessionAsync();
             }
             catch (WebException we)
@@ -231,6 +260,8 @@ namespace Subtle.Gui
                     Application.Exit();
                 }
             }
+
+            StatusText = "Session initialized.";
         }
 
         private void InitSubtitleGrid()
@@ -319,7 +350,6 @@ namespace Subtle.Gui
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 LoadFile(fileDialog.FileName);
-                SearchSubtitles(fileDialog.FileName);
             }
         }
 
@@ -414,7 +444,7 @@ namespace Subtle.Gui
                     break;
                 case SubtitleSearchResult.SearchMethods.Imdb:
                     e.Value = Resources.ImdbIcon;
-                    cell.ToolTipText = "Matched IMDb ID";
+                    cell.ToolTipText = "Matched by IMDb ID";
                     break;
             }
         }
