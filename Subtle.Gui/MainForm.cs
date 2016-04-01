@@ -67,13 +67,15 @@ namespace Subtle.Gui
             fileNameTextBox.Text = filename;
             hashTextBox.Text = Crypto.BinaryToHex(hash);
             textSearchTextBox.Text = Path.GetFileNameWithoutExtension(filename);
+            imdbIdTextBox.Text = string.Empty;
 
             fileNameTextBox.Enabled = true;
+            searchButton.Enabled = true;
 
             SetSearchMethodStates();
 
-            await Task.WhenAny(GetImdbDetails(fileDialog.FileName), Task.Delay(1000));
-            await SearchSubtitles(fileDialog.FileName);
+            await Task.WhenAny(GetImdbDetails(filename), Task.Delay(1000));
+            await SearchSubtitles(filename);
         }
 
         private async Task GetImdbDetails(string filename)
@@ -168,7 +170,6 @@ namespace Subtle.Gui
         private async Task SearchSubtitles(string filename)
         {
             StatusText = "Searching for subtitles...";
-            searchButton.Enabled = false;
             var query = CreateSearchQuery(filename);
             var subs = await SearchSubtitles(query.ToArray());
 
@@ -181,7 +182,6 @@ namespace Subtle.Gui
                 .ToList();
 
             subtitleBindingSource.ResetBindings(false);
-            searchButton.Enabled = true;
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }
 
@@ -362,7 +362,7 @@ namespace Subtle.Gui
                 return;
             }
 
-            StatusText = "Downloading...";
+            StatusText = "Downloading subtitle...";
             var file = await DownloadSubtitle(sub.Id);
 
             if (file == null)
@@ -464,9 +464,9 @@ namespace Subtle.Gui
             }
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private async void searchButton_Click(object sender, EventArgs e)
         {
-            SearchSubtitles(fileNameTextBox.Text);
+            await SearchSubtitles(fileNameTextBox.Text);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -484,6 +484,25 @@ namespace Subtle.Gui
         {
             var form = new AboutForm(osdbClient, githubClient);
             form.ShowDialog(this);
+        }
+
+        private void HandleDragEnter(object sender, DragEventArgs e)
+        {
+            var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            if (files != null &&
+                files.Length == 1 &&
+                File.Exists(files[0]) &&
+                FileTypes.VideoTypes.Contains(Path.GetExtension(files[0]).TrimStart('.')))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void HandleDragDrop(object sender, DragEventArgs e)
+        {
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            LoadFile(files[0]);
         }
     }
 }
