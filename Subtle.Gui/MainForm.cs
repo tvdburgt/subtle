@@ -74,7 +74,7 @@ namespace Subtle.Gui
 
             SetSearchMethodStates();
 
-            await Task.WhenAny(GetImdbDetails(filename), Task.Delay(1000));
+            await GetImdbDetails(filename);
             await SearchSubtitles(filename);
         }
 
@@ -149,6 +149,16 @@ namespace Subtle.Gui
             {
                 var subs = await osdbClient.DownloadSubtitlesAsync(subId);
                 return subs.First();
+            }
+            catch (OSDbException e)
+            {
+                MessageBox.Show(
+                    e.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return null;
             }
             catch (WebException e)
             {
@@ -243,10 +253,18 @@ namespace Subtle.Gui
                 StatusText = "Inititializing session...";
                 await osdbClient.InitSessionAsync();
             }
-            catch (WebException we)
+            catch (OSDbException e)
+            {
+                MessageBox.Show(
+                    e.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch (WebException e)
             {
                 var result = MessageBox.Show(
-                    $"Failed to initialize session: {we.Message}",
+                    $"Failed to initialize session: {e.Message}",
                     "Error",
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Error);

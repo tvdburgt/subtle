@@ -7,6 +7,8 @@ using Subtle.Model;
 using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
+using System.Threading.Tasks;
+using Nito.AsyncEx;
 
 namespace Subtle.Cli
 {
@@ -43,26 +45,32 @@ namespace Subtle.Cli
                 return 1;
             }
 
+            return AsyncContext.Run(MainAsync);
+        }
+
+        static async Task<int> MainAsync()
+        {
             if (Directory.Exists(options.Path))
             {
-                client.InitSession();
-                var results = ScanDirectory(options.Path)
-                    .Select(SearchSubtitle)
-                    .Where(s => s.Selection != null)
-                    .ToList();
+                await client.InitSessionAsync();
+
+                var searchTasks = ScanDirectory(options.Path)
+                    .Select(f => SearchSubtitle(f));
+
+                var subs = await Task.WhenAll(searchTasks);
 
                 if (!options.DryRun)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Downloading...");
-                    DownloadSubtitles(results);
+                    DownloadSubtitles(subs.Where(s => s != null));
                     Console.WriteLine("Done!");
                 }
             }
             else if (File.Exists(options.Path))
             {
-                client.InitSession();
-                var sub = SearchSubtitle(options.Path);
+                await client.InitSessionAsync();
+                var sub = await SearchSubtitle(options.Path);
                 if (sub.Selection != null && !options.DryRun)
                 {
                     DownloadSubtitle(sub);
@@ -78,12 +86,12 @@ namespace Subtle.Cli
             return 0;
         }
 
-        private static SubtitleSelection SearchSubtitle(string file)
+        private static async Task<SubtitleSelection> SearchSubtitle(string file)
         {
             var hash = Crypto.HashFile(file);
             var fileInfo = new FileInfo(file);
 
-            var subs = client.SearchSubtitles(
+            var subs = await client.SearchSubtitlesAsync(
                 new HashSearchQuery
                 {
                     LanguageIds = language.Iso6392,
@@ -114,14 +122,14 @@ namespace Subtle.Cli
             DownloadSubtitles(new[] { sub });
         }
 
-        private static void DownloadSubtitles(ICollection<SubtitleSelection> subs)
+        private static async void DownloadSubtitles(IEnumerable<SubtitleSelection> subs)
         {
-            if (subs.Count == 0)
+            if (!subs.Any())
             {
                 return;
             }
 
-            var downloads = client.DownloadSubtitles(subs.Select(s => s.Selection.Id).ToArray());
+            var downloads = await client.DownloadSubtitlesAsync(subs.Select(s => s.Selection.Id).ToArray());
 
             foreach (var file in downloads)
             {

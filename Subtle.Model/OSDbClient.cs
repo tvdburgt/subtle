@@ -12,6 +12,7 @@ namespace Subtle.Model
         public const string ApiUrl = "http://api.opensubtitles.org/xml-rpc";
         public const string DefaultUserAgent = "tvdburgt";
         public const string TestUserAgent = "OSTestUserAgent";
+        public const int Timeout = 5000;
 
         /// <summary>
         /// Default limit for SearchSubtitles. Maximum is 500.
@@ -31,85 +32,83 @@ namespace Subtle.Model
             proxy.Url = ApiUrl;
             proxy.UserAgent = userAgent;
             proxy.EnableCompression = true;
+            proxy.Timeout = Timeout;
         }
 
-        public void InitSession()
+        public async Task<Session> InitSessionAsync()
         {
-            session = proxy.LogIn(
-                username: string.Empty,
-                password: string.Empty,
-                language: string.Empty,
-                userAgent: DefaultUserAgent);
+            var task = Task.Factory.FromAsync(
+                (callback, state) => proxy.BeginLogIn(string.Empty, string.Empty, string.Empty, DefaultUserAgent, callback),
+                proxy.EndLogIn,
+                null);
+
+            session = await task.WithTimeout(Timeout);
 
             if (!session.IsSuccess)
             {
-                throw new OSDbException(
-                    $"Failed to initialize session: {session.Status}");
+                throw new OSDbException(session);
             }
+
+            return session;
         }
 
-        public ServerInfo GetServerInfo()
-        {
-            var sw = Stopwatch.StartNew();
-            var info = proxy.GetServerInfo();
-            sw.Stop();
-            info.ResponseTime = sw.Elapsed;
-            return info;
-        }
-
-        public SubtitleFileCollection DownloadSubtitles(params string[] fileIds)
-        {
-            CheckSession();
-            return proxy.DownloadSubtitles(session.Token, fileIds);
-        }
-
-        public Task<ImdbSearchResultCollection> SearchVideos(string query)
-        {
-            CheckSession();
-            return Task.Run(() => proxy.SearchVideos(
-                session.Token, query));
-        }
-
-        public LanguageCollection GetLanguages()
-        {
-            return proxy.GetLanguages();
-        }
-
-        public SubtitleSearchResultCollection SearchSubtitles(params SearchQuery[] query)
+        public async Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
         {
             CheckSession();
 
             var options = new SearchOptions { Limit = SearchLimit };
-            var result = proxy.SearchSubtitles(
-                session.Token, query, options);
+            var task = Task.Factory.FromAsync(
+                (callback, state) => proxy.BeginSearchSubtitles(session.Token, query, options, callback),
+                proxy.EndSearchSubtitles,
+                null);
+
+            var result = await task.WithTimeout(Timeout);
 
             if (!result.IsSuccess)
             {
-                throw new OSDbException(
-                    $"Subtitle search failed: {result.Status}");
+                throw new OSDbException(result);
             }
 
             return result;
         }
 
-        public Task InitSessionAsync()
+        public async Task<SubtitleFileCollection> DownloadSubtitlesAsync(params string[] fileIds)
         {
-            return Task.Run(() => InitSession());
+            CheckSession();
+
+            var task = Task.Factory.FromAsync(
+                (callback, state) => proxy.BeginDownloadSubtitles(session.Token, fileIds, callback),
+                proxy.EndDownloadSubtitles,
+                null);
+
+            var result = await task.WithTimeout(Timeout);
+
+            if (!result.IsSuccess)
+            {
+                throw new OSDbException(result);
+            }
+
+            return result;
         }
 
-        public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
+        public async Task<ServerInfo> GetServerInfoAsync()
         {
-            return Task.Run(() => SearchSubtitles(query));
+            var watch = Stopwatch.StartNew();
+            var task = Task.Factory.FromAsync(
+                (callback, state) => proxy.BeginGetServerInfo(callback),
+                proxy.EndGetServerInfo,
+                null);
+
+            var info = await task.WithTimeout(Timeout);
+
+            watch.Stop();
+            info.ResponseTime = watch.Elapsed;
+            return info;
         }
 
-        public Task<SubtitleFileCollection> DownloadSubtitlesAsync(params string[] fileIds)
+        public LanguageCollection GetLanguages()
         {
-            return Task.Run(() => DownloadSubtitles(fileIds));
-        }
-
-        public Task<ServerInfo> GetServerInfoAsync()
-        {
-            return Task.Run(() => GetServerInfo());
+            return proxy.GetLanguages();
         }
 
         private void CheckSession()

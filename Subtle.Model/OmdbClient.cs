@@ -11,12 +11,15 @@ namespace Subtle.Model
         private const string ContentType = "json";
         private const string BaseAddress = "https://www.omdbapi.com/";
 
+        private TimeSpan Timeout => TimeSpan.FromMilliseconds(2000);
+
         private readonly HttpClient client;
 
         public OmdbClient()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri(BaseAddress);
+            client.Timeout = Timeout;
         }
 
         public async Task<OmdbResponse> SearchMovieAsync(string title, int year)
@@ -33,7 +36,17 @@ namespace Subtle.Model
 
         private async Task<OmdbResponse> SearchAsync(string query)
         {
-            var response = await client.GetAsync("?" + query);
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await client.GetAsync("?" + query.TrimStart('?'));
+            }
+            catch (TaskCanceledException)
+            {
+                // Timeout occurred
+                return new OmdbResponse();
+            }
 
             if (!response.IsSuccessStatusCode)
             {

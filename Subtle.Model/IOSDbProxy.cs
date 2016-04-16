@@ -1,27 +1,33 @@
 ﻿using CookComputing.XmlRpc;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
+using System;
 
 namespace Subtle.Model
 {
     public interface IOSDbProxy : IXmlRpcProxy
     {
-        [XmlRpcMethod("ServerInfo")]
-        ServerInfo GetServerInfo();
-
         [XmlRpcMethod("GetSubLanguages")]
         LanguageCollection GetLanguages(string language = "en");
 
-        [XmlRpcMethod]
-        SubtitleSearchResultCollection SearchSubtitles(string token, SearchQuery[] query, SearchOptions options);
+        [XmlRpcBegin]
+        IAsyncResult BeginSearchSubtitles(string token, SearchQuery[] query, SearchOptions options, AsyncCallback callback);
+        [XmlRpcEnd]
+        SubtitleSearchResultCollection EndSearchSubtitles(IAsyncResult result);
 
-        [XmlRpcMethod("SearchMoviesOnIMDB")]
-        ImdbSearchResultCollection SearchVideos(string token, string query);
+        [XmlRpcBegin]
+        IAsyncResult BeginLogIn(string username, string password, string language, string userAgent, AsyncCallback callback);
+        [XmlRpcEnd]
+        Session EndLogIn(IAsyncResult result);
 
-        [XmlRpcMethod]
-        Session LogIn(string username, string password, string language, string userAgent);
+        [XmlRpcBegin]
+        IAsyncResult BeginDownloadSubtitles(string token, string[] fileIds, AsyncCallback callback);
+        [XmlRpcEnd]
+        SubtitleFileCollection EndDownloadSubtitles(IAsyncResult result);
 
-        [XmlRpcMethod]
-        SubtitleFileCollection DownloadSubtitles(string token, string[] fileIds);
+        [XmlRpcBegin("ServerInfo")]
+        IAsyncResult BeginGetServerInfo(AsyncCallback callback);
+        [XmlRpcEnd("ServerInfo")]
+        ServerInfo EndGetServerInfo(IAsyncResult result);
     }
 }
