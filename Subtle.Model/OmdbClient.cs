@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -24,13 +26,32 @@ namespace Subtle.Model
 
         public async Task<OmdbResponse> SearchMovieAsync(string title, int year)
         {
-            var query = $"type=movie&t={title}&y={year}&r={ContentType}&v={ApiVersion}";
-            return await SearchAsync(query);
+            return await SearchAsync(new Dictionary<string, string>
+            {
+                { "type", "movie" },
+                { "t", title },
+                { "y", year.ToString() },
+                { "r", ContentType },
+                { "v", ApiVersion.ToString() },
+            });
         }
 
         public async Task<OmdbResponse> SearchEpisodeAsync(string title, int season, int episode)
         {
-            var query = $"type=episode&t={title}&season={season}&episode={episode}&r={ContentType}&v={ApiVersion}";
+            return await SearchAsync(new Dictionary<string, string>
+            {
+                { "type", "episode" },
+                { "t", title },
+                { "season", season.ToString() },
+                { "episode", episode.ToString() },
+                { "r", ContentType },
+                { "v", ApiVersion.ToString() },
+            });
+        }
+
+        private async Task<OmdbResponse> SearchAsync(IDictionary<string, string> parameters)
+        {
+            var query = string.Join("&", parameters.Select(p => $"{p.Key}={p.Value}"));
             return await SearchAsync(query);
         }
 
