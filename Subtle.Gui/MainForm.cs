@@ -391,9 +391,34 @@ namespace Subtle.Gui
 
             var data = Convert.FromBase64String(file.Base64Data);
             var subFilePath = Path.ChangeExtension(fileNameTextBox.Text, sub.FileFormat);
-            File.WriteAllBytes(subFilePath, Gzip.Decompress(data));
 
-            StatusText = $@"Saved subtitle to ""{subFilePath}"".";
+            SaveSubtitle(subFilePath, Gzip.Decompress(data));
+        }
+
+        private void SaveSubtitle(string path, byte[] data)
+        {
+            try
+            {
+                File.WriteAllBytes(path, data);
+                StatusText = $@"Saved subtitle to ""{path}"".";
+            }
+            catch (IOException e)
+            {
+                var result = MessageBox.Show(
+                    $"Failed to save subtitle: {e.Message}",
+                    "Error",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Error);
+
+                if (result == DialogResult.Retry)
+                {
+                    SaveSubtitle(path, data);
+                }
+                else
+                {
+                    StatusText = "Download cancelled.";
+                }
+            }
         }
 
         private void SubtitleGridSelectionChanged(object sender, EventArgs e)
