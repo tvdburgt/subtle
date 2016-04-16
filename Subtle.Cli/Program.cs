@@ -8,7 +8,6 @@ using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using System.Threading.Tasks;
-using Nito.AsyncEx;
 
 namespace Subtle.Cli
 {
@@ -45,7 +44,7 @@ namespace Subtle.Cli
                 return 1;
             }
 
-            return AsyncContext.Run(MainAsync);
+            return MainAsync().GetAwaiter().GetResult();
         }
 
         static async Task<int> MainAsync()
