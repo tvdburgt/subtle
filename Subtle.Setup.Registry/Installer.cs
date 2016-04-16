@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Configuration.Install;
 using System.IO;
 
-namespace Subtle.Registry
+namespace Subtle.Setup.Registry
 {
     [RunInstaller(true)]
     public partial class Installer : System.Configuration.Install.Installer

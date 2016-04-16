@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Subtle.Registry
+namespace Subtle.Setup.Registry
 {
     using Microsoft.Win32;
 

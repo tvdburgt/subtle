@@ -1,4 +1,4 @@
-﻿namespace Subtle.Registry
+﻿namespace Subtle.Setup.Registry
 {
     partial class Installer
     {
