@@ -305,7 +305,6 @@ namespace Subtle.Gui
             this.subtitleGrid.Location = new System.Drawing.Point(12, 160);
             this.subtitleGrid.Name = "subtitleGrid";
             this.subtitleGrid.Size = new System.Drawing.Size(960, 340);
-            this.subtitleGrid.Subtitles = null;
             this.subtitleGrid.TabIndex = 10;
             // 
             // MainForm

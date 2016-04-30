@@ -186,8 +186,7 @@ namespace Subtle.Gui
                 .ThenBy(GetMatchMethodSortOrder)
                 .ThenByDescending(s => s.IsFeatured)
                 .ThenByDescending(s => s.Rating)
-                .ThenByDescending(s => s.DownloadCount)
-                .ToList();
+                .ThenByDescending(s => s.DownloadCount);
 
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }

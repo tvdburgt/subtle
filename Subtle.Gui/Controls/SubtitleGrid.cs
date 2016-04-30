@@ -1,4 +1,5 @@
 ﻿using Subtle.Gui.Properties;
+using Subtle.Gui.SortableBindingList;
 using Subtle.Model.Models;
 using System;
 using System.Collections.Generic;
@@ -9,18 +10,13 @@ namespace Subtle.Gui.Controls
 {
     public partial class SubtitleGrid : UserControl
     {
-        private BindingSource bindingSource;
-
         public event EventHandler SelectionChanged;
 
         public SubtitleGrid()
         {
             InitializeComponent();
 
-            // Create and attach binding source
-            bindingSource = new BindingSource();
             dataGridView.AutoGenerateColumns = false;
-            dataGridView.DataSource = bindingSource;
 
             // Enable double buffering
             PropertyInfo pi = dataGridView.GetType().GetProperty("DoubleBuffered",
@@ -28,15 +24,15 @@ namespace Subtle.Gui.Controls
             pi.SetValue(dataGridView, true, null);
         }
 
-        public List<Subtitle> Subtitles
+        public IEnumerable<Subtitle> Subtitles
         {
             set
             {
-                bindingSource.DataSource = value;
+                dataGridView.DataSource = new SortableBindingList<Subtitle>(value);
             }
             get
             {
-                return bindingSource.DataSource as List<Subtitle>;
+                return dataGridView.DataSource as IEnumerable<Subtitle>;
             }
         }
 

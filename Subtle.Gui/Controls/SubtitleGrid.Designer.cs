@@ -40,7 +40,7 @@
             this.HearingImpairedColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LanguageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UploaderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UploadedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DownloadsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +63,7 @@
             this.HearingImpairedColumn,
             this.SearchMethodColumn,
             this.NameColumn,
-            this.languageColumn,
+            this.LanguageColumn,
             this.UploaderColumn,
             this.UploadedColumn,
             this.DownloadsColumn,
@@ -143,13 +143,13 @@
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
             // 
-            // languageColumn
+            // LanguageColumn
             // 
-            this.languageColumn.DataPropertyName = "Language";
-            this.languageColumn.FillWeight = 23F;
-            this.languageColumn.HeaderText = "Language";
-            this.languageColumn.Name = "languageColumn";
-            this.languageColumn.ReadOnly = true;
+            this.LanguageColumn.DataPropertyName = "Language";
+            this.LanguageColumn.FillWeight = 23F;
+            this.LanguageColumn.HeaderText = "Language";
+            this.LanguageColumn.Name = "LanguageColumn";
+            this.LanguageColumn.ReadOnly = true;
             // 
             // UploaderColumn
             // 
@@ -209,7 +209,7 @@
         private System.Windows.Forms.DataGridViewImageColumn HearingImpairedColumn;
         private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LanguageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn UploaderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn UploadedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DownloadsColumn;
