@@ -13,7 +13,6 @@ using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using Application = System.Windows.Forms.Application;
-using System.Reflection;
 using Subtle.Model.Models;
 
 namespace Subtle.Gui
@@ -25,14 +24,13 @@ namespace Subtle.Gui
         private readonly OmdbClient omdbClient;
         private OpenFileDialog fileDialog;
 
-        private BindingSource subtitleBindingSource;
-
         public MainForm(OSDbClient osdbClient, IGitHubClient githubClient)
         {
             InitializeComponent();
             InitSearchMethods();
             InitFileDialog();
-            InitSubtitleGrid();
+
+            subtitleGrid.SelectionChanged += HandleSubtitleSelectionChanged;
 
             this.osdbClient = osdbClient;
             this.githubClient = githubClient;
@@ -183,7 +181,7 @@ namespace Subtle.Gui
             var query = CreateSearchQuery(filename);
             var subs = await SearchSubtitles(query.ToArray());
 
-            subtitleBindingSource.DataSource = Mapper.Map<Subtitle[]>(subs)
+            subtitleGrid.Subtitles = Mapper.Map<Subtitle[]>(subs)
                 .OrderBy(s => s.Language)
                 .ThenBy(GetMatchMethodSortOrder)
                 .ThenByDescending(s => s.IsFeatured)
@@ -191,7 +189,6 @@ namespace Subtle.Gui
                 .ThenByDescending(s => s.DownloadCount)
                 .ToList();
 
-            subtitleBindingSource.ResetBindings(false);
             StatusText = $"Search returned {subs.Count()} subtitles.";
         }
 
@@ -282,18 +279,6 @@ namespace Subtle.Gui
             StatusText = "Session initialized.";
         }
 
-        private void InitSubtitleGrid()
-        {
-            subtitleBindingSource = new BindingSource();
-            subtitleGrid.AutoGenerateColumns = false;
-            subtitleGrid.DataSource = subtitleBindingSource;
-
-            // Enable double buffering
-            PropertyInfo pi = subtitleGrid.GetType().GetProperty("DoubleBuffered",
-                  BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(subtitleGrid, true, null);
-        }
-
         private void InitFileDialog()
         {
             var types = FileTypes.VideoTypes.Select(t => $"*.{t}");
@@ -373,7 +358,7 @@ namespace Subtle.Gui
 
         private async void DownloadButtonClick(object sender, EventArgs e)
         {
-            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as Subtitle;
+            var sub = subtitleGrid.SelectedSubtitle;
 
             if (sub == null)
             {
@@ -421,75 +406,9 @@ namespace Subtle.Gui
             }
         }
 
-        private void SubtitleGridSelectionChanged(object sender, EventArgs e)
+        private void HandleSubtitleSelectionChanged(object sender, EventArgs e)
         {
-            downloadButton.Enabled = (subtitleGrid.SelectedRows.Count > 0);
-        }
-
-        private void SubtitleGridCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as Subtitle;
-            if (sub != null)
-            {
-                System.Diagnostics.Process.Start(sub.Url);
-            }
-        }
-
-        private void SubtitleGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            var sub = subtitleGrid.Rows[e.RowIndex].DataBoundItem as Subtitle;
-            var column = subtitleGrid.Columns[e.ColumnIndex];
-            var cell = subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-            if (sub == null)
-            {
-                return;
-            }
-
-            switch (column.Name)
-            {
-                case "FeaturedColumn":
-                    if (sub.IsFeatured)
-                    {
-                        e.Value = Resources.FeaturedIcon;
-                        cell.ToolTipText = "Featured";
-                    }
-                    break;
-                case "HearingImpairedColumn":
-                    if (sub.IsHearingImpaired)
-                    {
-                        e.Value = Resources.HearingImpairedIcon;
-                        cell.ToolTipText = "Hearing impaired";
-                    }
-                    break;
-                case "SearchMethodColumn":
-                    FormatSearchMethodColumn(sub, cell, e);
-                    break;
-            }
-        }
-
-        private static void FormatSearchMethodColumn(Subtitle sub, DataGridViewCell cell, DataGridViewCellFormattingEventArgs e)
-        {
-            switch (sub.MatchMethod)
-            {
-                case SearchMethod.Hash:
-                    e.Value = Resources.HashIcon;
-                    cell.ToolTipText = "Matched by file hash";
-                    break;
-                case SearchMethod.FullText:
-                    e.Value = Resources.TextSearchIcon;
-                    cell.ToolTipText = "Matched by full-text search";
-                    break;
-                case SearchMethod.Imdb:
-                    e.Value = Resources.ImdbIcon;
-                    cell.ToolTipText = "Matched by IMDb ID";
-                    break;
-            }
+            downloadButton.Enabled = subtitleGrid.SelectedSubtitle != null;
         }
 
         private static int GetMatchMethodSortOrder(Subtitle sub)

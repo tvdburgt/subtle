@@ -30,13 +30,6 @@ namespace Subtle.Gui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,24 +49,14 @@ namespace Subtle.Gui
             this.label4 = new System.Windows.Forms.Label();
             this.textSearchTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.subtitleGrid = new System.Windows.Forms.DataGridView();
-            this.FeaturedColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.HearingImpairedColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.SearchMethodColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.languageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UploaderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UploadedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
             this.downloadButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.searchButton = new System.Windows.Forms.Button();
-            this.imdbIdTextBox = new Subtle.Gui.Controls.ImdbTextBox();
+            this.subtitleGrid = new Subtle.Gui.Controls.SubtitleGrid();
             this.menuStrip1.SuspendLayout();
             this.fileTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -263,150 +246,16 @@ namespace Subtle.Gui
             this.label2.TabIndex = 9;
             this.label2.Text = "Text search:";
             // 
-            // subtitleGrid
+            // imdbIdTextBox
             // 
-            this.subtitleGrid.AllowUserToAddRows = false;
-            this.subtitleGrid.AllowUserToDeleteRows = false;
-            this.subtitleGrid.AllowUserToResizeColumns = false;
-            this.subtitleGrid.AllowUserToResizeRows = false;
-            this.subtitleGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.subtitleGrid.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.subtitleGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.subtitleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.subtitleGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FeaturedColumn,
-            this.HearingImpairedColumn,
-            this.SearchMethodColumn,
-            this.nameColumn,
-            this.languageColumn,
-            this.UploaderColumn,
-            this.UploadedColumn,
-            this.Column3,
-            this.Column2});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.subtitleGrid.DefaultCellStyle = dataGridViewCellStyle7;
-            this.subtitleGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.subtitleGrid.Location = new System.Drawing.Point(12, 160);
-            this.subtitleGrid.MultiSelect = false;
-            this.subtitleGrid.Name = "subtitleGrid";
-            this.subtitleGrid.ReadOnly = true;
-            this.subtitleGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.subtitleGrid.RowHeadersVisible = false;
-            this.subtitleGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.subtitleGrid.Size = new System.Drawing.Size(960, 340);
-            this.subtitleGrid.TabIndex = 4;
-            this.subtitleGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.SubtitleGridCellFormatting);
-            this.subtitleGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SubtitleGridCellMouseDoubleClick);
-            this.subtitleGrid.SelectionChanged += new System.EventHandler(this.SubtitleGridSelectionChanged);
-            // 
-            // FeaturedColumn
-            // 
-            this.FeaturedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = null;
-            this.FeaturedColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.FeaturedColumn.FillWeight = 5F;
-            this.FeaturedColumn.HeaderText = "";
-            this.FeaturedColumn.MinimumWidth = 25;
-            this.FeaturedColumn.Name = "FeaturedColumn";
-            this.FeaturedColumn.ReadOnly = true;
-            this.FeaturedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FeaturedColumn.Width = 25;
-            // 
-            // HearingImpairedColumn
-            // 
-            this.HearingImpairedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = null;
-            this.HearingImpairedColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.HearingImpairedColumn.FillWeight = 5F;
-            this.HearingImpairedColumn.HeaderText = "";
-            this.HearingImpairedColumn.MinimumWidth = 25;
-            this.HearingImpairedColumn.Name = "HearingImpairedColumn";
-            this.HearingImpairedColumn.ReadOnly = true;
-            this.HearingImpairedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.HearingImpairedColumn.Width = 25;
-            // 
-            // SearchMethodColumn
-            // 
-            this.SearchMethodColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.NullValue = null;
-            this.SearchMethodColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.SearchMethodColumn.FillWeight = 5F;
-            this.SearchMethodColumn.HeaderText = "";
-            this.SearchMethodColumn.MinimumWidth = 25;
-            this.SearchMethodColumn.Name = "SearchMethodColumn";
-            this.SearchMethodColumn.ReadOnly = true;
-            this.SearchMethodColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.SearchMethodColumn.Width = 25;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "FileName";
-            this.nameColumn.FillWeight = 90F;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // languageColumn
-            // 
-            this.languageColumn.DataPropertyName = "Language";
-            this.languageColumn.FillWeight = 23F;
-            this.languageColumn.HeaderText = "Language";
-            this.languageColumn.Name = "languageColumn";
-            this.languageColumn.ReadOnly = true;
-            // 
-            // UploaderColumn
-            // 
-            this.UploaderColumn.DataPropertyName = "UploaderName";
-            this.UploaderColumn.FillWeight = 25F;
-            this.UploaderColumn.HeaderText = "Uploader";
-            this.UploaderColumn.Name = "UploaderColumn";
-            this.UploaderColumn.ReadOnly = true;
-            // 
-            // UploadedColumn
-            // 
-            this.UploadedColumn.DataPropertyName = "UploadDate";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.UploadedColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.UploadedColumn.FillWeight = 22F;
-            this.UploadedColumn.HeaderText = "Uploaded";
-            this.UploadedColumn.Name = "UploadedColumn";
-            this.UploadedColumn.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "DownloadCount";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column3.FillWeight = 20F;
-            this.Column3.HeaderText = "Downloads";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Rating";
-            dataGridViewCellStyle6.NullValue = "-";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column2.FillWeight = 11.12546F;
-            this.Column2.HeaderText = "Rating";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.imdbIdTextBox.Enabled = false;
+            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
+            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
+            this.imdbIdTextBox.MaxLength = 7;
+            this.imdbIdTextBox.Name = "imdbIdTextBox";
+            this.imdbIdTextBox.Size = new System.Drawing.Size(55, 23);
+            this.imdbIdTextBox.TabIndex = 10;
             // 
             // downloadButton
             // 
@@ -448,16 +297,16 @@ namespace Subtle.Gui
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // imdbIdTextBox
+            // subtitleGrid
             // 
-            this.imdbIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.imdbIdTextBox.Enabled = false;
-            this.imdbIdTextBox.Font = new System.Drawing.Font("Consolas", 10F);
-            this.imdbIdTextBox.Location = new System.Drawing.Point(101, 95);
-            this.imdbIdTextBox.MaxLength = 7;
-            this.imdbIdTextBox.Name = "imdbIdTextBox";
-            this.imdbIdTextBox.Size = new System.Drawing.Size(55, 23);
-            this.imdbIdTextBox.TabIndex = 10;
+            this.subtitleGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.subtitleGrid.Location = new System.Drawing.Point(12, 160);
+            this.subtitleGrid.Name = "subtitleGrid";
+            this.subtitleGrid.Size = new System.Drawing.Size(960, 340);
+            this.subtitleGrid.Subtitles = null;
+            this.subtitleGrid.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -465,9 +314,9 @@ namespace Subtle.Gui
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.subtitleGrid);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.downloadButton);
-            this.Controls.Add(this.subtitleGrid);
             this.Controls.Add(this.fileTable);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
@@ -483,7 +332,6 @@ namespace Subtle.Gui
             this.menuStrip1.PerformLayout();
             this.fileTable.ResumeLayout(false);
             this.fileTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subtitleGrid)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -500,7 +348,6 @@ namespace Subtle.Gui
         private System.Windows.Forms.TableLayoutPanel fileTable;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button downloadButton;
-        private System.Windows.Forms.DataGridView subtitleGrid;
         private System.Windows.Forms.TextBox fileNameTextBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusStrip;
@@ -518,15 +365,7 @@ namespace Subtle.Gui
         private System.Windows.Forms.ToolStripMenuItem searchMethodsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
-        private System.Windows.Forms.DataGridViewImageColumn FeaturedColumn;
-        private System.Windows.Forms.DataGridViewImageColumn HearingImpairedColumn;
-        private System.Windows.Forms.DataGridViewImageColumn SearchMethodColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn languageColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UploaderColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UploadedColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private SubtitleGrid subtitleGrid;
     }
 }
 

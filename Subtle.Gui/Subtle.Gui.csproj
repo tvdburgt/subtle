@@ -66,6 +66,12 @@
     <Compile Include="Controls\ImdbTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\SubtitleGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SubtitleGrid.Designer.cs">
+      <DependentUpon>SubtitleGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="LanguagesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SubtitleGrid.resx">
+      <DependentUpon>SubtitleGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LanguagesForm.resx">
       <DependentUpon>LanguagesForm.cs</DependentUpon>
