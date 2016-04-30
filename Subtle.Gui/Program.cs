@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
 using Octokit;
-using Subtle.Gui.Mapping;
 using Subtle.Model;
 using Application = System.Windows.Forms.Application;
+using Subtle.Model.Mapping;
 
 namespace Subtle.Gui
 {

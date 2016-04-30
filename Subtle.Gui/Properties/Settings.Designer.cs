@@ -40,9 +40,9 @@ namespace Subtle.Gui.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hash, FullText, Imdb")]
-        public global::Subtle.Gui.ViewModels.SearchMethod SearchMethods {
+        public global::Subtle.Model.Models.SearchMethod SearchMethods {
             get {
-                return ((global::Subtle.Gui.ViewModels.SearchMethod)(this["SearchMethods"]));
+                return ((global::Subtle.Model.Models.SearchMethod)(this["SearchMethods"]));
             }
             set {
                 this["SearchMethods"] = value;

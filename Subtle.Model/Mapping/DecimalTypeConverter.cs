@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using AutoMapper;
 
-namespace Subtle.Gui.Mapping
+namespace Subtle.Model.Mapping
 {
     public class DecimalTypeConverter : TypeConverter<string, decimal?>
     {

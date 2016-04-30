@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Subtle.Gui.ViewModels
+namespace Subtle.Model.Models
 {
-    public class SubtitleViewModel
+    public class Subtitle
     {
         public string Id { get; set; }
         public string FileName { get; set; }
@@ -15,6 +15,6 @@ namespace Subtle.Gui.ViewModels
         public bool IsFeatured { get; set; }
         public bool IsHearingImpaired { get; set; }
         public string Url { get; set; }
-        public string MatchMethod { get; set; }
+        public SearchMethod MatchMethod { get; set; }
     }
 }

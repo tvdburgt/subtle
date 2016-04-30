@@ -8,12 +8,15 @@ using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using System.Threading.Tasks;
+using AutoMapper;
+using Subtle.Model.Models;
+using Subtle.Model.Mapping;
 
 namespace Subtle.Cli
 {
     class Program
     {
-        private static readonly string[] SubtitleTypes = { "srt", "sub", "smi", /*"txt",*/ "ssa", "ass", "mpl" };
+        private static readonly string[] SubtitleTypes = { "srt", "sub", "smi", "ssa", "ass", "mpl" };
         private static readonly Regex IgnorePattern = new Regex(@"sample$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static OSDbClient client;
@@ -22,6 +25,8 @@ namespace Subtle.Cli
 
         static int Main(string[] args)
         {
+            Mapper.Initialize(cfg => cfg.AddProfile<OSDbProfile>());
+
             client = new OSDbClient(OSDbClient.DefaultUserAgent);
             options = new SubtleOptions();
             CommandLine.Parser.Default.ParseArgumentsStrict(args, options);
@@ -47,32 +52,19 @@ namespace Subtle.Cli
             return MainAsync().GetAwaiter().GetResult();
         }
 
-        static async Task<int> MainAsync()
+        private static async Task<int> MainAsync()
         {
+            IEnumerable<string> files = Enumerable.Empty<string>();
+
             if (Directory.Exists(options.Path))
             {
-                await client.InitSessionAsync();
-
-                var searchTasks = ScanDirectory(options.Path)
-                    .Select(f => SearchSubtitle(f));
-
-                var subs = await Task.WhenAll(searchTasks);
-
-                if (!options.DryRun)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Downloading...");
-                    DownloadSubtitles(subs.Where(s => s != null));
-                    Console.WriteLine("Done!");
-                }
+                files = ScanDirectory(options.Path);
             }
             else if (File.Exists(options.Path))
             {
-                await client.InitSessionAsync();
-                var sub = await SearchSubtitle(options.Path);
-                if (sub.Selection != null && !options.DryRun)
+                if (options.Replace || !HasSubtitle(options.Path))
                 {
-                    DownloadSubtitle(sub);
+                    files = new[] { options.Path };
                 }
             }
             else
@@ -82,10 +74,24 @@ namespace Subtle.Cli
                 return 1;
             }
 
+            await client.InitSessionAsync();
+            var searchTasks = files.Select(f => SearchSubtitleAsync(f));
+
+            var subs = (await Task.WhenAll(searchTasks)).AsEnumerable();
+            subs = subs.Where(s => s.Selection != null);
+
+            if (!options.DryRun && subs.Any())
+            {
+                Console.WriteLine();
+                Console.WriteLine("Downloading...");
+                await DownloadSubtitlesAsync(subs);
+                Console.WriteLine("Done!");
+            }
+
             return 0;
         }
 
-        private static async Task<SubtitleSelection> SearchSubtitle(string file)
+        private static async Task<SubtitleSelection> SearchSubtitleAsync(string file)
         {
             var hash = Crypto.HashFile(file);
             var fileInfo = new FileInfo(file);
@@ -98,15 +104,15 @@ namespace Subtle.Cli
                     FileSize = fileInfo.Length,
                 });
 
-            var selection = SelectSubtitle(subs);
+            var selection = SelectSubtitle(Mapper.Map<Subtitle[]>(subs));
 
             if (selection == null)
             {
-                Console.WriteLine($"[notfound]\t{file}");
+                Console.WriteLine("{0} {1}", Keyword("NotFound"), fileInfo.Name);
             }
             else
             {
-                Console.WriteLine($"[{selection.MatchMethod}]\t{file}");
+                Console.WriteLine("{0} {1}", Keyword(selection.MatchMethod), fileInfo.Name);
             }
 
             return new SubtitleSelection
@@ -116,12 +122,7 @@ namespace Subtle.Cli
             };
         }
 
-        private static void DownloadSubtitle(SubtitleSelection sub)
-        {
-            DownloadSubtitles(new[] { sub });
-        }
-
-        private static async void DownloadSubtitles(IEnumerable<SubtitleSelection> subs)
+        private static async Task DownloadSubtitlesAsync(IEnumerable<SubtitleSelection> subs)
         {
             if (!subs.Any())
             {
@@ -141,13 +142,7 @@ namespace Subtle.Cli
 
         private static IEnumerable<string> ScanDirectory(string path)
         {
-            var searchOption = SearchOption.AllDirectories;
-
-            if (options.Shallow)
-            {
-                searchOption = SearchOption.TopDirectoryOnly;
-            }
-
+            var searchOption = options.Shallow ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories;
             var files = Directory.EnumerateFiles(path, "*", searchOption);
 
             foreach (var file in files)
@@ -161,15 +156,13 @@ namespace Subtle.Cli
 
                 if (IgnorePattern.IsMatch(Path.GetFileNameWithoutExtension(file)))
                 {
-                    Console.WriteLine($"[ignored]\t{file}");
-                    //Console.WriteLine($@"Skipping ""{file}"": matched ignore pattern");
+                    Console.WriteLine("{0} {1}", Keyword("Ignored"), Path.GetFileName(file));
                     continue;
                 }
 
                 if (!options.Replace && HasSubtitle(file))
                 {
-                    Console.WriteLine($"[skipped]\t{file}");
-                    //Console.WriteLine($@"Skipping ""{file}"": already has matching subtitle");
+                    Console.WriteLine("{0} {1}", Keyword("Skipped"), Path.GetFileName(file));
                     continue;
                 }
 
@@ -182,12 +175,12 @@ namespace Subtle.Cli
         /// </summary>
         /// <param name="subs"></param>
         /// <returns></returns>
-        private static SubtitleSearchResult SelectSubtitle(IEnumerable<SubtitleSearchResult> subs)
+        private static Subtitle SelectSubtitle(IEnumerable<Subtitle> subs)
         {
             return subs
-                .OrderByDescending(s => int.Parse(s.IsFeatured))
-                .ThenByDescending(s => decimal.Parse(s.Rating))
-                .ThenByDescending(s => int.Parse(s.DownloadCount))
+                .OrderByDescending(s => s.IsFeatured)
+                .ThenByDescending(s => s.Rating)
+                .ThenByDescending(s => s.DownloadCount)
                 .FirstOrDefault();
         }
 
@@ -196,6 +189,11 @@ namespace Subtle.Cli
             var dir = Path.GetDirectoryName(file);
             var name = Path.GetFileNameWithoutExtension(file);
             return SubtitleTypes.Any(type => File.Exists($@"{dir}\{name}.{type}"));
+        }
+
+        private static string Keyword(object value)
+        {
+            return $"{$"[{value.ToString()}]",-12}";
         }
     }
 }

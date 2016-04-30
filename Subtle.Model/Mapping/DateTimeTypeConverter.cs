@@ -2,7 +2,7 @@
 using AutoMapper;
 using System.Globalization;
 
-namespace Subtle.Gui.Mapping
+namespace Subtle.Model.Mapping
 {
     public class DateTimeTypeConverter : TypeConverter<string, DateTime>
     {

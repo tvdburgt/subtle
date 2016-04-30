@@ -8,13 +8,13 @@ using System.Windows.Forms;
 using AutoMapper;
 using Octokit;
 using Subtle.Gui.Properties;
-using Subtle.Gui.ViewModels;
 using Subtle.Model;
 using Subtle.Model.Helpers;
 using Subtle.Model.Requests;
 using Subtle.Model.Responses;
 using Application = System.Windows.Forms.Application;
 using System.Reflection;
+using Subtle.Model.Models;
 
 namespace Subtle.Gui
 {
@@ -183,7 +183,7 @@ namespace Subtle.Gui
             var query = CreateSearchQuery(filename);
             var subs = await SearchSubtitles(query.ToArray());
 
-            subtitleBindingSource.DataSource = Mapper.Map<SubtitleViewModel[]>(subs)
+            subtitleBindingSource.DataSource = Mapper.Map<Subtitle[]>(subs)
                 .OrderBy(s => s.Language)
                 .ThenBy(GetMatchMethodSortOrder)
                 .ThenByDescending(s => s.IsFeatured)
@@ -373,7 +373,7 @@ namespace Subtle.Gui
 
         private async void DownloadButtonClick(object sender, EventArgs e)
         {
-            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as SubtitleViewModel;
+            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as Subtitle;
 
             if (sub == null)
             {
@@ -433,7 +433,7 @@ namespace Subtle.Gui
                 return;
             }
 
-            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as SubtitleViewModel;
+            var sub = subtitleGrid.SelectedRows[0]?.DataBoundItem as Subtitle;
             if (sub != null)
             {
                 System.Diagnostics.Process.Start(sub.Url);
@@ -442,7 +442,7 @@ namespace Subtle.Gui
 
         private void SubtitleGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var sub = subtitleGrid.Rows[e.RowIndex].DataBoundItem as SubtitleViewModel;
+            var sub = subtitleGrid.Rows[e.RowIndex].DataBoundItem as Subtitle;
             var column = subtitleGrid.Columns[e.ColumnIndex];
             var cell = subtitleGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
@@ -473,34 +473,34 @@ namespace Subtle.Gui
             }
         }
 
-        private static void FormatSearchMethodColumn(SubtitleViewModel sub, DataGridViewCell cell, DataGridViewCellFormattingEventArgs e)
+        private static void FormatSearchMethodColumn(Subtitle sub, DataGridViewCell cell, DataGridViewCellFormattingEventArgs e)
         {
             switch (sub.MatchMethod)
             {
-                case SubtitleSearchResult.SearchMethods.Hash:
+                case SearchMethod.Hash:
                     e.Value = Resources.HashIcon;
                     cell.ToolTipText = "Matched by file hash";
                     break;
-                case SubtitleSearchResult.SearchMethods.FullText:
+                case SearchMethod.FullText:
                     e.Value = Resources.TextSearchIcon;
                     cell.ToolTipText = "Matched by full-text search";
                     break;
-                case SubtitleSearchResult.SearchMethods.Imdb:
+                case SearchMethod.Imdb:
                     e.Value = Resources.ImdbIcon;
                     cell.ToolTipText = "Matched by IMDb ID";
                     break;
             }
         }
 
-        private static int GetMatchMethodSortOrder(SubtitleViewModel sub)
+        private static int GetMatchMethodSortOrder(Subtitle sub)
         {
             switch (sub.MatchMethod)
             {
-                case SubtitleSearchResult.SearchMethods.Hash:
+                case SearchMethod.Hash:
                     return 0;
-                case SubtitleSearchResult.SearchMethods.Imdb:
+                case SearchMethod.Imdb:
                     return 1;
-                case SubtitleSearchResult.SearchMethods.FullText:
+                case SearchMethod.FullText:
                     return 2;
                 default:
                     return int.MaxValue;

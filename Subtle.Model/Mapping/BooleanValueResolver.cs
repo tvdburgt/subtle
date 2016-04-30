@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Subtle.Gui.Mapping
+namespace Subtle.Model.Mapping
 {
     public class BooleanValueResolver : ValueResolver<string, bool>
     {

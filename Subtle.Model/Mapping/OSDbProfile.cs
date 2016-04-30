@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using Subtle.Gui.ViewModels;
 using Subtle.Model.Responses;
+using Subtle.Model.Models;
 
-namespace Subtle.Gui.Mapping
+namespace Subtle.Model.Mapping
 {
     public class OSDbProfile : Profile
     {
@@ -11,8 +11,9 @@ namespace Subtle.Gui.Mapping
         {
             Mapper.CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
             Mapper.CreateMap<string, decimal?>().ConvertUsing(new DecimalTypeConverter());
+            Mapper.CreateMap<string, SearchMethod>().ConvertUsing(new SearchMethodTypeConverter());
 
-            Mapper.CreateMap<SubtitleSearchResult, SubtitleViewModel>()
+            Mapper.CreateMap<SubtitleSearchResult, Subtitle>()
                 .ForMember(dest => dest.IsFeatured, opt => opt.ResolveUsing<BooleanValueResolver>().FromMember(src => src.IsFeatured))
                 .ForMember(dest => dest.IsHearingImpaired, opt => opt.ResolveUsing<BooleanValueResolver>().FromMember(src => src.IsHearingImpaired));
 

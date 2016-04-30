@@ -4,7 +4,7 @@ using CommandLine.Text;
 
 namespace Subtle.Cli
 {
-    class SubtleOptions
+    public class SubtleOptions
     {
         [Option("dry-run", DefaultValue = false, HelpText = "Perform a dry run (only search for subtitles, do not download them).")]
         public bool DryRun { get; set; }

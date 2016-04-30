@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CookComputing.XmlRpcV2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
       <HintPath>..\packages\xmlrpcnet.3.0.0.266\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
       <Private>True</Private>
@@ -53,6 +57,13 @@
     <Compile Include="Helpers\Gzip.cs" />
     <Compile Include="Helpers\VideoInfo.cs" />
     <Compile Include="IOSDbProxy.cs" />
+    <Compile Include="Mapping\SearchMethodTypeConverter.cs" />
+    <Compile Include="Mapping\BooleanValueResolver.cs" />
+    <Compile Include="Mapping\DateTimeTypeConverter.cs" />
+    <Compile Include="Mapping\DecimalTypeConverter.cs" />
+    <Compile Include="Mapping\OSDbProfile.cs" />
+    <Compile Include="Models\SearchMethod.cs" />
+    <Compile Include="Models\Subtitle.cs" />
     <Compile Include="OmdbClient.cs" />
     <Compile Include="OSDbClient.cs" />
     <Compile Include="OSDbConfig.cs">
@@ -95,6 +106,7 @@
 &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
