@@ -11,5 +11,8 @@
     <Setting Name="SearchMethods" Type="Subtle.Model.Models.SearchMethod" Scope="User">
       <Value Profile="(Default)">Hash, FullText, Imdb</Value>
     </Setting>
+    <Setting Name="OSDbTimeout" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:20</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

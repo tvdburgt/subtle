@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Octokit;
+using Subtle.Gui.Properties;
 using Subtle.Model;
 using Application = System.Windows.Forms.Application;
 using Subtle.Model.Mapping;
@@ -21,6 +22,8 @@ namespace Subtle.Gui
             var osdbClient = new OSDbClient();
 #endif
             var githubClient = new GitHubClient(new ProductHeaderValue(Application.ProductName, Application.ProductVersion));
+
+            osdbClient.Timeout = Settings.Default.OSDbTimeout;
 
             Mapper.Initialize(cfg => cfg.AddProfile<OSDbProfile>());
             Application.EnableVisualStyles();

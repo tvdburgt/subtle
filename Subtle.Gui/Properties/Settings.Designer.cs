@@ -48,5 +48,17 @@ namespace Subtle.Gui.Properties {
                 this["SearchMethods"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:20")]
+        public global::System.TimeSpan OSDbTimeout {
+            get {
+                return ((global::System.TimeSpan)(this["OSDbTimeout"]));
+            }
+            set {
+                this["OSDbTimeout"] = value;
+            }
+        }
     }
 }

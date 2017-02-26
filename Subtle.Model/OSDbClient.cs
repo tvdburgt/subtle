@@ -13,7 +13,7 @@ namespace Subtle.Model
         public const string DefaultUserAgent = "tvdburgt";
         public const string TestUserAgent = "OSTestUserAgentTemp";
 
-        public static readonly TimeSpan Timeout = TimeSpan.FromSeconds(20);
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(20);
 
         /// <summary>
         /// Default limit for SearchSubtitles. Maximum is 500.
@@ -100,7 +100,7 @@ namespace Subtle.Model
             }
         }
 
-        private static async Task<T> ExecuteOSDbTask<T>(Task<T> task) where T : OSDbResponse
+        private async Task<T> ExecuteOSDbTask<T>(Task<T> task) where T : OSDbResponse
         {
             try
             {
