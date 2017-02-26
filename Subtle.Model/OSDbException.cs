@@ -14,5 +14,10 @@ namespace Subtle.Model
             : base(message)
         {
         }
+
+        public OSDbException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }

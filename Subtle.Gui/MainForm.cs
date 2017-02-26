@@ -118,14 +118,6 @@ namespace Subtle.Gui
             }
             catch (OSDbException e)
             {
-                MessageBox.Show(
-                    e.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            catch (WebException e)
-            {
                 var result = MessageBox.Show(
                     $"Subtitle search failed: {e.Message}",
                     "Error",
@@ -149,16 +141,6 @@ namespace Subtle.Gui
                 return subs.First();
             }
             catch (OSDbException e)
-            {
-                MessageBox.Show(
-                    e.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
-                return null;
-            }
-            catch (WebException e)
             {
                 var result = MessageBox.Show(
                     $"Failed to download subtitle: {e.Message}",
@@ -250,14 +232,6 @@ namespace Subtle.Gui
                 await osdbClient.InitSessionAsync();
             }
             catch (OSDbException e)
-            {
-                MessageBox.Show(
-                    e.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            catch (WebException e)
             {
                 var result = MessageBox.Show(
                     $"Failed to initialize session: {e.Message}",

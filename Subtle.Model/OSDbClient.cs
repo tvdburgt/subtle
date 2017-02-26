@@ -11,8 +11,9 @@ namespace Subtle.Model
     {
         public const string ApiUrl = "http://api.opensubtitles.org/xml-rpc";
         public const string DefaultUserAgent = "tvdburgt";
-        public const string TestUserAgent = "OSTestUserAgent";
-        public const int Timeout = 5000;
+        public const string TestUserAgent = "OSTestUserAgentTemp";
+
+        public static readonly TimeSpan Timeout = TimeSpan.FromSeconds(20);
 
         /// <summary>
         /// Default limit for SearchSubtitles. Maximum is 500.
@@ -31,30 +32,24 @@ namespace Subtle.Model
             proxy = XmlRpcProxyGen.Create<IOSDbProxy>();
             proxy.Url = ApiUrl;
             proxy.UserAgent = userAgent;
+            proxy.Timeout = (int)Timeout.TotalMilliseconds;
             proxy.EnableCompression = true;
-            proxy.Timeout = Timeout;
         }
 
         public async Task<Session> InitSessionAsync()
         {
             var task = Task.Factory.FromAsync(
-                (callback, state) => proxy.BeginLogIn(string.Empty, string.Empty, string.Empty, DefaultUserAgent, callback),
+                (callback, state) => proxy.BeginLogIn(string.Empty, string.Empty, string.Empty, proxy.UserAgent, callback),
                 proxy.EndLogIn,
                 null);
 
-            session = await task.WithTimeout(Timeout);
-
-            if (!session.IsSuccess)
-            {
-                throw new OSDbException(session);
-            }
-
+            session = await ExecuteOSDbTask(task);
             return session;
         }
 
-        public async Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
+        public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
         {
-            CheckSession();
+            EnsureSession();
 
             var options = new SearchOptions { Limit = SearchLimit };
             var task = Task.Factory.FromAsync(
@@ -62,33 +57,19 @@ namespace Subtle.Model
                 proxy.EndSearchSubtitles,
                 null);
 
-            var result = await task.WithTimeout(Timeout);
-
-            if (!result.IsSuccess)
-            {
-                throw new OSDbException(result);
-            }
-
-            return result;
+            return ExecuteOSDbTask(task);
         }
 
-        public async Task<SubtitleFileCollection> DownloadSubtitlesAsync(params string[] fileIds)
+        public Task<SubtitleFileCollection> DownloadSubtitlesAsync(params string[] fileIds)
         {
-            CheckSession();
+            EnsureSession();
 
             var task = Task.Factory.FromAsync(
                 (callback, state) => proxy.BeginDownloadSubtitles(session.Token, fileIds, callback),
                 proxy.EndDownloadSubtitles,
                 null);
 
-            var result = await task.WithTimeout(Timeout);
-
-            if (!result.IsSuccess)
-            {
-                throw new OSDbException(result);
-            }
-
-            return result;
+            return ExecuteOSDbTask(task);
         }
 
         public async Task<ServerInfo> GetServerInfoAsync()
@@ -111,11 +92,32 @@ namespace Subtle.Model
             return proxy.GetLanguages();
         }
 
-        private void CheckSession()
+        private void EnsureSession()
         {
             if (string.IsNullOrEmpty(session?.Token))
             {
                 throw new InvalidOperationException("Session is not initialized");
+            }
+        }
+
+        private static async Task<T> ExecuteOSDbTask<T>(Task<T> task) where T : OSDbResponse
+        {
+            try
+            {
+                var result = await task.WithTimeout(Timeout);
+                if (!result.IsSuccess)
+                {
+                    throw new OSDbException(result);
+                }
+                return result;
+            }
+            catch (XmlRpcServerException e)
+            {
+                throw new OSDbException(e.Message, e);
+            }
+            catch (TimeoutException e)
+            {
+                throw new OSDbException(e.Message, e);
             }
         }
     }

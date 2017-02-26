@@ -1,18 +1,18 @@
-﻿using System.Net;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Subtle.Model
 {
-    static class TaskExtensions
+    internal static class TaskExtensions
     {
-        public static async Task<TResult> WithTimeout<TResult>(this Task<TResult> task, int timeout)
+        public static async Task<TResult> WithTimeout<TResult>(this Task<TResult> task, TimeSpan timeout)
         {
             if (await Task.WhenAny(task, Task.Delay(timeout)) == task)
             {
-                return task.Result;
+                return task.GetAwaiter().GetResult();
             }
 
-            throw new WebException("Request timed out");
+            throw new TimeoutException("Request timed out");
         }
     }
 }

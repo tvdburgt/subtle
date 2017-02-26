@@ -19,9 +19,11 @@ namespace Subtle.Model
 
         public OmdbClient()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BaseAddress);
-            client.Timeout = Timeout;
+            client = new HttpClient
+            {
+                BaseAddress = new Uri(BaseAddress),
+                Timeout = Timeout
+            };
         }
 
         public async Task<OmdbResponse> SearchMovieAsync(string title, int year)
@@ -102,13 +104,7 @@ namespace Subtle.Model
         public string PosterUrl { get; set; }
 
         [JsonIgnore]
-        public string ImdbIdTrimmed
-        {
-            get
-            {
-                return ImdbId?.Trim()?.TrimStart('t');
-            }
-        }
+        public string ImdbIdTrimmed => ImdbId?.Trim().TrimStart('t');
 
         [JsonIgnore]
         public string ImdbUrl
