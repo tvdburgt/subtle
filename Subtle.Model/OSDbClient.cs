@@ -20,8 +20,8 @@ namespace Subtle.Model
         /// </summary>
         public const int SearchLimit = 100;
 
-        private readonly IOSDbProxy proxy;
-        private Session session;
+        private readonly IOSDbProxy _proxy;
+        private Session _session;
 
         public OSDbClient() : this(DefaultUserAgent)
         {
@@ -29,22 +29,22 @@ namespace Subtle.Model
 
         public OSDbClient(string userAgent)
         {
-            proxy = XmlRpcProxyGen.Create<IOSDbProxy>();
-            proxy.Url = ApiUrl;
-            proxy.UserAgent = userAgent;
-            proxy.Timeout = (int)Timeout.TotalMilliseconds;
-            proxy.EnableCompression = true;
+            _proxy = XmlRpcProxyGen.Create<IOSDbProxy>();
+            _proxy.Url = ApiUrl;
+            _proxy.UserAgent = userAgent;
+            _proxy.Timeout = (int)Timeout.TotalMilliseconds;
+            _proxy.EnableCompression = true;
         }
 
         public async Task<Session> InitSessionAsync()
         {
             var task = Task.Factory.FromAsync(
-                (callback, state) => proxy.BeginLogIn(string.Empty, string.Empty, string.Empty, proxy.UserAgent, callback),
-                proxy.EndLogIn,
+                (callback, state) => _proxy.BeginLogIn(string.Empty, string.Empty, string.Empty, _proxy.UserAgent, callback),
+                _proxy.EndLogIn,
                 null);
 
-            session = await ExecuteOSDbTask(task);
-            return session;
+            _session = await ExecuteOSDbTask(task);
+            return _session;
         }
 
         public Task<SubtitleSearchResultCollection> SearchSubtitlesAsync(params SearchQuery[] query)
@@ -53,8 +53,8 @@ namespace Subtle.Model
 
             var options = new SearchOptions { Limit = SearchLimit };
             var task = Task.Factory.FromAsync(
-                (callback, state) => proxy.BeginSearchSubtitles(session.Token, query, options, callback),
-                proxy.EndSearchSubtitles,
+                (callback, state) => _proxy.BeginSearchSubtitles(_session.Token, query, options, callback),
+                _proxy.EndSearchSubtitles,
                 null);
 
             return ExecuteOSDbTask(task);
@@ -65,8 +65,8 @@ namespace Subtle.Model
             EnsureSession();
 
             var task = Task.Factory.FromAsync(
-                (callback, state) => proxy.BeginDownloadSubtitles(session.Token, fileIds, callback),
-                proxy.EndDownloadSubtitles,
+                (callback, state) => _proxy.BeginDownloadSubtitles(_session.Token, fileIds, callback),
+                _proxy.EndDownloadSubtitles,
                 null);
 
             return ExecuteOSDbTask(task);
@@ -76,8 +76,8 @@ namespace Subtle.Model
         {
             var watch = Stopwatch.StartNew();
             var task = Task.Factory.FromAsync(
-                (callback, state) => proxy.BeginGetServerInfo(callback),
-                proxy.EndGetServerInfo,
+                (callback, state) => _proxy.BeginGetServerInfo(callback),
+                _proxy.EndGetServerInfo,
                 null);
 
             var info = await task.WithTimeout(Timeout);
@@ -89,12 +89,12 @@ namespace Subtle.Model
 
         public LanguageCollection GetLanguages()
         {
-            return proxy.GetLanguages();
+            return _proxy.GetLanguages();
         }
 
         private void EnsureSession()
         {
-            if (string.IsNullOrEmpty(session?.Token))
+            if (string.IsNullOrEmpty(_session?.Token))
             {
                 throw new InvalidOperationException("Session is not initialized");
             }
