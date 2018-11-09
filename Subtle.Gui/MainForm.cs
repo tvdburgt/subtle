@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
@@ -45,13 +44,27 @@ namespace Subtle.Gui
 
         private string StatusText
         {
-            set { statusStrip.Text = value; }
+            set => statusStrip.Text = value;
         }
 
         private string WindowTitle
         {
-            get { return Text; }
-            set { Text = value; }
+            get => Text;
+            set => Text = value;
+        }
+
+        /// <summary>
+        /// Close this window when Escape is pressed.
+        /// </summary>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private async void LoadFile(string filename)

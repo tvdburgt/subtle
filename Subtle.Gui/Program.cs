@@ -16,11 +16,7 @@ namespace Subtle.Gui
         [STAThread]
         static void Main()
         {
-#if DEBUG
-            var osdbClient = new OSDbClient(OSDbClient.TestUserAgent);
-#else
             var osdbClient = new OSDbClient();
-#endif
             var githubClient = new GitHubClient(new ProductHeaderValue(Application.ProductName, Application.ProductVersion));
 
             osdbClient.Timeout = Settings.Default.OSDbTimeout;
